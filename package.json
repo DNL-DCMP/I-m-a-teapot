@@ -1,0 +1,15 @@
+{
+  "name": "i-m-a-teapot",
+  "version": "1.0.0",
+  "description": "Página de recetas de cocina",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
