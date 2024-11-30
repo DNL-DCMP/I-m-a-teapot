@@ -2,7 +2,13 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-let recetas = []
+let recetas = [{
+    id: 1,
+    nombre_receta: " ",
+    tiempo: " ",
+    descripcion: " ",
+    ingredientes: " "
+}]
 
 app.use(express.json())
 
@@ -30,6 +36,19 @@ app.get('/api/v1/recetas/:id/comentarios', (req, res) => {
     res.json(receta.comentarios)
 })
 
+/*Agrega receta*/
+app.post('/api/v1/recetas', (req, res) => {
+    const receta = {
+        id: recetas.length + 1,
+        nombre_receta: req.body.nombre_receta,
+        tiempo: req.body.tiempo,
+        descripcion: req.body.descripcion,
+        ingredientes: req.body.ingredientes
+    }
+
+    recetas.push(receta)
+    res.status(201).send(receta)
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
