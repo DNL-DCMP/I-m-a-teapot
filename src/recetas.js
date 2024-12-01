@@ -12,6 +12,10 @@ let recetas = [{
 
 app.use(express.json())
 
+app.get('/', (req, res) => {
+    res.send('Yumm! app')
+})
+
 /*Obtiene todas las recetas*/
 app.get('/api/v1/recetas', (req,res) => {
     res.json(recetas)
@@ -53,3 +57,5 @@ app.post('/api/v1/recetas', (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+/* ------USERS----- */ 
