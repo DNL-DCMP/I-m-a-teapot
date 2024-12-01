@@ -1,4 +1,5 @@
 const express = require('express')
+const req = require('express/lib/request')
 const app = express()
 const port = 3000
 
@@ -52,6 +53,17 @@ app.post('/api/v1/recetas', (req, res) => {
 
     recetas.push(receta)
     res.status(201).send(receta)
+})
+
+/* Borrar la receta */
+app.delete('api/v1/recetas/:id', (req, res) => {
+    const receta = recetas.find((element) => element.id == req.params.id)
+    if (receta === undefined) {
+        res.sendStatus(404)
+        return
+    }
+    recetas = recetas.filter((element) => element.id != req.params.id)
+    res.send(receta)
 })
 
 app.listen(port, () => {
