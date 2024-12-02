@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:17
+    container_name: database
+    environment:
+      - POSTGRES_USER=yumm
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=yumm_app
+    ports:
+      - 5432:5432
+    volumes:
+      - ./psql_data:/var/lib/postgresql/data
+      
