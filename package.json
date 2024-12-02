@@ -2,10 +2,10 @@
   "name": "i-m-a-teapot",
   "version": "1.0.0",
   "description": "Página de recetas de cocina",
-  "main": "src/recetas.js",
+  "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon recetas.js"
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
