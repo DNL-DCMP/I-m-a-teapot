@@ -72,17 +72,14 @@ app.listen(port, () => {
 
 /* ------USERS----- */ 
 
-let users = [{
-    id: 1,
-    name: "ailin",
-    age: 20
-}]
+let users = []
 
+/*Muestra todos los usuarios*/
 app.get('/api/v1/users', (req, res) => {
     res.json(users)
 })
 
-// Lee un usuario por ID
+/*Lee un usuario por id*/
 app.get('/api/v1/users/:id', (req, res) => {
     const user = users.find((user) => user.id == req.params.id)
 
@@ -95,7 +92,7 @@ app.get('/api/v1/users/:id', (req, res) => {
     res.json(user)
 })
 
-//Borra un usuario por ID
+/*Borra un usuario por ID*/
 app.delete('/api/v1/users/:id', (req, res) => {
     const user_delete = users.find((user) => user.id == req.params.id)
 
@@ -109,3 +106,11 @@ app.delete('/api/v1/users/:id', (req, res) => {
     users = users.filter((user) =>  user.id != req.params.id)
     res.sendStatus(201)
 })
+
+/*Muestra los favoritos de un usuario dado su id*/
+app.get('/api/v1/users/:id/favoritos', (req, res) => {
+    const favoritos = users.find((user) => user.id == req.params.id)
+    res.json(user.favoritos)
+})
+
+
