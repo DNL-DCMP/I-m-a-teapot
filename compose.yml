@@ -1,6 +1,8 @@
 services:
   db:
-    image: postgres:17
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: database
     environment:
       - POSTGRES_USER=yumm
@@ -10,4 +12,3 @@ services:
       - 5432:5432
     volumes:
       - ./psql_data:/var/lib/postgresql/data
-      
