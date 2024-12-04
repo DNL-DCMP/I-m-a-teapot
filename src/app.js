@@ -1,3 +1,5 @@
+const { Prisma } = require('@prisma/client')
+const prisma = new PrismaClient();
 const express = require('express')
 const req = require('express/lib/request')
 const app = express()
@@ -66,25 +68,26 @@ app.delete('api/v1/recetas/:id', (req, res) => {
     res.send(receta)
 })
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
 
 /* ------USERS----- */ 
 
-let users = []
+
 
 /*Muestra todos los usuarios*/
-app.get('/api/v1/users', (req, res) => {
+app.get('/api/v1/users', async (req, res) => {
+    const users = await prisma.user.findMany()
     res.json(users)
 })
 
 /*Lee un usuario por id*/
-app.get('/api/v1/users/:id', (req, res) => {
-    const user = users.find((user) => user.id == req.params.id)
-
+app.get('/api/v1/users/:id', async (req, res) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
     //Si el usuario no existe, devuelve un 404 not found
-    if (user === undefined){
+    if (user === null){
         res.sendStatus(404)
         return
     }
@@ -92,19 +95,61 @@ app.get('/api/v1/users/:id', (req, res) => {
     res.json(user)
 })
 
-/*Borra un usuario por ID*/
-app.delete('/api/v1/users/:id', (req, res) => {
-    const user_delete = users.find((user) => user.id == req.params.id)
+app.post('/api/v1/users', async (req, res) => {
+    const user = await prisma.user.create({
+        data:{
+            name:req.body.name,
+            email:req.body.email,
+            password:req.body.password,
+        }
+    })
+    res.status(201).send(user)
+})
 
-    /*Si el usuario no existe, devuelve un  404 not found*/
-    if(user_delete === undefined){
+/*Borra un usuario por ID*/
+app.delete('/api/v1/users/:id', async (req, res) => {
+    //busca el usuario
+    const user = await prisma.user.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
+    //si no lo encuentra devuelve 404
+    if (user == null){
         res.sendStatus(404)
         return
     }
+    //si lo encuentra lo elimina
+    await prisma.user.delete({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
 
-    /*Filtra los usuarios por id, solo se queda con aquellos que no coincidan con el id del usuario a eliminar*/
-    users = users.filter((user) =>  user.id != req.params.id)
-    res.sendStatus(201)
+    res.send(user)
+})
+
+app.put('/api/v1/users/:id', async (req, res) => {
+    let user = await prisma.user.findUnique({
+        where:{
+            id: parseInt(req.params.id)
+        }
+    })
+    if (user === null) {
+        res.sendStatus(404)
+        return
+    }
+    user = await prisma.user.update({
+        where: {
+            id: user.id
+        },
+        data: {
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+        }
+    })
+    res.send(user)
 })
 
 /*Muestra los favoritos de un usuario dado su id*/
@@ -113,4 +158,6 @@ app.get('/api/v1/users/:id/favoritos', (req, res) => {
     res.json(user.favoritos)
 })
 
-
+app.listen(port, () => {
+    console.log(`Yumm! app listening on port ${port}`)
+})
