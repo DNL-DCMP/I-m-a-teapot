@@ -5,13 +5,7 @@ const req = require('express/lib/request')
 const app = express()
 const port = 3000
 
-let recetas = [{
-    id: 1,
-    nombre_receta: " ",
-    tiempo: " ",
-    descripcion: " ",
-    ingredientes: " "
-}]
+let recetas = []
 
 app.use(express.json())
 
@@ -44,17 +38,16 @@ app.get('/api/v1/recetas/:id/comentarios', (req, res) => {
 })
 
 /*Agrega receta*/
-app.post('/api/v1/recetas', (req, res) => {
-    const receta = {
-        id: recetas.length + 1,
-        nombre_receta: req.body.nombre_receta,
-        tiempo: req.body.tiempo,
-        descripcion: req.body.descripcion,
-        ingredientes: req.body.ingredientes
-    }
-
-    recetas.push(receta)
-    res.status(201).send(receta)
+app.post('/api/v1/recipes', async (req, res) => {
+    const recipe = await prisma.recipe.create({
+        data: {
+            name: req.body.name,
+            description: req.body.description,
+            ingredients: req.body.ingredients, 
+            instructions: req.body.instructions
+        }
+    })
+    res.status(201).send(recipe)
 })
 
 /* Borrar la receta */
