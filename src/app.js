@@ -144,7 +144,19 @@ app.put('/api/v1/recipes/:id', async (req, res) => {
             name: req.body.name,
             description: req.body.description,
             ingredients: req.body.ingredients, 
-            instructions: req.body.instructions
+            instructions: req.body.instructions,
+            categories: {
+                connectOrCreate: 
+                    categories.map((CategoryName) => ({
+                            where:{
+                                name: CategoryName
+                            },
+                            create:{
+                                name: CategoryName
+                            }
+                        })
+                    )
+            }
         }
     })
 
