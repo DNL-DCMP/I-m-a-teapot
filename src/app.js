@@ -93,6 +93,33 @@ app.delete('api/v1/recipes/:id', async (req, res) => {
     res.send(recipe)
 })
 
+app.put('/api/v1/recipes/:id', async (req, res) => {
+    let recipe = await prisma.recipe.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
+
+    if(recipe === null){
+        res.sendStatus(404)
+        return
+    }
+
+    recipe = await prisma.recipe.update({
+        where:{
+            id: recipe.id
+        },
+        data:{
+            name: req.body.name,
+            description: req.body.description,
+            ingredients: req.body.ingredients, 
+            instructions: req.body.instructions
+        }
+    })
+
+    res.send(recipe)
+})
+
 
 /* ------USERS----- */ 
 
