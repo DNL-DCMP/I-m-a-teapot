@@ -1,4 +1,4 @@
-const { Prisma } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 const express = require('express')
 const req = require('express/lib/request')
@@ -58,14 +58,26 @@ app.post('/api/v1/recetas', (req, res) => {
 })
 
 /* Borrar la receta */
-app.delete('api/v1/recetas/:id', (req, res) => {
-    const receta = recetas.find((element) => element.id == req.params.id)
-    if (receta === undefined) {
+app.delete('api/v1/recipes/:id', async (req, res) => {
+    const recipe = await prisma.recipe.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
+    /*Si no la encuentra devuelve 404*/
+    if (recipe === null){
         res.sendStatus(404)
         return
     }
-    recetas = recetas.filter((element) => element.id != req.params.id)
-    res.send(receta)
+
+    /*Si la encuentra la elimina*/
+    await prisma.recipe.delete({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
+
+    res.send(recipe)
 })
 
 
