@@ -60,6 +60,18 @@ app.post('/api/v1/recipes', async (req, res) => {
             description: req.body.description,
             ingredients: req.body.ingredients, 
             instructions: req.body.instructions,
+            categories: {
+                connectOrCreate: 
+                    categories.map((CategoryName) => ({
+                            where:{
+                                name: CategoryName
+                            },
+                            create:{
+                                name: CategoryName
+                            }
+                        })
+                    )
+            },
             user: {
                 connect: {
                     id: userId
