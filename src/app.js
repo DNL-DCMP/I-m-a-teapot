@@ -5,8 +5,6 @@ const req = require('express/lib/request')
 const app = express()
 const port = 3000
 
-let recetas = []
-
 app.use(express.json())
 
 app.get('/', (req, res) => {
@@ -14,27 +12,44 @@ app.get('/', (req, res) => {
 })
 
 /*Obtiene todas las recetas*/
-app.get('/api/v1/recetas', (req,res) => {
-    res.json(recetas)
+app.get('/api/v1/recipes', async (req,res) => {
+    const recipes = await prisma.recipe.findMany()
+    res.json(recipes)
 })
 
 /*Obtiene las recetas por id*/
-app.get('/api/v1/recetas/:id', (req, res) => {
-    const receta = recetas.find((receta) => receta.id == req.params.id)
-
-    /*Si la receta no existe, devuelve un 404*/
-    if (receta === undefined){
+app.get('/api/v1/recipes/:id', async (req, res) => {
+    const recipe = await prisma.recipe.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
+    //Si el usuario no existe, devuelve un 404 not found
+    if (recipe === null){
         res.sendStatus(404)
         return
     }
 
-    res.json(receta)
+    res.json(recipe)
 })
 
 /*Filtra los comentarios de una receta mediante el id*/
-app.get('/api/v1/recetas/:id/comentarios', (req, res) => {
-    const receta = recetas.find((receta) => receta.id == req.params.id)
-    res.json(receta.comentarios)
+app.get('/api/v1/recipes/:id/comments', async (req, res) => {
+    const recipe = await prisma.recipe.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        },
+        select: {
+            comments: true
+        }
+    })
+
+    if(recipe === null){
+        res.sendStatus(404)
+        return
+    }
+
+    res.json(recipe.comments)
 })
 
 /*Agrega receta*/
