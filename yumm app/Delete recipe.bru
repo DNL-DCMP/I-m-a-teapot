@@ -1,0 +1,15 @@
+meta {
+  name: Delete recipe
+  type: http
+  seq: 3
+}
+
+delete {
+  url: http://localhost:3000/api/v1/recipes/:id
+  body: none
+  auth: none
+}
+
+params:path {
+  id: 
+}
