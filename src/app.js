@@ -39,7 +39,7 @@ app.get('/api/v1/recipes/:id/comments', async (req, res) => {
         where: {
             id: parseInt(req.params.id)
         },
-        select: {
+        include: {
             comments: true
         }
     })
@@ -50,6 +50,25 @@ app.get('/api/v1/recipes/:id/comments', async (req, res) => {
     }
 
     res.json(recipe.comments)
+})
+
+/*Muestra las categorias de una receta*/
+app.get('/api/v1/recipes/:id/categories', async (req, res) => {
+    const recipe = await prisma.recipe.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        },
+        include: {
+            categories: true
+        }
+    })
+
+    if(recipe === null){
+        res.sendStatus(404)
+        return
+    }
+
+    res.json(recipe.categories)
 })
 
 /*Agrega receta*/
