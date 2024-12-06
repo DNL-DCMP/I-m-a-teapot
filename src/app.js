@@ -1,10 +1,19 @@
-const { PrismaClient } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const express = require('express')
+const cors = require('cors');
 const req = require('express/lib/request')
 const app = express()
 const port = 3000
 
+let recetas = [{
+    id: 1,
+    nombre_receta: " ",
+    tiempo: " ",
+    descripcion: " ",
+    ingredientes: " "
+}]
+app.use(cors());
 app.use(express.json())
 
 app.get('/', (req, res) => {

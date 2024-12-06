@@ -1,8 +1,6 @@
 services:
   db:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: postgres:latest
     container_name: database
     environment:
       - POSTGRES_USER=yumm
@@ -12,3 +10,18 @@ services:
       - 5432:5432
     volumes:
       - ./psql_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: app_server
+    environment:
+      - DATABASE_URL=postgresql://yumm:password@db:5432/yumm_app
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app
+    command: ["npm", "run", "start"]

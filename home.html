@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Yumm!</title>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+        <style>
+            .hero {
+              background-image: url('https://img.freepik.com/foto-gratis/composicion-vista-superior-deliciosas-golosinas-desayuno_23-2148829547.jpg?t=st=1733431356~exp=1733434956~hmac=784e388de311e492cec8e124e33a37554ad020b6aa6fcadbd753285bd7f712ba&w=1380'); 
+              background-size: cover;
+              background-position: center;
+              background-repeat: no-repeat;
+            }
+          </style>
+    </head>
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:#F5E7D2;">
+            <div class="navbar-brand">
+              <a class="navbar-item">
+                <figure class="image is-32x32">
+                    <img src="muffin.png"/>
+                </figure>
+                <strong class="is-size-5">Yumm!</strong>
+              </a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                  <div class="buttons">
+                    <a class="button is-primary" style="background-color:#8B5E3C;"><strong>Sign up</strong></a>
+                    <a class="button is-light" style="background-color:#A3B18A;">Log in</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        <main>
+            <section class="hero is-medium is-info" style="background-color:#FDF8F2;">
+                <div class="hero-body">
+                  <div class="container has-text-centered">
+                    <h1 class="title" style="color: #FDF8F2;">Comparte, descubre y guarda tus recetas favoritas</h1>
+                    <p class="subtitle is-italic is-size-4 has-text-weight-bold" style="color: #A3B18A;">Descubre y comparte tus platos favoritos</p>
+                    <div class="buttons is-centered" style="margin-top: 100px;">
+                      <a href="#" class="button is-primary is-large" style="background-color:#8B5E3C;color:#F5E7D2;">Regístrate gratis</a>
+                      <a href="#" class="button is-light is-large" style="background-color:#A3B18A;color: black;">Explora recetas</a>
+                    </div>
+                  </div>
+                </div>
+            </section>
+            <section class="section is-medium has-text-centered">
+              <h1 class="title">Unete a nuestra comunidad de amantes de la cocina</h1>
+              <h2 class="subtitle">Miles de recetas esperando <strong class="is-underlined"> ser descubiertas</strong></h2>
+            </section>
+            <section class="section">
+              <div class="container">
+                  <!-- Contenedor del formulario -->
+                  <div class="columns is-centered">
+                      <div class="column is-half">
+                          <form id="registerForm" class="box" method="POST" action="http://localhost:3000/api/v1/users">
+                              <h1 class="title has-text-centered">Registrate</h1>
+                              
+                              <!-- Campo Nombre -->
+                              <div class="field">
+                                  <label class="label">Name</label>
+                                  <div class="control">
+                                      <input class="input" type="text" placeholder="Ingresa tu nombre" id="name">
+                                  </div>
+                              </div>
+                              
+                              <!-- Campo Email -->
+                              <div class="field">
+                                  <label class="label">Email</label>
+                                  <div class="control">
+                                      <input class="input" type="email" placeholder="Ingresa tu email" id="email">
+                                  </div>
+                              </div>
+                              
+                              <!-- Campo Contraseña -->
+                              <div class="field">
+                                  <label class="label">Password</label>
+                                  <div class="control">
+                                      <input class="input" type="password" placeholder="Ingresa tu contraseña" id="password">
+                                  </div>
+                              </div>
+                              
+                              <!-- Botón de envío -->
+                              <div class="field">
+                                  <div class="control has-text-centered">
+                                      <button class="button is-primary is-fullwidth" style="background-color: #A3B18A;">Registrarse</button>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+            </section>
+            <section class="section is-medium">
+              <nav class="level">
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">Tweets</p>
+                    <p class="title">3,456</p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">Following</p>
+                    <p class="title">123</p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">Followers</p>
+                    <p class="title">456K</p>
+                  </div>
+                </div>
+                <div class="level-item has-text-centered">
+                  <div>
+                    <p class="heading">Likes</p>
+                    <p class="title">789</p>
+                  </div>
+                </div>
+              </nav>
+            </section>
+
+        </main>
+        <footer class="footer">
+          <div class="content has-text-centered">
+            <p>
+              <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>.
+              The source code is licensed
+              <a href="https://opensource.org/license/mit">MIT</a>. The
+              website content is licensed
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0//"
+                >CC BY NC SA 4.0</a
+              >.
+            </p>
+          </div>
+        </footer>
+        <script>
+          document.getElementById('registerForm').addEventListener('submit', async function (e) {
+              e.preventDefault();
+
+              const name = document.getElementById('name').value;
+              const email = document.getElementById('email').value;
+              const password = document.getElementById('password').value;
+
+              const response = await fetch('http://localhost:3000/api/v1/users', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ name, email, password }),
+              });
+              const result = await response.json();
+          });
+
+         </script>
+    </body>
+</html>
