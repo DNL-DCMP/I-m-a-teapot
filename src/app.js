@@ -262,6 +262,56 @@ app.get('/api/v1/users/:id/favoritos', (req, res) => {
     res.json(user.favoritos)
 })
 
+/* ------COMENTS----- */ 
+
+/* Agregar comentario a una receta */
+app.post('/api/v1/recipes/:id/comments', async (req, res) => {
+    const recipe = await prisma.recipe.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
+    if(recipe === null){
+        res.sendStatus(404)
+        return
+    }
+
+    const comment = await prisma.comment.create({
+        data: {
+            content: req.body.content,
+            recipe: {
+                connect: {
+                    id: recipe.id
+                }
+            }
+        }
+    })
+
+    res.status(201).send(comment)
+})
+
+/* Eliminar un comentario de una receta*/
+app.delete('/api/v1/recipes/:id/comments/:commentId', async (req, res) => {
+    const comment = await prisma.comment.findUnique({
+        where: {
+            id: parseInt(req.params.commentId)
+        }
+    })
+
+    if(comment === null){
+        res.sendStatus(404)
+        return
+    }
+
+    await prisma.comment.delete({
+        where: {
+            id: parseInt(req.params.commentId)
+        }
+    })
+
+    res.send(comment)
+})
+
 app.listen(port, () => {
     console.log(`Yumm! app listening on port ${port}`)
 })
