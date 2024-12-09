@@ -6,13 +6,6 @@ const req = require('express/lib/request')
 const app = express()
 const port = 3000
 
-let recetas = [{
-    id: 1,
-    nombre_receta: " ",
-    tiempo: " ",
-    descripcion: " ",
-    ingredientes: " "
-}]
 app.use(cors());
 app.use(express.json())
 
@@ -260,6 +253,56 @@ app.put('/api/v1/users/:id', async (req, res) => {
 app.get('/api/v1/users/:id/favoritos', (req, res) => {
     const favoritos = users.find((user) => user.id == req.params.id)
     res.json(user.favoritos)
+})
+
+/* ------COMENTS----- */ 
+
+/* Agregar comentario a una receta */
+app.post('/api/v1/recipes/:id/comments', async (req, res) => {
+    const recipe = await prisma.recipe.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
+    if(recipe === null){
+        res.sendStatus(404)
+        return
+    }
+
+    const comment = await prisma.comment.create({
+        data: {
+            content: req.body.content,
+            recipe: {
+                connect: {
+                    id: recipe.id
+                }
+            }
+        }
+    })
+
+    res.status(201).send(comment)
+})
+
+/* Eliminar un comentario de una receta*/
+app.delete('/api/v1/recipes/:id/comments/:commentId', async (req, res) => {
+    const comment = await prisma.comment.findUnique({
+        where: {
+            id: parseInt(req.params.commentId)
+        }
+    })
+
+    if(comment === null){
+        res.sendStatus(404)
+        return
+    }
+
+    await prisma.comment.delete({
+        where: {
+            id: parseInt(req.params.commentId)
+        }
+    })
+
+    res.send(comment)
 })
 
 app.listen(port, () => {
