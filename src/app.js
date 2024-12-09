@@ -187,6 +187,24 @@ app.get('/api/v1/categories/:id', async (req, res) => {
     res.json(category)
 })
 
+app.get('/api/v1/categories/:id/recipes', async (req, res) => {
+    const category = await prisma.category.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        },
+        include: {
+            recipes: true
+        }
+    })
+
+    if (category === null){
+        res.sendStatus(404)
+        return
+    }
+
+    res.json(category.recipes)
+})
+
 
 /* ------USERS----- */ 
 
