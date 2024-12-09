@@ -205,10 +205,29 @@ app.get('/api/v1/categories/:id/recipes', async (req, res) => {
     res.json(category.recipes)
 })
 
+app.delete('/api/v1/categories/:id', async (req,res) => {
+    const category = await prisma.category.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        }
+    })
+
+    if(category == null){
+        res.sendStatus(404)
+        return
+    }
+
+    await prisma.category.delete({
+        where:{
+            id: parseInt(req.params.id)
+        }
+    })
+
+    res.json(category)
+})
+
 
 /* ------USERS----- */ 
-
-
 
 /*Muestra todos los usuarios*/
 app.get('/api/v1/users', async (req, res) => {
