@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root{
-  --base-clr: #11121a;
-  --line-clr: #42434a;
-  --hover-clr: #222533;
-  --text-clr: #e6e6ef;
-  --accent-clr: #5e63ff;
+  --base-clr: #FDF8F2;
+  --line-clr: #fcd69c;
+  --hover-clr: #FDF8F2;
+  --text-clr: #6C6C6C;
+  --accent-clr: #8B5E3C;
   --secondary-text-clr: #b0b3c1;
 }
 *{
@@ -23,14 +23,95 @@ body{
   display: grid;
   grid-template-columns: auto 1fr;
 }
+
+/* Traigo los cambios de la pagina de ailu*/
+
+.encabezado {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin: 50px 150px 50px 150px;
+  padding: 20px;
+  border-radius: 100px;
+  box-shadow: 100%;
+  text-align: center;
+  color: #A3B18A;
+  width: 1000x;
+}
+
+.encabezado h1 p {
+  text-shadow: 100% #6C6C6C;
+}
+
+.recipes-container-by-category {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding: 16px;
+  margin: 50px;
+  gap: 10px;
+}
+
+.recipes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  background-color: white;
+  border-radius: 20px;
+  gap: 20px;
+  height: 100%;
+}
+
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #fff6ea;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 20px;
+  box-shadow: 100%;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.recipe-card img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.recipes-container-by-category h2 {
+  background-color: #ffffff;
+  border-radius: 20px;
+  text-align: left;
+  padding: 20px;
+  font-size: 130%;
+  text-shadow: 50%;
+  width: 250px;
+}
+
+#boton-ver-receta {
+  background-color: #A3B18A;
+  color: #fff6ea;
+  border: 0;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 100%;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+/* hasta aca */
+
 #sidebar{
   box-sizing: border-box;
-  height: 100vh;
+  height: 100%; /*aca iba 100vh, pero hay que mirar el video y ver como hacer para que los iconos se mantengan al moverse*/ 
   width: 250px;
   padding: 5px 1em;
-  background-color: var(--base-clr);
-  border-right: 1px solid var(--line-clr);
-
+  background-color: #F5E7D2;
   position: sticky;
   top: 0;
   align-self: start;
@@ -65,7 +146,7 @@ body{
   border-radius: .5em;
   padding: .85em;
   text-decoration: none;
-  color: var(--text-clr);
+  color: #A3B18A;
   display: flex;
   align-items: center;
   gap: 1em;
@@ -80,7 +161,7 @@ body{
 }
 #sidebar svg{
   flex-shrink: 0;
-  fill: var(--text-clr);
+  fill: #A3B18A;
 }
 #sidebar a span, #sidebar .dropdown-btn span{
   flex-grow: 1;
@@ -266,8 +347,8 @@ body {
     padding: 10px;
     font-size: 16px;
     border-radius: 25px;
-    background-color: var(--text-clr);
-    color: var(--line-clr);
+    background-color: #b7b7b7;
+    color: #6C6C6C;
   }
   
   #search-btn {
@@ -281,4 +362,5 @@ body {
   #search-btn svg {
     fill: var(--secondary-text-clr);
   }
+
   
