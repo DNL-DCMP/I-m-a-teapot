@@ -1,58 +1,28 @@
 
-const recipesHomePage  = document.getElementById('recipes-container');
+const nav = document.querySelector(".nav");
+const searchIcon = document.querySelector("#searchIcon");
+const navOpenBtn = document.querySelector(".navOpenBtn");
+const navCloseBtn = document.querySelector(".navCloseBtn");
 
-const categoryId = [1,2,3,4];
-categoryId.forEach(id => {
-    fetch('http://localhost:3000/api/v1/categories/${id}/recipes')
-        .then(response => response.json())
-        .then(data => {
+/*Agrega funcionalidad al boton de busqueda */
+searchIcon.addEventListener('click', () => {
+    nav.classList.toggle('openSearch');
+    nav.classList.remove('openNav');
 
-            data.recipes = data.recipes.slice(0,4);
-            const categoryElement = showCategories(data);
-            recipesHomePage.appendChild(categoryElement);
-        })
-})
+    if(nav.classList.contains('openSearch')){
+       return searchIcon.classList.replace("bx-search", "bx-x");
+    }
 
-function showCategories (category) {
-    const categoryContainer = document.createElement("div");
-    categoryContainer.classList.add("recipes-container-by-category");
+    searchIcon.classList.replace("bx-x", "bx-search");
+});
 
-    const titleContainer = document.createElement("h2");
-    titleContainer.classList.add("titulo-container");
-    titleContainer.textContent = category.name;
+/*Agrega funcionalidad al boto de menu y cierre*/
+navOpenBtn.addEventListener('click', () => {
+    nav.classList.add('openNav');
+    nav.classList.remove('openSearch');
+    searchIcon.classList.replace("bx-x", "bx-search");
+});
 
-    const recipesContainer = document.createElement("div");
-    recipesContainer.classList.add("recipes");
-
-    category.recipes.forEach(recipe => {
-        const recipeCard = showRecipe(recipe);
-        recipesContainer.appendChild(recipeCard);
-    });
-
-    categoryContainer.appendChild(titleContainer);
-    categoryContainer.appendChild(recipesContainer);
-    
-    return categoryContainer;
-}
-
-function showRecipe (recipe){
-    const div = document.createElement("div");
-    div.classList.add("recipe-card");
-
-    div.innerHTML = `
-        <div class="recipe-image">
-            <img src="${recipe.image}" class="image-recipe">
-        </div>
-        <div class="recipe-info">
-            <div class="recipe-name">
-                <h3>${recipe.name}</h3>
-            </div>
-            <div class="recipe-description">
-                <p class="recipe-description">${recipe.description}</p>
-            </div>
-            <button id="boton-ver-receta" onclick="viewRecipe(${recipe.id})">Ver receta</button>
-        </div>
-    `;
-
-    return div;
-}
+navCloseBtn.addEventListener('click', () => {
+    nav.classList.remove('openNav');
+});
