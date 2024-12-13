@@ -197,7 +197,7 @@ a {
 .input-box .more-ingredients-btn,
 .input-box .more-instructions-btn,
 .input-box .add-category-btn {
-    margin-top: 1rem;
+    margin-top: 0.3rem;
     border: none;
     background-color: #b4c29c;
     border-radius: 20px;
@@ -301,5 +301,55 @@ a {
         color: #fff;
         font-size: 20px;
         cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 765px) {
+    .input-group {
+        grid-template-columns: 1fr;
+    }
+
+    .input-box .more-ingredients-btn,
+    .input-box .more-instructions-btn,
+    .input-box .add-category-btn {
+        font-size: 0.8rem;
+        font-weight: 500;
+        width: 130px;
+    }
+
+    .input-box .more-ingredients-btn:hover,
+    .input-box .more-instructions-btn:hover,
+    .input-box .add-category-btn:hover {
+        width: 135px;
+    }
+}
+
+@media screen and (max-width: 560px){
+    .input-box label {
+        font-size: 0.85rem;
+    }
+
+    .input-box input {
+        padding: 0.5rem 0.9rem;
+    }
+
+    .input-box .more-ingredients-btn,
+    .input-box .more-instructions-btn,
+    .input-box .add-category-btn {
+        font-size: 0.6rem;
+        font-weight: 600;
+        width: 80px;
+    }
+
+    .input-box .more-ingredients-btn:hover,
+    .input-box .more-instructions-btn:hover,
+    .input-box .add-category-btn:hover {
+        width: 90px;
+        font-weight: 650;
+    }
+    
+    .submit-button button {
+        font-size: 0.8rem;
+        width: 300px;
     }
 }
