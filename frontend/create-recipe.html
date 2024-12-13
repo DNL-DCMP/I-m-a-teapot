@@ -46,10 +46,11 @@
         </div>
     </nav>
 
+    <div class="encabezado">
+        <img src="img/form-image.png">
+    </div>
+
     <div class="container">
-        <div class="form-image">
-            <img src="img/form-image.png">
-        </div>
         <div class="form">
             <form action="#">
                 <div class="form-header">
@@ -69,37 +70,40 @@
                     </div>
 
                     <div class="input-box">
-                        <label for="recipe-description">Ingredientes</label>
-                        <input id="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes con sus cantidades...">
-                        <input id="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes con sus cantidades...">
-                        <input id="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes con sus cantidades...">
-                        <input id="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes con sus cantidades...">
-                        <button class="more-ingredients-btn"><i class='bx bx-plus-medical'></i></button>
+                        <div class="container-input ingredients">
+                            <label for="recipe-description">Ingredientes</label>
+                            <input id="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes">
+                            <input id="recipe-ingredients" type="text" name="recipeingredientes">
+                            <input id="recipe-ingredients" type="text" name="recipeingredientes">
+                        </div>
+                        <button class="more-ingredients-btn">Agregar ingrediente</button>
                     </div>
 
                     <div class="input-box">
-                        <label for="recipe-instructions">Pasos para hacer la receta</label>
-                        <input id="recipe-istructions" type="text" name="recipeinstructions">
-                        <input id="recipe-istructions" type="text" name="recipeinstructions">
-                        <input id="recipe-istructions" type="text" name="recipeinstructions">
-                        <input id="recipe-istructions" type="text" name="recipeinstructions">
-                        <input id="recipe-istructions" type="text" name="recipeinstructions">
-                        <button class="more-instructions-btn"><i class='bx bx-plus-medical'></i></button>
+                        <div class="container-input instructions">
+                            <label for="recipe-instructions">Pasos para hacer la receta</label>
+                            <input id="recipe-istructions" type="text" name="recipeinstructions">
+                            <input id="recipe-istructions" type="text" name="recipeinstructions">
+                            <input id="recipe-istructions" type="text" name="recipeinstructions">
+                        </div>
+                        <button class="more-instructions-btn">Agregar instrucción</button>
                     </div>
 
                     <div class="input-box">
-                        <label for="recipe-categories">Descripción</label>
-                        <input id="recipe-categories" type="text" name="recipecategory" placeholder="Ingresar una categoría">
-                        <button class="add-category-btn"><i class='bx bx-plus-medical'></i></button>
-                        <button class="create-category-btn"><i class='bx bx-edit-alt' style='color:#ffffff' ></i></button>
+                        <div class="container-input categories">
+                            <label for="recipe-categories">Categoría/s</label>
+                            <input id="recipe-categories" type="text" name="recipecategory" placeholder="Ingresar categoría">
+                        </div>
+                        <button class="add-category-btn">Agregar categoría</button>
                     </div>
-                </div>
 
-                <div class="submit-button">
-                    <button>Crear</button>
                 </div>
-                
             </form>
+
+            <div class="submit-button">
+                <button>Crear</button>
+            </div>
+
         </div>
     </div>
     <script src="create-recipe.js"></script>

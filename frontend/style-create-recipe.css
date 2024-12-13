@@ -161,6 +161,12 @@ a {
     margin-bottom: 3.5rem;
 }
 
+.container-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
 .input-box input {
     margin: 0.5rem 0;
     padding: 0.8rem 1.2rem;
