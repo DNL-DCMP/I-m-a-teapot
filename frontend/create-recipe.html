@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Receta</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style-create-recipe.css">
+</head>
+<body>
+    <nav class="nav">
+        <i class='bx bx-menu navOpenBtn' style='color:#ffffff'></i>
+        <!--Aca va el logo-->
+        <a href="#" class="logo">Yumm!</a>
+        <ul class="nav-links">
+            <i class='bx bx-x navCloseBtn'></i>
+            <li>
+                <a href="inicio.html" class="nav-link">
+                    <i class='bx bx-home-alt-2'></i>
+                    <span class="text">Inicio</span>
+                    </a>
+            </li>
+             <li>
+                <a href="user-profile.html" class="nav-link">
+                    <i class='bx bx-user'></i>
+                    <span class="text">Perfil</span>
+                </a>
+            </li>
+            <li>
+                <a href="user-recipes.html" class="nav-link">
+                    <i class='bx bx-collection'></i>
+                    <span class="text">Mis recetas</span>
+                </a>
+            </li>
+            <li>
+                <a href="create-recipe.html" class="nav-link">
+                    <i class='bx bx-pencil'></i>
+                    <span class="text">Crear Receta</span>
+                </a>
+            </li>
+        </ul>
+        <i class='bx bx-search search-icon' id="searchIcon"></i>
+        <div class="search-box">
+            <i class='bx bx-search search-icon'></i>
+            <input type="text" placeholder="Busca por receta o categoría...">
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="form-image">
+            <img src="img/form-image.png">
+        </div>
+        <div class="form">
+            <form action="#">
+                <div class="form-header">
+                    <div class="title">
+                        <h1>Crear receta</h1>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-box">
+                        <label for="recipe-name">Nombre de la receta</label>
+                        <input id="recipe-name" type="text" name="recipename" placeholder="Ingresar el nombre de la receta...">
+                    </div>
+
+                    <div class="input-box">
+                        <label for="recipe-description">Descripción</label>
+                        <input id="recipe-description" type="text" name="recipedescription" placeholder="Ingresar una breve descripción de la receta...">
+                    </div>
+
+                    <div class="input-box">
+                        <label for="recipe-description">Ingredientes</label>
+                        <input id="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes con sus cantidades...">
+                        <input id="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes con sus cantidades...">
+                        <input id="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes con sus cantidades...">
+                        <input id="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes con sus cantidades...">
+                        <button class="more-ingredients-btn"><i class='bx bx-plus-medical'></i></button>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="recipe-instructions">Pasos para hacer la receta</label>
+                        <input id="recipe-istructions" type="text" name="recipeinstructions">
+                        <input id="recipe-istructions" type="text" name="recipeinstructions">
+                        <input id="recipe-istructions" type="text" name="recipeinstructions">
+                        <input id="recipe-istructions" type="text" name="recipeinstructions">
+                        <input id="recipe-istructions" type="text" name="recipeinstructions">
+                        <button class="more-instructions-btn"><i class='bx bx-plus-medical'></i></button>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="recipe-categories">Descripción</label>
+                        <input id="recipe-categories" type="text" name="recipecategory" placeholder="Ingresar una categoría">
+                        <button class="add-category-btn"><i class='bx bx-plus-medical'></i></button>
+                        <button class="create-category-btn"><i class='bx bx-edit-alt' style='color:#ffffff' ></i></button>
+                    </div>
+                </div>
+
+                <div class="submit-button">
+                    <button>Crear</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <script src="create-recipe.js"></script>
+</body>
+</html>
