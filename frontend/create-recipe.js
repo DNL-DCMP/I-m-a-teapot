@@ -39,6 +39,7 @@ moreIngredientesBtn.addEventListener('click', (event) => {
     const inputIngredients = document.createElement('input');
     inputIngredients.type = "text";
     inputIngredients.name = "recipeingredientes";
+    inputIngredients.classList.add('recipe-ingredients')
 
     ingredientsContainer.appendChild(inputIngredients);
 });
@@ -51,6 +52,7 @@ moreInstructionsBtn.addEventListener('click', (event) => {
     const inputInstructions = document.createElement('input');
     inputInstructions.type = "text";
     inputInstructions.name = "recipeinstructions";
+    inputInstructions.classList.add('recipe-instructions');
 
     instructionsContainer.appendChild(inputInstructions);
 });
@@ -63,16 +65,17 @@ addCategoryBtn.addEventListener('click', (event) => {
     const inputCategories = document.createElement('input');
     inputCategories.type = "text";
     inputCategories.name = "recipecategories";
+    inputCategories.classList.add('recipe-categories');
 
     categoriesContainer.appendChild(inputCategories);
 });
 
 function createRecipe() {
-    const name = document.getElementById('recipe-name').value;
-    const description = document.getElementById('recipe-description').value;
-    const ingredients = document.querySelectorAll('#recipe-ingredients').values;
-    const instructions = document.querySelectorAll('#recipe-instructions').values;
-    const categories = document.querySelectorAll('#recipe-categories').values;
+    const name = document.querySelector('.recipe-name').value;
+    const description = document.querySelector('.recipe-description').value;
+    const ingredients = document.querySelectorAll('.recipe-ingredients').values;
+    const instructions = document.querySelectorAll('.recipe-instructions').values;
+    const categories = document.querySelectorAll('.recipe-categories').values;
 
     let body = {
         name: name,
@@ -103,20 +106,20 @@ function createRecipe() {
 }
 
 function clearForm() {
-    document.getElementById('recipe-name').value = ' ';
-    document.getElementById('recipe-description').value = ' ';
+    document.querySelector('.recipe-name').value = ' ';
+    document.querySelector('.recipe-description').value = ' ';
     
-    const ingredientsInputs = document.querySelectorAll('#ingredientsContainer .ingredients');
+    const ingredientsInputs = document.querySelectorAll('.recipe-ingredients');
         ingredientsInputs.forEach(input => {
             input.value = '';
         });
 
-    const instructionsInputs = document.querySelectorAll('#instructionsContainer .instructions');
+    const instructionsInputs = document.querySelectorAll('.recipe-instructions');
         instructionsInputs.forEach(input => {
             input.value = '';
         });
 
-    const categoriesInputs = document.querySelectorAll('#categoriesContainer .categories');
+    const categoriesInputs = document.querySelectorAll('.recipe-categories');
         categoriesInputs.forEach(input => {
             input.value = '';
         });
