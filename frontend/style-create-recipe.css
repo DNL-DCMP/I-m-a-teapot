@@ -352,4 +352,12 @@ a {
         font-size: 0.8rem;
         width: 300px;
     }
+
+    .form {
+        margin-top: 3rem;
+    }
+
+    .encabezado {
+        display: none;
+    }
 }
