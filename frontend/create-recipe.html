@@ -71,7 +71,7 @@
 
                     <div class="input-box">
                         <div class="container-input ingredients">
-                            <label for="recipe-description">Ingredientes</label>
+                            <label for="recipe-ingredients">Ingredientes</label>
                             <input id="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes">
                             <input id="recipe-ingredients" type="text" name="recipeingredientes">
                             <input id="recipe-ingredients" type="text" name="recipeingredientes">
@@ -82,9 +82,9 @@
                     <div class="input-box">
                         <div class="container-input instructions">
                             <label for="recipe-instructions">Pasos para hacer la receta</label>
-                            <input id="recipe-istructions" type="text" name="recipeinstructions">
-                            <input id="recipe-istructions" type="text" name="recipeinstructions">
-                            <input id="recipe-istructions" type="text" name="recipeinstructions">
+                            <input id="recipe-instructions" type="text" name="recipeinstructions">
+                            <input id="recipe-instructions" type="text" name="recipeinstructions">
+                            <input id="recipe-instructions" type="text" name="recipeinstructions">
                         </div>
                         <button class="more-instructions-btn">Agregar instrucción</button>
                     </div>
@@ -96,12 +96,12 @@
                         </div>
                         <button class="add-category-btn">Agregar categoría</button>
                     </div>
-
                 </div>
             </form>
 
             <div class="submit-button">
-                <button>Crear</button>
+                <button onclick="createRecipe()">Crear</button>
+                <button onclick="clearForm()">Limpiar</button> 
             </div>
 
         </div>

@@ -66,3 +66,58 @@ addCategoryBtn.addEventListener('click', (event) => {
 
     categoriesContainer.appendChild(inputCategories);
 });
+
+function createRecipe() {
+    const name = document.getElementById('recipe-name').value;
+    const description = document.getElementById('recipe-description').value;
+    const ingredients = document.querySelectorAll('#recipe-ingredients').values;
+    const instructions = document.querySelectorAll('#recipe-instructions').values;
+    const categories = document.querySelectorAll('#recipe-categories').values;
+
+    let body = {
+        name: name,
+        description: description,
+        ingredients: ingredients, 
+        instructions: instructions,
+        /*Falta agregar el input en el front*/
+        image: image,
+        categories: categories
+    };
+
+    fetch("http://127.0.0.1:3000/api/v1/recipes", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'aplication/json'
+        },
+
+        body: JSON.stringify(body)
+    })
+        .then(response => {
+            if(response.status !== 201){
+                alert("Error al cargar la receta");
+            } else {
+                clearForm();
+            }
+        })
+
+}
+
+function clearForm() {
+    document.getElementById('recipe-name').value = ' ';
+    document.getElementById('recipe-description').value = ' ';
+    
+    const ingredientsInputs = document.querySelectorAll('#ingredientsContainer .ingredients');
+        ingredientsInputs.forEach(input => {
+            input.value = '';
+        });
+
+    const instructionsInputs = document.querySelectorAll('#instructionsContainer .instructions');
+        instructionsInputs.forEach(input => {
+            input.value = '';
+        });
+
+    const categoriesInputs = document.querySelectorAll('#categoriesContainer .categories');
+        categoriesInputs.forEach(input => {
+            input.value = '';
+        });
+}
