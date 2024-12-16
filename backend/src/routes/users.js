@@ -25,6 +25,25 @@ router.get('/:id', async (req, res) => {
     res.json(user)
 })
 
+/*Obtiene las recetas de un usuario dado su id*/
+router.get('/:id/recipes', async (req, res) => {
+    const user = await prisma.user.findUnique({
+        where: {
+            id: parseInt(req.params.id)
+        },
+        include: {
+           recipes: true
+        }
+    })
+
+    if(user === null){
+        res.sendStatus(404)
+        return
+    }
+
+    res.json(user.recipes)
+})
+
 router.post('/', async (req, res) => {
     const user = await prisma.user.create({
         data:{
