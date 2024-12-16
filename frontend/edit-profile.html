@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yumm!</title>
+    <!--ICONS-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style-edit-profile.css">
+</head>
+<body>
+        <nav class="nav">
+            <i class='bx bx-menu navOpenBtn' style='color:#ffffff'></i>
+            <!--Aca va el logo-->
+            <a href="#" class="logo">Yumm!</a>
+            <ul class="nav-links">
+                <i class='bx bx-x navCloseBtn'></i>
+                <li>
+                    <a href="inicio.html" class="nav-link">
+                        <i class='bx bx-home-alt-2'></i>
+                        <span class="text">Inicio</span>
+                        </a>
+                </li>
+                 <li>
+                    <a href="user-profile.html" class="nav-link">
+                        <i class='bx bx-user'></i>
+                        <span class="text">Perfil</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="user-recipes.html" class="nav-link">
+                        <i class='bx bx-collection'></i>
+                        <span class="text">Mis recetas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="create-recipe.html" class="nav-link">
+                        <i class='bx bx-pencil'></i>
+                        <span class="text">Crear Receta</span>
+                    </a>
+                </li>
+            </ul>
+            <i class='bx bx-search search-icon' id="searchIcon"></i>
+            <div class="search-box">
+                <i class='bx bx-search search-icon'></i>
+                <input type="text" placeholder="Busca por receta o categoría...">
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="header-profile">
+                <h2 class="title-container">Mi perfil</h2>
+                <div class="button-control">
+                    <button class="edit-profile-btn" onclick="editProfile()"><a href="user-profile.html">Guardar cambios</a></button>
+                    <button class="close-btn"><a href="user-profile.html">Cancelar</a></button>
+                </div>
+            </div>
+
+            <div class="name-container">
+                <!--Falta agregar el campo en schema.prisma-->
+                <img src="img/cookiecheseecake.webp" class="user-image">
+                <h2 class="name-user"></h2>
+            </div>
+            <div class="personal-info-container">
+                <h2 class="title-information">Información personal</h2>
+
+                <div class="info-container">
+                    <div class="information">
+                        <label for="firts-name">Nombre/s</label>
+                        <input type="text" id="first-name" placeholder="Ingresar nombre/s...">
+                    </div>
+
+                    <div class="information">
+                        <label for="last-name">Apellido/s</label>
+                        <input type="text" id="last-name" placeholder="Ingresar apellido/s...">
+                    </div>
+
+                    <div class="information">
+                        <label for="email">Email</label>
+                        <input type="text" id="last-name" pattern="^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" required  placeholder="Ingresar email...">
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="changepsswd-container">
+                <h2 class="title-information">Cambiar contraseña</h2>
+
+                <div class="info-container">
+                    <div class="information">
+                        <label for="firts-name">Nombre/s</label>
+                        <input type="text" id="first-name">
+                    </div>
+
+                    <div class="information">
+                        <label for="lats-name">Apellido/s</label>
+                        <input type="text" id="last-name">
+                    </div>
+
+                    <div class="information">
+                        <label for="lats-name">Email</label>
+                        <input type="text" id="last-name" pattern="^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" required>
+                    </div>
+                </div>
+
+             </div>
+            -->
+        </div>
+
+    </div>
+    <script src="edit-profile.js"></script>
+</body>
