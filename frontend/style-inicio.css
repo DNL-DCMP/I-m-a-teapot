@@ -308,3 +308,19 @@ a {
         display: none;
     }
 }
+
+.card-recipe .add-comment-btn {
+    background-color: #A3B18A; 
+    border-radius: 20px; 
+    font-size: 15px; 
+    padding: 10px; 
+    text-align: center;
+    display: inline-block; 
+    color: #fff; 
+    text-decoration: none; 
+    transition: background-color 0.3s ease;
+}
+.card-recipe .view-recipe-btn:hover,
+.card-recipe .add-comment-btn:hover {
+    background-color: #8B9C71; 
+}
