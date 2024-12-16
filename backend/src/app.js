@@ -8,6 +8,11 @@ const port = 3000
 
 app.use(cors());
 app.use(express.json())
+app.use(cors({
+    origin: '*', // Permite todas las fuentes
+    methods: ['GET', 'POST'], // Métodos permitidos
+    allowedHeaders: ['Content-Type'], // Encabezados permitidos
+}));
 
 app.get('/', (req, res) => {
     res.send('Yumm! app')
@@ -75,12 +80,14 @@ app.get('/api/v1/recipes/:id/categories', async (req, res) => {
 
 /*Agrega receta*/
 app.post('/api/v1/recipes', async (req, res) => {
+    const userId = 1; // ID de usuario estático para pruebas
+    const categories = req.body.categories || [];
     const recipe = await prisma.recipe.create({
         data: {
             name: req.body.name,
             description: req.body.description,
-            ingredients: req.body.ingredients, 
-            instructions: req.body.instructions,
+            ingredients: req.body.ingredients || [],
+            instructions: req.body.instructions || [],
             categories: {
                 connectOrCreate: 
                     categories.map((CategoryName) => ({
@@ -252,15 +259,23 @@ app.get('/api/v1/users/:id', async (req, res) => {
 })
 
 app.post('/api/v1/users', async (req, res) => {
-    const user = await prisma.user.create({
-        data:{
-            name:req.body.name,
-            email:req.body.email,
-            password:req.body.password,
-        }
-    })
-    res.status(201).send(user)
-})
+    
+        const { name, email, password } = req.body;
+        console.log("Datos recibidos desde el front:", { name, email, password });
+
+        // Crear nuevo usuario
+        const newUser = await prisma.user.create({
+            data: {
+                name,
+                email,
+                password // Aquí podrías hashear la contraseña antes de guardarla
+            }
+        });
+
+        res.status(201).json({ message: 'Registro exitoso', user: newUser });
+    
+});
+
 
 /*Borra un usuario por ID*/
 app.delete('/api/v1/users/:id', async (req, res) => {
@@ -363,6 +378,45 @@ app.delete('/api/v1/recipes/:id/comments/:commentId', async (req, res) => {
 
     res.send(comment)
 })
+
+// Login de usuario
+app.post("/api/v1/login", async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Buscar al usuario por email
+        const user = await prisma.user.findUnique({
+            where: { email },
+        });
+
+        // Si no se encuentra el usuario
+        if (!user) {
+            return res.status(404).json({ message: "Usuario no encontrado" });
+        }
+
+        // Verificar la contraseña directamente
+        if (user.password !== password) {
+            return res.status(401).json({ message: "Contraseña incorrecta" });
+        }
+
+        // Actualizar el estado del usuario a "connected"
+        await prisma.user.update({
+            where: { id: user.id },
+            data: { isLoggedIn: true },
+        });
+
+        // Responder con el mensaje y el userId
+        return res.status(200).json({
+            message: "Inicio de sesión exitoso",
+            userId: user.id,
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
+
 
 app.listen(port, () => {
     console.log(`Yumm! app listening on port ${port}`)
