@@ -26,3 +26,18 @@ navOpenBtn.addEventListener('click', () => {
 navCloseBtn.addEventListener('click', () => {
     nav.classList.remove('openNav');
 });
+
+/* Autentication */
+
+let isLoggedIn = true;
+const authButtons = document.querySelectorAll(".auth-buttons");
+
+function updateUI(){
+    if(isLoggedIn){
+        authButtons.forEach(button => button.classList.add("hidden"));
+    }else{
+        authButtons.forEach(button => button.classList.remove("hidden"));
+    }
+}
+
+updateUI();
