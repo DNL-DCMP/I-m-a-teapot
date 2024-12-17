@@ -70,43 +70,54 @@ addCategoryBtn.addEventListener('click', (event) => {
     categoriesContainer.appendChild(inputCategories);
 });
 
-function createRecipe() {
-    const name = document.querySelector('.recipe-name').value;
-    const description = document.querySelector('.recipe-description').value;
+//Funcion para crear la receta
+const user = JSON.parse(localStorage.getItem('user'));
 
-    // Corregir obtención de valores para inputs múltiples
-    const ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value);
-    const instructions = Array.from(document.querySelectorAll('.recipe-instructions')).map(input => input.value);
-    const categories = Array.from(document.querySelectorAll('.recipe-categories')).map(input => input.value);
+if(user){
+    function createRecipe() {
 
-    let body = {
-        name: name,
-        description: description,
-        ingredients: ingredients,
-        instructions: instructions,
-        // Faltaría implementar el manejo de la imagen si es necesario
-        // image: image,
-        categories: categories
-    };
+        const userId = user.id;
 
-    fetch("http://127.0.0.1:3000/api/v1/recipes", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' // Corregir typo en 'application/json'
-        },
-        body: JSON.stringify(body)
-    })
-    .then(response => {
-        if (response.status !== 201) {
-            alert("Error al cargar la receta");
-        } else {
-            clearForm();
-        }
-    })
-    .catch(error => {
-        console.error("Error al enviar la receta:", error);
-    });
+        let name = document.querySelector('.recipe-name').value;
+        let description = document.querySelector('.recipe-description').value;
+    
+        // Corregir obtención de valores para inputs múltiples
+        let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value);
+        let instructions = Array.from(document.querySelectorAll('.recipe-instructions')).map(input => input.value);
+        let categories = Array.from(document.querySelectorAll('.recipe-categories')).map(input => input.value);
+        
+        let body = {
+            name: name,
+            description: description,
+            ingredients: ingredients,
+            instructions: instructions,
+            // Faltaría implementar el manejo de la imagen si es necesario
+            // image: image,
+            categories: categories,
+            userId: userId
+        };
+    
+        fetch(`http://localhost:3000/api/v1/recipes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        .then(response => {
+            if (response.status !== 201) {
+                alert("Error al cargar la receta");
+            } else {
+                console.log("Receta creada");
+                clearForm();
+            }
+        })
+        .catch(error => {
+            console.error("Error al enviar la receta:", error);
+        });
+    }
 }
+
 
 function clearForm() {
     document.querySelector('.recipe-name').value = ' ';
