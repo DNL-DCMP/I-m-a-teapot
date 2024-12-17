@@ -64,33 +64,38 @@ router.get('/:id/categories', async (req, res) => {
 
 /*Agrega receta*/
 router.post('/', async (req, res) => {
-    const recipe = await prisma.recipe.create({
-        data: {
-            name: req.body.name,
-            description: req.body.description,
-            ingredients: req.body.ingredients, 
-            instructions: req.body.instructions,
-            categories: {
-                connectOrCreate: 
-                    categories.map((CategoryName) => ({
-                            where:{
-                                name: CategoryName
-                            },
-                            create:{
-                                name: CategoryName
-                            }
-                        })
-                    )
-            },
-            user: {
-                connect: {
-                    id: userId
+    try {
+
+        const recipe = await prisma.recipe.create({
+            data: {
+                name: req.body.name,
+                description: req.body.description,
+                ingredients: req.body.ingredients,
+                instructions: req.body.instructions,
+                categories: {
+                    connectOrCreate: req.body.categories.map((category) => ({
+                        where: {
+                            name: category
+                        },
+                        create: {
+                            name: category
+                        }
+                    }))
+                },
+                user: {
+                    connect:  {
+                        id: req.body.userId
+                    }
                 }
             }
-        }
-    })
-    res.status(201).send(recipe)
-})
+        });
+        res.status(201).send(recipe);
+
+    } catch (error) {
+        console.error("Error al crear receta:", error);
+        res.status(500).json({ error: "Error al crear la receta" });
+    }
+});
 
 /* Borrar la receta */
 router.delete('/:id', async (req, res) => {
