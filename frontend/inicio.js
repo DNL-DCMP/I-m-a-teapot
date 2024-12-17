@@ -4,6 +4,7 @@ const searchIcon = document.querySelector("#searchIcon");
 const navOpenBtn = document.querySelector(".navOpenBtn");
 const navCloseBtn = document.querySelector(".navCloseBtn");
 
+
 /*Agrega funcionalidad al boton de busqueda */
 searchIcon.addEventListener('click', () => {
     nav.classList.toggle('openSearch');
@@ -27,17 +28,24 @@ navCloseBtn.addEventListener('click', () => {
     nav.classList.remove('openNav');
 });
 
+
+
+
 /* Autentication */
+document.addEventListener("DOMContentLoaded", () => {
+    // Obtener el usuario desde localStorage
+    const user = JSON.parse(localStorage.getItem("user"));
 
-let isLoggedIn = false;
-const authButtons = document.querySelectorAll(".auth-buttons");
+    // Verificar si el usuario existe y si está logueado
+    if (user && user.isLoggedIn) {
+        console.log("El usuario está logueado:", user.isLoggedIn);
 
-function updateUI(){
-    if(isLoggedIn){
+        const authButtons = document.querySelectorAll(".auth");
         authButtons.forEach(button => button.classList.add("hidden"));
-    }else{
-        authButtons.forEach(button => button.classList.remove("hidden"));
+        
+    } else {
+        console.log("El usuario no está logueado o no existe.");
+        const notAuthButtons = document.querySelectorAll(".notAuth");
+        notAuthButtons.forEach(button => button.classList.add("hidden") )
     }
-}
-
-updateUI();
+});

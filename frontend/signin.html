@@ -88,13 +88,13 @@
             const email = document.getElementById("registerEmail").value;
             const password = document.getElementById("registerPassword").value;
 
-            console.log("Datos enviados al back-end:", { name, email, password }); //Depuracion
+            console.log("Datos enviados al back-end:", { name, email, password }); // Depuración
 
             try {
                 const response = await fetch("http://localhost:3000/api/v1/users", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, password }),
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, password }),
                 });
 
                 const data = await response.json();
@@ -106,8 +106,12 @@
                     // Redirigir al formulario de inicio de sesión
                     document.getElementById("sign-in-btn").click(); // Cambiar a modo inicio de sesión
                 } else {
-                    console.error("Error en el registro:", data.message);
-                    alert(`Error: ${data.message}`);
+                    // Manejar errores de validación de registro
+                    if (data.error) {
+                        alert(`Error: ${data.error}`); // Mensaje de error del servidor
+                    } else {
+                        alert("Error en el registro. Verifica los datos e inténtalo nuevamente.");
+                    }
                 }
             } catch (error) {
                 console.error("Error al enviar datos:", error);
@@ -123,10 +127,7 @@
         }
 
         //Tomar los datos de inicio de secion
-        // Seleccionamos el formulario
         const loginForm = document.getElementById("loginForm");
-
-        // Escuchar el evento 'submit'
         loginForm.addEventListener("submit", async (event) => {
             event.preventDefault(); // Evita que la página se recargue
 
@@ -147,10 +148,11 @@
                 // Verificar si el inicio de sesión fue exitoso
                 if (response.ok) {
                     document.getElementById("message").innerText = "Inicio de sesión exitoso.";
-                    console.log("User ID:", data.userId); // Mostrar el userId en la consola
+                    console.log("Usuario:", data.user); // Mostrar la estructura completa del usuario
 
-                    // Almacenar el userId en localStorage o en una variable global
-                    localStorage.setItem("userId", data.userId);
+                    // Almacenar el usuario en localStorage
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    window.location.href = "inicio.html";
                 } else {
                     document.getElementById("message").innerText = `Error: ${data.message}`;
                 }

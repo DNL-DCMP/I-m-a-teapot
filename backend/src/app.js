@@ -410,22 +410,21 @@ app.post("/api/v1/login", async (req, res) => {
         }
 
         // Actualizar el estado del usuario a "connected"
-        await prisma.user.update({
+        const updatedUser = await prisma.user.update({
             where: { id: user.id },
             data: { isLoggedIn: true },
         });
 
-        // Responder con el mensaje y el userId
+        // Responder con la estructura completa del usuario y el mensaje
         return res.status(200).json({
             message: "Inicio de sesión exitoso",
-            userId: user.id,
+            user: updatedUser, // Devolver la estructura completa del usuario
         });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Error interno del servidor" });
     }
 });
-
 
 
 app.listen(port, () => {

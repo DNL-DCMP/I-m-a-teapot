@@ -45,15 +45,29 @@ router.get('/:id/recipes', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    const user = await prisma.user.create({
-        data:{
-            name:req.body.name,
-            email:req.body.email,
-            password:req.body.password,
+    const { name, email, password } = req.body;
+
+    try {
+        // Verificar si el usuario ya existe
+        const existingUser = await prisma.user.findUnique({
+            where: { email }
+        });
+
+        if (existingUser) {
+            return res.status(400).json({ error: 'El usuario ya está registrado' });
         }
-    })
-    res.status(201).send(user)
-})
+
+        // Crear el nuevo usuario
+        const user = await prisma.user.create({
+            data: { name, email, password }
+        });
+
+        res.status(201).json({ message: 'Usuario creado con éxito', user });
+    } catch (error) {
+        console.error('Error al crear usuario:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+});
 
 /*Borra un usuario por ID*/
 router.delete('/:id', async (req, res) => {
