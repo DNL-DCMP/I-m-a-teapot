@@ -24,7 +24,7 @@ body {
     background-repeat: no-repeat;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	min-height: 100vh;
 	padding: 1rem;
 }
@@ -44,6 +44,7 @@ body {
 	text-align: center;
 }
 .wrapper h3 {
+    text-align: center;
 	font-size: 1.5rem;
 	font-weight: 600;
 	margin-bottom: 1rem;
@@ -68,7 +69,16 @@ h3 {
 	opacity: 0;
 	animation: animate .5s calc(var(--i) * .1s) ease-in-out forwards;
 }
-
+ 
+.star:hover,
+.star.hover,
+.star.selected {
+  color: #FFD700; /* Color dorado cuando el usuario pasa el ratón o selecciona la estrella */
+}
+.bxs-star {
+    color: #FFD700; /* Estrella llena en dorado */
+  }
+  
 @keyframes animate {
 	0% {
 		opacity: 0;
@@ -132,3 +142,48 @@ textarea {
         background-image: url('img/galles.jpg'); 
     }
 }
+
+/* Comentarios */
+#commentsSection {
+    margin-top: 30px;
+  }
+  
+  .comment {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .comment p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .comment .rating {
+    font-size: 18px;
+    color: #FFD700;
+  }
+  
+  .comment .rating .star {
+    color: #FFD700; /* Estrellas doradas para la calificación */
+  }
+  
+  .comment .author {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .comment .date {
+    font-size: 12px;
+    color: #777;
+  }
+  
+  .comment .delete-btn {
+    color: #f44336;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
