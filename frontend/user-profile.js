@@ -27,6 +27,7 @@ navCloseBtn.addEventListener('click', () => {
     nav.classList.remove('openNav');
 });
 
+<<<<<<< HEAD
 const user = JSON.parse(localStorage.getItem('user'));
 
 if(user){
@@ -36,10 +37,32 @@ if(user){
     .then(response => response.json())
     .then(data => {
         const nameMain = document.querySelector('.name-user');
+=======
+
+/*Falta agregar el id del usuario
+fetch("http://localhost:3000/api/v1/users/:id")
+    .then(response => response.json())
+    .then(data => {
+        const nameMain = document.querySelector('.name-user');
+        const name = document.querySelector('.first-name');
+        /*Hay que agregar lastname a schema.prisma
+        const lastname = document.querySelector('.last-name');
+>>>>>>> b0adce14e586543518ca36078fbf56784d3853ce
         const email = document.querySelector('.email');
 
         nameMain.innerText = data.name;
         email.innerText = data.email;
+    });*/
 
+<<<<<<< HEAD
     });
 }
+=======
+// Logout de usuario
+const logoutButton = document.getElementById('logout');
+logoutButton.addEventListener('click', () => {
+    // Limpiar localStorage
+    localStorage.clear();
+    window.location.href = 'inicio.html';
+});
+>>>>>>> b0adce14e586543518ca36078fbf56784d3853ce

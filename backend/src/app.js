@@ -267,7 +267,7 @@ app.get('/api/v1/users/:id', async (req, res) => {
 
     res.json(user)
 })
-
+/*
 app.post('/api/v1/users', async (req, res) => {
     
         const { name, email, password } = req.body;
@@ -285,7 +285,7 @@ app.post('/api/v1/users', async (req, res) => {
         res.status(201).json({ message: 'Registro exitoso', user: newUser });
     
 });
-
+*/
 
 /*Borra un usuario por ID*/
 app.delete('/api/v1/users/:id', async (req, res) => {
