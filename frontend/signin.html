@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+        <!-- <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script> --> 
         <link rel="stylesheet" href="signin-style.css"/>
         <title>Sign in & Sign up Form</title>
     </head>
@@ -11,32 +11,34 @@
         <div class="container">
             <div class="forms-container">
                 <div class="signin-signup">
-                    <form action="" class="sign-in-form">
+                    <form id="loginForm" class="sign-in-form">
                         <h2 class="title">Sign in</h2>
                         <div class="input-field">
                             <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Username">
+                            <input type="email" placeholder="example@email.com" id="email" name="email">
                         </div>
                         <div class="input-field">
                             <i class="fas fa-lock"></i>
-                            <input type="password" placeholder="Password">
+                            <input type="password" placeholder="Password" id="password" name="password">
                         </div>
                         <input type="submit" value="Login" class="btn solid">
+                        <div id="message"></div>
                     </form>
+                    
 
-                    <form class="sign-up-form" id="registerForm" action="">
+                    <form id="registerForm" class="sign-up-form">
                         <h2 class="title">Sign up</h2>
                         <div class="input-field">
                             <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Username" id="name">
+                            <input type="text" id="registerName" name="registerName" placeholder="Nombre">
                         </div>
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
-                            <input type="text" placeholder="Email" id="email">
+                            <input type="email" id="registerEmail" name="registerEmail" placeholder="Email" required>
                         </div>
                         <div class="input-field">
                             <i class="fas fa-lock"></i>
-                            <input type="password" placeholder="Password" id="password">
+                            <input type="password" id="registerPassword" name="registerPassword" placeholder="Contraseña" required>
                         </div>
                         <input type="submit" value="Sign up" class="btn solid">
                     </form>
@@ -78,24 +80,86 @@
             container.classList.remove("sign-up-mode");
         });
 
-        document.getElementById('registerForm').addEventListener('submit', async function (e) {
-              e.preventDefault();
+        document.getElementById("registerForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            // Obtén los valores de los inputs
+            const name = document.getElementById("registerName").value;
+            const email = document.getElementById("registerEmail").value;
+            const password = document.getElementById("registerPassword").value;
 
-            const response = await fetch('http://localhost:3000/api/v1/users', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password }),
-            });
-            const result = await response.json();
+            console.log("Datos enviados al back-end:", { name, email, password }); // Depuración
+
+            try {
+                const response = await fetch("http://localhost:3000/api/v1/users", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, password }),
+                });
+
+                const data = await response.json();
+                console.log("Respuesta del servidor:", data);
+
+                if (response.ok) {
+                    console.log("Registro exitoso:", data);
+
+                    // Redirigir al formulario de inicio de sesión
+                    document.getElementById("sign-in-btn").click(); // Cambiar a modo inicio de sesión
+                } else {
+                    // Manejar errores de validación de registro
+                    if (data.error) {
+                        alert(`Error: ${data.error}`); // Mensaje de error del servidor
+                    } else {
+                        alert("Error en el registro. Verifica los datos e inténtalo nuevamente.");
+                    }
+                }
+            } catch (error) {
+                console.error("Error al enviar datos:", error);
+                alert("Error al conectar con el servidor.");
+            }
         });
+
+
         // Si el usuario se esta registrando, lo lleva la parte de registro de la pagina
         if (location.hash === '#registerForm') {
             const myButton = document.getElementById('sign-up-btn');    
             myButton.click();
         }
+
+        //Tomar los datos de inicio de secion
+        const loginForm = document.getElementById("loginForm");
+        loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault(); // Evita que la página se recargue
+
+            // Obtener los valores de los campos
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                // Enviar los datos al backend
+                const response = await fetch("http://localhost:3000/api/v1/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                const data = await response.json(); // Convertir la respuesta a JSON
+
+                // Verificar si el inicio de sesión fue exitoso
+                if (response.ok) {
+                    document.getElementById("message").innerText = "Inicio de sesión exitoso.";
+                    console.log("Usuario:", data.user); // Mostrar la estructura completa del usuario
+
+                    // Almacenar el usuario en localStorage
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    window.location.href = "inicio.html";
+                } else {
+                    document.getElementById("message").innerText = `Error: ${data.message}`;
+                }
+            } catch (error) {
+                console.error("Error al iniciar sesión:", error);
+                document.getElementById("message").innerText = "Error al conectar con el servidor.";
+            }
+        });
     </script>
 </html>
