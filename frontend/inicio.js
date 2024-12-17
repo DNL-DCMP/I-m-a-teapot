@@ -29,7 +29,7 @@ navCloseBtn.addEventListener('click', () => {
 
 /* Autentication */
 
-let isLoggedIn = true;
+let isLoggedIn = false;
 const authButtons = document.querySelectorAll(".auth-buttons");
 
 function updateUI(){
