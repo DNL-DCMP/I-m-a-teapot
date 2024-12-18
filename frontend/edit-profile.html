@@ -51,7 +51,7 @@
             <div class="header-profile">
                 <h2 class="title-container">Mi perfil</h2>
                 <div class="button-control">
-                    <button class="edit-profile-btn" onclick="editProfile()"><a href="user-profile.html">Guardar cambios</a></button>
+                    <button class="edit-profile-btn" id="saveButton"><a>Guardar cambios</a></button>
                     <button class="close-btn"><a href="user-profile.html">Cancelar</a></button>
                 </div>
             </div>
@@ -69,15 +69,13 @@
                         <label for="firts-name">Nombre/s</label>
                         <input type="text" id="first-name" placeholder="Ingresar nombre/s...">
                     </div>
-
-                    <div class="information">
-                        <label for="last-name">Apellido/s</label>
-                        <input type="text" id="last-name" placeholder="Ingresar apellido/s...">
-                    </div>
-
                     <div class="information">
                         <label for="email">Email</label>
-                        <input type="text" id="last-name" pattern="^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" required  placeholder="Ingresar email...">
+                        <input type="text" id="email"  required  placeholder="Ingresar email...">
+                    </div>
+                    <div class="information">
+                        <label for="biografia">Biografia</label>
+                        <textarea type="text" id="biography" rows="4" cols="50" placeholder="Escribre una biografia..."></textarea>
                     </div>
                 </div>
             </div>
@@ -96,12 +94,7 @@
                         <input type="text" id="last-name">
                     </div>
 
-                    <div class="information">
-                        <label for="lats-name">Email</label>
-                        <input type="text" id="last-name" pattern="^[a-zA-Z0-9_.±]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" required>
-                    </div>
-                </div>
-
+                   
              </div>
             -->
         </div>
@@ -109,3 +102,4 @@
     </div>
     <script src="edit-profile.js"></script>
 </body>
+</html>

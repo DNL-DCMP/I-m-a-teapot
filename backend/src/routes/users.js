@@ -109,7 +109,8 @@ router.put('/:id', async (req, res) => {
         data: {
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            biography: req.body.biography
         }
     })
     res.send(user)
