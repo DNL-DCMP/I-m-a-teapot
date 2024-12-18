@@ -223,9 +223,18 @@ a {
     font-size: 10px;
 }
 
-
-
-
+.info-container textarea {
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    box-shadow: 1px 1px 6px #0000001c;
+    margin-top: 10px;
+    padding: 0.9rem;
+    font-size: 10px;
+    resize: none; /* Evita que el usuario cambie el tamaño del textarea */
+    width: 100%;
+    font-family: "Poppins", sans-serif; 
+}
 
 
 /*---responsive---*/
