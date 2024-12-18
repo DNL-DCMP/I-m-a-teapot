@@ -45,6 +45,7 @@ model Recipe {
 model Comment {
   id           Int        @id @default(autoincrement())
   content      String
+  rating       Int  
   createdAt    DateTime   @default(now())
   userId       Int
   recipeId     Int
