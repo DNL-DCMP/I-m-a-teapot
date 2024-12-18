@@ -40,7 +40,7 @@ if(user){
     .then(data => {
         const nameMain = document.querySelector('.name-user');
         const email = document.querySelector('.email');
-        const biography = document.querySelector('.biografia')
+        const biography = document.querySelector('.biografia');
         const profilePicture = document.querySelector('#profilePicture');
 
         nameMain.innerText = data.name;
@@ -51,6 +51,11 @@ if(user){
           profilePicture.src = data.profilePicture;
         } else {
           profilePicture.src = 'img/cookiecheseecake.webp'; // Imagen por defecto si no tiene una URL
+        }
+
+        if (!data.biography) { // Verifica si la biografía es null, undefined o una cadena vacía
+          const hiddenBio = document.querySelector("#biography");
+          hiddenBio.classList.add("hidden"); // Agrega la clase 'hidden' para ocultar el elemento
         }
     });
 }

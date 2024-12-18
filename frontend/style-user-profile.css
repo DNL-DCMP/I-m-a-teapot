@@ -213,6 +213,9 @@ a {
     font-size: 13px;
 }
 
+.hidden{
+    display: none;
+}
 
 
 /*---responsive---*/
