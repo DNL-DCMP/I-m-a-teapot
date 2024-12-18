@@ -27,15 +27,18 @@ model User {
 }
 
 model Recipe {
-  id            Int        @id @default(autoincrement())
-  name         String
-  description   String?
-  ingredients   String[]   
-  instructions  String[]
-  categories    Category[] 
-  userId        Int
-  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  comments      Comment[]  
+  id              Int        @id @default(autoincrement())
+  name            String
+  description     String?
+  ingredients     String[]   
+  instructions    String[]
+  time            Int
+  temperatureCook Int
+  servings        Int
+  categories      Category[] 
+  userId          Int
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments        Comment[]  
 }
 
 model Comment {
