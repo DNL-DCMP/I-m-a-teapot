@@ -87,7 +87,7 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         const deleteRecipeBtn = document.createElement('button');
         deleteRecipeBtn.classList.add('delete-recipe-btn');
         deleteRecipeBtn.innerText = "Borrar receta";
-        deleteRecipeBtn.onclick = "deleteRecipe()";
+        deleteRecipeBtn.onclick = deleteRecipe;
         recipesBtn.appendChild(deleteRecipeBtn);
 
         const commentsRecipeBtn = document.createElement('button');
@@ -98,3 +98,23 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
 
         recipeContainer.appendChild(recipesBtn);
     })
+
+function deleteRecipe(){
+    fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(response => {
+            if (response.ok) {
+                alert('Receta borrada con éxito!');
+                window.location.href = 'user-recipes.html';
+            } else {
+                console.log("Error al borrar la rceeta");
+            }
+        })
+        .catch(error => {
+            alert('Error al borrar la receta');
+        });
+}
