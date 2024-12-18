@@ -21,7 +21,7 @@ router.get('/:id', async (req, res) => {
         return
     }
 
-    res.json(recipe)
+    res.status(201).json(recipe)
 })
 
 /*Filtra los comentarios de una receta mediante el id*/
