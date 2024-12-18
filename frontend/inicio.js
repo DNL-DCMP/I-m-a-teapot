@@ -28,6 +28,57 @@ navCloseBtn.addEventListener('click', () => {
     nav.classList.remove('openNav');
 });
 
+const Container = document.querySelector('.container');
+
+fetch("https://localhost:3000/api/v1/recipes")
+  .then((response) => response.json())
+  .then((recipe) => {
+    const recetasAleatorias = data.sort(() => 0.5 - Math.random()).slice(0, 8);
+    createCard(recetasAleatorias);
+  });
+
+function createCard (recipe) {
+    const topRecipes = document.createElement('section');
+    topRecipes.classList.add('container top-recipes');
+
+    const titleContainer = document.createElement('h1');
+    titleContainer.classList.add('heading-1');
+    titleContainer.innerText = "Explora las mejores recetas!";
+    topRecipes.appendChild(titleContainer);
+
+    const recipesContainer = document.createElement('div');
+    recipesContainer.classList.add('container-recipes');
+
+    const cardRecipe = document.createElement('div');
+    cardRecipe.classList.add('card-recipe');
+
+    let img = document.createElement('img');
+    img.src = recipe.image;
+    cardRecipe.appendChild(img);
+
+    let titleRecipe = document.createElement('h3');
+    titleRecipe.classList.add('recipe-name');
+    titleRecipe.innerText = recipe.name;
+    cardRecipe.appendChild(titleRecipe);
+
+    let recipeDesc = document.createElement('p');
+    recipeDesc.classList.add('recipe-description');
+    recipeDesc.innerText = recipe.description;
+    cardRecipe.appendChild(recipeDesc);
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-containet');
+
+    let linkViewRecipe = document.createElement('a');
+    linkViewRecipe.classList.add('view-recipe-btn');
+    linkViewRecipe.innerText = "Ver receta";
+    linkViewRecipe.href = `recipes-details.html?id=${recipe.id}`;
+    buttonContainer.appendChild(linkViewRecipe);
+    cardRecipe.appendChild(buttonContainer);
+
+    recipesContainer.appendChild(cardRecipe);
+
+}
 
 
 
