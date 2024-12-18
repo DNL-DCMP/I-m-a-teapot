@@ -34,48 +34,48 @@ const recipeId = params.get('id');
 fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
     .then(response => response.json())
     .then(recipe => {
-        const recipeInfo = document.querySelector('.recip-info');
+
         const recipeLeft = document.querySelector('.recipe-left');
+        const recipeRight = document.querySelector('.recipe-right');
+
+        const ingredientsTitle = document.createElement('h1');
+        ingredientsTitle.classList.add('ingredients-title');
+        ingredientsTitle.innerText = "Ingredientes";
+        recipeLeft.appendChild(ingredientsTitle);
+
+        const ingredientsContainer = document.createElement('ul');
+        ingredientsContainer.classList.add('ingredients-container');
+
+        for (let i = 0; i < recipe.ingredients.length; i++) {
+            let ingredientItem = document.createElement('li');
+            ingredientItem.innerText = recipe.ingredients[i];
+            ingredientsContainer.appendChild(ingredientItem);
+        }
+        recipeLeft.appendChild(ingredientsContainer);
 
         let recipeName = document.createElement('h1');
         recipeName.classList.add('recipe-name');
         recipeName.innerText = recipe.name;
-        recipeInfo.appendChild(recipeName);
+        recipeRight.appendChild(recipeName);
 
-        let recipeDescription = document.createElement('div');
+        let recipeDescription = document.createElement('p');
         recipeDescription.classList.add('recipe-description');
+        recipeDescription.innerText = recipe.description;
+        recipeRight.appendChild(recipeDescription);
 
-            let description = document.createElement('p');
-            description.classList.add('description');
-            description.innerText = recipe.description;
-            recipeDescription.appendChild(description);
-        
-        recipeInfo.appendChild(recipeDescription);
-        
+        const instructionsTitle = document.createElement('h1');
+        instructionsTitle.classList.add('instructions-title');
+        instructionsTitle.innerText = "Instrucciones:"
+        recipeRight.appendChild(instructionsTitle);
 
-        let instructions = document.querySelector('.intructions');
+        const instructionsContainer = document.createElement('ul');
+        instructionsContainer.classList.add('instructions-container');
 
-        recipe.instructions.forEach(instruction => {
-            let li = document.createElement('li');
-            li.classList.add('instructions-item');
-            li.innerText = instruction;
-            instructions.appendChild(li);
-        });
+        for(let i = 0; i < recipe.instructions.length; i++){
+            let instructionsItem = document.createElement('li');
+            instructionsItem.innerText = recipe.instructions[i];
+            instructionsContainer.appendChild(instructionsItem);
+        }
 
-        let img = document.createElement('img');
-        img.src = recipe.image;
-        img.classList.add("image-recipe");
-        recipeLeft.appendChild(img);
-
-        let RecipeIngredients = document.createElement('div');
-        RecipeIngredients.classList.add('recipe-ingredients');
-
-        const recipeIngredients = document.querySelector('.ingredients');
-
-        recipe.ingredients.forEach(ingredient => {
-            let listElement = document.createElement('li');
-            listElement.classList.add('ingredients-item');
-            listElement.innerText = recipe.ingredients;
-            RecipeIngredients.appendChild(listElement);
-        })
+        recipeRight.appendChild(instructionsContainer);
     })
