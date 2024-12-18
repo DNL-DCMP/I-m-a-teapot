@@ -34,7 +34,8 @@ model Recipe {
   instructions    String[]
   time            Int
   temperatureCook Int
-  servings        Int
+  servings        Int?
+  recipePicture   String?
   categories      Category[] 
   userId          Int
   user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
