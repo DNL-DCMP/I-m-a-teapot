@@ -34,18 +34,32 @@ router.post('/:id/comments', async (req, res) => {
         return
     }
 
+    const userId = req.body.userId;
     const comment = await prisma.comment.create({
         data: {
             content: req.body.content,
+            rating: req.body.rating,
             recipe: {
                 connect: {
                     id: recipe.id
+                }
+            },
+            user: {
+                connect: {
+                    id: userId
                 }
             }
         }
     })
 
-    res.status(201).send(comment)
+    res.status(201).send({
+        id: comment.id,
+        content: comment.content,
+        rating: comment.rating,
+        user: {
+            name: comment.user.name // Muestra el nombre del usuario
+        }
+    });
 })
 
 /* Modificar un comentario de una receta */
