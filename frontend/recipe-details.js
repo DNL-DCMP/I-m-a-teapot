@@ -34,39 +34,20 @@ const recipeId = params.get('id');
 fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
     .then(response => response.json())
     .then(recipe => {
-
-        const recipeLeft = document.querySelector('.recipe-left');
-        const recipeRight = document.querySelector('.recipe-right');
-
-        const ingredientsTitle = document.createElement('h1');
-        ingredientsTitle.classList.add('ingredients-title');
-        ingredientsTitle.innerText = "Ingredientes";
-        recipeLeft.appendChild(ingredientsTitle);
-
-        const ingredientsContainer = document.createElement('ul');
-        ingredientsContainer.classList.add('ingredients-container');
-
-        for (let i = 0; i < recipe.ingredients.length; i++) {
-            let ingredientItem = document.createElement('li');
-            ingredientItem.innerText = recipe.ingredients[i];
-            ingredientsContainer.appendChild(ingredientItem);
-        }
-        recipeLeft.appendChild(ingredientsContainer);
-
         let recipeName = document.createElement('h1');
         recipeName.classList.add('recipe-name');
         recipeName.innerText = recipe.name;
-        recipeRight.appendChild(recipeName);
+        recipeContainer.appendChild(recipeName);
 
         let recipeDescription = document.createElement('p');
         recipeDescription.classList.add('recipe-description');
         recipeDescription.innerText = recipe.description;
-        recipeRight.appendChild(recipeDescription);
+        recipeContainer.appendChild(recipeDescription);
 
         const instructionsTitle = document.createElement('h1');
         instructionsTitle.classList.add('instructions-title');
         instructionsTitle.innerText = "Instrucciones:"
-        recipeRight.appendChild(instructionsTitle);
+        recipeContainer.appendChild(instructionsTitle);
 
         const instructionsContainer = document.createElement('ul');
         instructionsContainer.classList.add('instructions-container');
@@ -77,5 +58,43 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
             instructionsContainer.appendChild(instructionsItem);
         }
 
-        recipeRight.appendChild(instructionsContainer);
+        recipeContainer.appendChild(instructionsContainer);
+
+        const ingredientsTitle = document.createElement('h1');
+        ingredientsTitle.classList.add('ingredients-title');
+        ingredientsTitle.innerText = "Ingredientes";
+        recipeContainer.appendChild(ingredientsTitle);
+
+        const ingredientsContainer = document.createElement('ul');
+        ingredientsContainer.classList.add('ingredients-container');
+
+        for (let i = 0; i < recipe.ingredients.length; i++) {
+            let ingredientItem = document.createElement('li');
+            ingredientItem.innerText = recipe.ingredients[i];
+            ingredientsContainer.appendChild(ingredientItem);
+        }
+        recipeContainer.appendChild(ingredientsContainer);
+
+        const recipesBtn = document.createElement('div');
+        recipesBtn.classList.add('button-recipes');
+
+        const editRecipeBtn = document.createElement('button');
+        editRecipeBtn.classList.add('edit-recipe-btn');
+        editRecipeBtn.innerText = "Editar receta";
+        editRecipeBtn.onclick = "editRecipe.html";
+        recipesBtn.appendChild(editRecipeBtn);
+
+        const deleteRecipeBtn = document.createElement('button');
+        deleteRecipeBtn.classList.add('delete-recipe-btn');
+        deleteRecipeBtn.innerText = "Borrar receta";
+        deleteRecipeBtn.onclick = "deleteRecipe()";
+        recipesBtn.appendChild(deleteRecipeBtn);
+
+        const commentsRecipeBtn = document.createElement('button');
+        commentsRecipeBtn.classList.add('comments-recipe-btn');
+        commentsRecipeBtn.innerText = "Comentarios";
+        commentsRecipeBtn.onclick = "commentsRecipe.html";
+        recipesBtn.appendChild(commentsRecipeBtn);
+
+        recipeContainer.appendChild(recipesBtn);
     })
