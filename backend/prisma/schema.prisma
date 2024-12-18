@@ -14,14 +14,16 @@ datasource db {
 }
 
 model User {
-  id          Int        @id @default(autoincrement())
-  name        String
-  email       String     @unique
-  password    String
-  createdAt   DateTime   @default(now())
-  isLoggedIn  Boolean    @default(false)
-  recipes     Recipe[]  
-  comments    Comment[] 
+  id             Int        @id @default(autoincrement())
+  name           String
+  email          String     @unique
+  password       String
+  biography      String?
+  profilePicture String?
+  createdAt      DateTime   @default(now())
+  isLoggedIn     Boolean    @default(false)
+  recipes        Recipe[]  
+  comments       Comment[] 
 }
 
 model Recipe {

@@ -44,7 +44,7 @@ app.post("/api/v1/login", async (req, res) => {
             return res.status(401).json({ message: "Contraseña incorrecta" });
         }
 
-        // Actualizar el estado del usuario a "connected"
+        // Actualizar el estado del usuario a "true"
         const updatedUser = await prisma.user.update({
             where: { id: user.id },
             data: { isLoggedIn: true },
@@ -58,6 +58,35 @@ app.post("/api/v1/login", async (req, res) => {
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Error interno del servidor" });
+    }
+});
+
+// Logout de user
+
+app.post("/api/v1/logout", async (req, res) => {
+    try {
+      const { userId } = req.body; // Captura el ID del usuario enviado desde el frontend
+  
+      // Verificar que el ID del usuario sea válido
+      if (!userId) {
+        return res.status(400).json({ message: 'Se requiere el ID del usuario' });
+      }
+  
+      // Actualizar el campo isLoggedIn a false en la base de datos
+      const updatedUser = await prisma.user.update({
+        where: { id: userId },
+        data: { isLoggedIn: false },
+      });
+  
+      return res.json({
+        message: 'Logout exitoso',
+        user: updatedUser,
+      });
+    } catch (error) {
+      console.error('Error en el logout:', error.message);
+      return res.status(500).json({
+        message: 'Ocurrió un error al desloguear el usuario',
+      });
     }
 });
 
