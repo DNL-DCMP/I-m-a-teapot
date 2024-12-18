@@ -80,6 +80,8 @@ if(user){
 
         let name = document.querySelector('.recipe-name').value;
         let description = document.querySelector('.recipe-description').value;
+        let time = document.querySelector('.recipe-time').value;
+        let temperatureCook = document.querySelector('.recipe-temperatureCook').value
     
         // Corregir obtención de valores para inputs múltiples
         let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value);
@@ -89,6 +91,8 @@ if(user){
         let body = {
             name: name,
             description: description,
+            time: time,
+            temperatureCook: temperatureCook,
             ingredients: ingredients,
             instructions: instructions,
             // Faltaría implementar el manejo de la imagen si es necesario
@@ -122,6 +126,8 @@ if(user){
 function clearForm() {
     document.querySelector('.recipe-name').value = ' ';
     document.querySelector('.recipe-description').value = ' ';
+    document.querySelector('.recipe-time').value = '';
+    document.querySelector('.recipe-temperatureCook').value = '';
     
     const ingredientsInputs = document.querySelectorAll('.recipe-ingredients');
         ingredientsInputs.forEach(input => {
