@@ -236,6 +236,19 @@ a {
     font-family: "Poppins", sans-serif; 
 }
 
+.container .changepsswd-container {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    padding: 3rem;
+    box-shadow: 1px 1px 6px #0000001c;
+    border-radius: 20px;
+}
+
+.container .changepsswd-container .title-information {
+    color: #333;
+}
+
 
 /*---responsive---*/
 
@@ -389,8 +402,8 @@ a {
 
     .container {
         padding: 4rem;
-        margin: 2.5rem;
-        margin-top: 6rem;
+        padding-top: 6rem;
+        margin: 0;
     }
 }
 
@@ -462,7 +475,8 @@ a {
 
 @media screen and (max-width: 460px){
     .container {
-        padding: 2rem;
+        padding-top: 6rem;
+        padding: 1rem;
     }
 
     .container .personal-info-container {
