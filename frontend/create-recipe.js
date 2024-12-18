@@ -80,8 +80,8 @@ if(user){
 
         let name = document.querySelector('.recipe-name').value;
         let description = document.querySelector('.recipe-description').value;
-        let time = document.querySelector('.recipe-time').value;
-        let temperatureCook = document.querySelector('.recipe-temperatureCook').value
+        let time = parseInt(document.querySelector('.recipe-time').value);
+        let temperatureCook = parseInt(document.querySelector('.recipe-temperatureCook').value);
     
         // Corregir obtención de valores para inputs múltiples
         let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value);
