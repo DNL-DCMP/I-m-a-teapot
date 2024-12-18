@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const resultsContainer = document.querySelector('container-results')
+    const resultsContainer = document.getElementById('results')
     const searchResults = JSON.parse(localStorage.getItem('searchResults'))
 
     if (searchResults && searchResults.length > 0) {

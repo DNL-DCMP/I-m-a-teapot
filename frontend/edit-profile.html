@@ -51,13 +51,14 @@
             <div class="header-profile">
                 <h2 class="title-container">Mi perfil</h2>
                 <div class="button-control">
-                    <button class="edit-profile-btn" id="saveButton"><a href="user-profile.html">Guardar cambios</a></button>
+                    <button class="edit-profile-btn" id="saveButton"><a>Guardar cambios</a></button>
                     <button class="close-btn"><a href="user-profile.html">Cancelar</a></button>
                 </div>
             </div>
 
             <div class="name-container">
-                <img id="profilePicture" src="img/cookiecheseecake.webp" class="user-image" alt="profilePicture">
+                <!--Falta agregar el campo en schema.prisma-->
+                <img src="img/cookiecheseecake.webp" class="user-image">
                 <h2 class="name-user"></h2>
             </div>
             <div class="personal-info-container">
@@ -65,41 +66,37 @@
 
                 <div class="info-container">
                     <div class="information">
-                        <label>Nombre/s</label>
+                        <label for="firts-name">Nombre/s</label>
                         <input type="text" id="first-name" placeholder="Ingresar nombre/s...">
                     </div>
                     <div class="information">
-                        <label>Email</label>
+                        <label for="email">Email</label>
                         <input type="text" id="email"  required  placeholder="Ingresar email...">
                     </div>
                     <div class="information">
-                        <label>Biografia</label>
+                        <label for="biografia">Biografia</label>
                         <textarea type="text" id="biography" rows="4" cols="50" placeholder="Escribre una biografia..."></textarea>
-                    </div>
-                    <div class="information">
-                        <label>Imagen de Perfil</label>
-                        <input type="url" id="imgProfile" placeholder="https://example.com/imagen.jpg">
                     </div>
                 </div>
             </div>
-           
+            <!--
             <div class="changepsswd-container">
                 <h2 class="title-information">Cambiar contraseña</h2>
 
                 <div class="info-container">
                     <div class="information">
-                        <label>Contraseña Nueva</label>
-                        <input type="password" id="newPassword">
+                        <label for="firts-name">Nombre/s</label>
+                        <input type="text" id="first-name">
                     </div>
 
                     <div class="information">
-                        <label>Confirmar Contraseña</label>
-                        <input type="password" id="confirmPassword">
+                        <label for="lats-name">Apellido/s</label>
+                        <input type="text" id="last-name">
                     </div>
-                </div>
+
                    
-            </div>
-            
+             </div>
+            -->
         </div>
 
     </div>

@@ -93,37 +93,28 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-    try {
-        const user = await prisma.user.findUnique({
-            where: {
-                id: parseInt(req.params.id)
-            }
-        });
-
-        if (!user) {
-            return res.status(404).send({ error: 'Usuario no encontrado' });
+    let user = await prisma.user.findUnique({
+        where:{
+            id: parseInt(req.params.id)
         }
-
-        const updatedUser = await prisma.user.update({
-            where: {
-                id: parseInt(req.params.id),
-            },
-            data: {
-                name: req.body.name || user.name, // Mantiene el dato actual si no se envía uno nuevo
-                email: req.body.email || user.email,
-                password: req.body.password || user.password,
-                biography: req.body.biography || user.biography,
-                profilePicture: req.body.profilePicture || user.profilePicture,
-                password: req.body.password || user.password
-            }
-        });
-
-        res.status(200).send(updatedUser);
-    } catch (error) {
-        console.error('Error al actualizar usuario:', error);
-        res.status(500).send({ error: 'Error al actualizar el perfil del usuario' });
+    })
+    if (user === null) {
+        res.sendStatus(404)
+        return
     }
-});
+    user = await prisma.user.update({
+        where: {
+            id: user.id
+        },
+        data: {
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            biography: req.body.biography
+        }
+    })
+    res.send(user)
+})
 
 /*Muestra los favoritos de un usuario dado su id*/
 router.get('/:id/favoritos', (req, res) => {

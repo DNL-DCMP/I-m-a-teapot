@@ -40,21 +40,12 @@ if(user){
     .then(data => {
         const nameMain = document.querySelector('.name-user');
         const email = document.querySelector('.email');
-        const biography = document.querySelector('.biografia')
-        const profilePicture = document.querySelector('#profilePicture');
 
         nameMain.innerText = data.name;
         email.innerText = data.email;
-        biography.innerText = data.biography;
-
-        if (data.profilePicture) {
-          profilePicture.src = data.profilePicture;
-        } else {
-          profilePicture.src = 'img/cookiecheseecake.webp'; // Imagen por defecto si no tiene una URL
-        }
     });
 }
-
+console.log(user)
 // Logout de usuario
 
 const logoutButton = document.getElementById("logout");

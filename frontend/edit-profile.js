@@ -26,53 +26,39 @@ navCloseBtn.addEventListener('click', () => {
     nav.classList.remove('openNav');
 });
 
-const user = JSON.parse(localStorage.getItem('user'));
-
-if(user){
-    const userId = user.id;
-
-    fetch(`http://localhost:3000/api/v1/users/${userId}`)
+/*Agrega el nombre del usuario a el header principal  (falta agregar la imagen a schema.prisma
+fetch("http://localhost:3000/api/v1/users/:id")
     .then(response => response.json())
     .then(data => {
         const nameMain = document.querySelector('.name-user');
-        const profilePicture = document.querySelector('#profilePicture');
+        nameMain.innerText = data.name + data.lastname;
 
-        nameMain.innerText = data.name;
-
-        if (data.profilePicture) {
-          profilePicture.src = data.profilePicture;
-        } else {
-          profilePicture.src = 'img/cookiecheseecake.webp'; // Imagen por defecto si no tiene una URL
-        }
     });
-}
+    */
+/*Función para editar el perfil del usuario*/
 
+const user = JSON.parse(localStorage.getItem('user'));
 const userId = user.id;
 
 document.getElementById('saveButton').addEventListener('click', (event) => {
     event.preventDefault(); // Evita la recarga de la página
 
     // Obtener los valores de los inputs
-    const name = document.querySelector('#first-name').value.trim();
+    const firstName = document.querySelector('#first-name').value.trim();
     const email = document.querySelector('#email').value.trim();
-    const biography = document.querySelector('#biography').value.trim();
-    const profilePicture = document.querySelector('#imgProfile').value.trim();
-    const password = document.querySelector('#newPassword').value.trim();
-    const confirmPassword = document.querySelector('#confirmPassword').value.trim();
+    const bio = document.querySelector('#biography').value.trim();
 
-    // Validar que las contraseñas coincidan
-    if (password !== confirmPassword) {
-        alert('Las contraseñas no coinciden. Por favor, inténtalo de nuevo.');
-        return; // Detener la ejecución si no coinciden
+    // Validaciones
+    if (!firstName || !email || !bio) {
+        alert('Por favor, complete todos los campos.');
+        return;
     }
-    
+
     // Construir el objeto con los datos
     const data = {
-        name: name,
+        firstName: firstName,
         email: email,
-        biography: biography,
-        profilePicture: profilePicture,
-        password: password
+        bio: bio,
     };
 
     // Enviar los datos con fetch
@@ -86,7 +72,6 @@ document.getElementById('saveButton').addEventListener('click', (event) => {
     .then(response => {
         if (response.ok) {
             alert('Perfil actualizado exitosamente');
-            window.location.href = "user-profile.html";
         } else {
             alert('Hubo un error al actualizar el perfil');
         }
