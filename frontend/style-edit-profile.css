@@ -441,9 +441,20 @@ a {
         padding: 0.75rem;
         font-size: 8px;
     }
+
+    .container .changepsswd-container {
+        padding: 1.5rem;
+    }
+    
+    .container .changepsswd-container .title-information {
+        color: #333;
+        font-size: 16px;
+    }
+
 }
 
 @media screen and (max-width: 500px){
+    .container
     .container .header-profile h2 {
         font-size: 20px;
     }
@@ -470,6 +481,11 @@ a {
     .container .personal-info-container .title-information {
         font-size: 13px;
     }
+
+    .container .changepsswd-container .title-information {
+        font-size: 13px;
+    }
+      
 }
 
 
@@ -477,6 +493,10 @@ a {
     .container {
         padding-top: 6rem;
         padding: 1rem;
+    }
+
+    .container .header-profile {
+        margin-top: 5rem;
     }
 
     .container .personal-info-container {
