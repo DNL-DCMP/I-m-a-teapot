@@ -37,7 +37,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "frontend/inicio.html" # Especifica el archivo exacto que deseas subir
+          path: "frontend/" # Especifica el archivo exacto que deseas subir
 
       # Despliega el archivo en GitHub Pages
       - name: Deploy to GitHub Pages
