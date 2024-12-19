@@ -43,25 +43,6 @@ router.get('/:id/comments', async (req, res) => {
     res.json(recipe.comments)
 })
 
-/*Muestra las categorias de una receta*/
-router.get('/:id/categories', async (req, res) => {
-    const recipe = await prisma.recipe.findUnique({
-        where: {
-            id: parseInt(req.params.id)
-        },
-        include: {
-            categories: true
-        }
-    })
-
-    if(recipe === null){
-        res.sendStatus(404)
-        return
-    }
-
-    res.json(recipe.categories)
-})
-
 /*Agrega receta*/
 router.post('/', async (req, res) => {
     try {
