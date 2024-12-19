@@ -55,16 +55,6 @@ router.post('/', async (req, res) => {
                 instructions: req.body.instructions,
                 time: req.body.time,
                 temperatureCook: req.body.temperatureCook,
-                categories: {
-                    connectOrCreate: req.body.categories.map((category) => ({
-                        where: {
-                            name: category
-                        },
-                        create: {
-                            name: category
-                        }
-                    }))
-                },
                 user: {
                     connect:  {
                         id: req.body.userId
@@ -125,19 +115,7 @@ router.put('/:id', async (req, res) => {
             ingredients: req.body.ingredients, 
             instructions: req.body.instructions,
             time: req.body.time,
-            temperatureCook: req.body.temperatureCook,
-            categories: {
-                connectOrCreate: 
-                    categories.map((CategoryName) => ({
-                            where:{
-                                name: CategoryName
-                            },
-                            create:{
-                                name: CategoryName
-                            }
-                        })
-                    )
-            }
+            temperatureCook: req.body.temperatureCook
         }
     })
 
