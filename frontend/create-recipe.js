@@ -76,6 +76,7 @@ function loadRecipeForEditing(id){
         document.querySelector('.recipe-description').value = recipe.description;
         document.querySelector('.recipe-time').value = recipe.time;
         document.querySelector('.recipe-temperatureCook').value = recipe.temperatureCook;
+        document.querySelector('.recipe-picture').value = recipe.recipePicture;
         recipe.ingredients.forEach((ingredient, index) => {
             if(index === 0){
                 document.querySelector('.recipe-ingredients').value = ingredient;
@@ -121,9 +122,10 @@ if(user){
     
         let name = document.querySelector('.recipe-name').value;
         let description = document.querySelector('.recipe-description').value;
-        let time = parseInt(document.querySelector('.recipe-time').value, 10);
-        let temperatureCook = parseInt(document.querySelector('.recipe-temperatureCook').value, 10);
-    
+        let time = parseInt(document.querySelector('.recipe-time').value);
+        let temperatureCook = parseInt(document.querySelector('.recipe-temperatureCook').value);
+        let recipePicture = document.querySelector('.recipe-picture').value;
+        
         let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value);
         let instructions = Array.from(document.querySelectorAll('.recipe-instructions')).map(input => input.value);
     
@@ -132,6 +134,7 @@ if(user){
             description: description,
             time: time,
             temperatureCook: temperatureCook,
+            recipePicture: recipePicture,
             ingredients: ingredients,
             instructions: instructions,
             userId: userId
@@ -162,8 +165,9 @@ if(user){
         
         let name = document.querySelector('.recipe-name').value.trim();
         let description = document.querySelector('.recipe-description').value.trim();
-        let time = parseInt(document.querySelector('.recipe-time').value);
-        let temperatureCook = parseInt(document.querySelector('.recipe-temperatureCook').value);
+        let time = parseInt(document.querySelector('.recipe-time').value.trim());
+        let temperatureCook = parseInt(document.querySelector('.recipe-temperatureCook').value.trim());
+        let recipePicture = document.querySelector('.recipe-picture').value.trim();
     
         // Corregir obtención de valores para inputs múltiples
         let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value.trim()).filter(value => value !== '');
@@ -180,10 +184,9 @@ if(user){
             description: description,
             time: time,
             temperatureCook: temperatureCook,
+            recipePicture: recipePicture,
             ingredients: ingredients,
             instructions: instructions,
-            // Faltaría implementar el manejo de la imagen si es necesario
-            // image: image,
             userId: userId
         };
     
@@ -212,6 +215,7 @@ function clearForm() {
     document.querySelector('.recipe-description').value = ' ';
     document.querySelector('.recipe-time').value = '';
     document.querySelector('.recipe-temperatureCook').value = '';
+    document.querySelector('.recipe-picture').value = '';
     
     const ingredientsInputs = document.querySelectorAll('.recipe-ingredients');
         ingredientsInputs.forEach(input => {

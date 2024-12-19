@@ -50,6 +50,11 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         instructionsTitle.innerText = "Instrucciones:"
         recipeContainer.appendChild(instructionsTitle);
 
+        const imageContainer = document.createElement('div');
+        imageContainer.classList.add('image-container');
+        imageContainer.style.backgroundImage = `url(${recipe.image})`;
+        recipeContainer.appendChild(imageContainer);
+
         const instructionsContainer = document.createElement('ul');
         instructionsContainer.classList.add('instructions-container');
 

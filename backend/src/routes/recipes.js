@@ -55,6 +55,7 @@ router.post('/', async (req, res) => {
                 instructions: req.body.instructions,
                 time: req.body.time,
                 temperatureCook: req.body.temperatureCook,
+                recipePicture: req.body.recipePicture,
                 user: {
                     connect:  {
                         id: req.body.userId
@@ -115,7 +116,8 @@ router.put('/:id', async (req, res) => {
             ingredients: req.body.ingredients, 
             instructions: req.body.instructions,
             time: req.body.time,
-            temperatureCook: req.body.temperatureCook
+            temperatureCook: req.body.temperatureCook,
+            recipePicture: req.body.recipePicture
         }
     })
 
