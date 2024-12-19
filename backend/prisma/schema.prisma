@@ -36,7 +36,6 @@ model Recipe {
   temperatureCook Int
   servings        Int?
   recipePicture   String?
-  categories      Category[] 
   userId          Int
   user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   comments        Comment[]  
@@ -51,10 +50,4 @@ model Comment {
   recipeId     Int
   user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-}
-
-model Category {
-  id           Int        @id @default(autoincrement())
-  name         String     @unique
-  recipes       Recipe[]   
 }
