@@ -69,10 +69,8 @@ if(user){
                 let div = document.createElement('div');
                 div.classList.add('card-recipe');
 
-                /*Hay que agregarlo a schema.prisma y el endpoint de recipes
                 let img = document.createElement('img');
-                img.src = recipe.image;
-                */
+                img.src = recipe.recipePicture;
 
                 /* Titulo de la receta */
                 let titulo = document.createElement('h3');
@@ -90,7 +88,7 @@ if(user){
                 linkViewRecipe.innerText = "Ver receta";
                 linkViewRecipe.href = `recipes-details.html?id=${recipe.id}`;
 
-                /*div.appendChild(img);*/
+                div.appendChild(img);
                 div.appendChild(titulo);
                 div.appendChild(desc);
                 div.appendChild(linkViewRecipe);

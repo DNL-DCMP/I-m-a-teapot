@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.classList.add('card-recipe');
 
                 let img = document.createElement('img');
-                img.src = recipe.image;
+                img.src = recipe.recipePicture;
 
                 /* Titulo de la receta */
                 let titulo = document.createElement('h3');
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 linkViewRecipe.innerText = "Ver receta";
                 linkViewRecipe.href = `recipes-details.html?id=${recipe.id}`;
 
-                /*div.appendChild(img);*/
+                div.appendChild(img);
                 div.appendChild(titulo);
                 div.appendChild(desc);
                 div.appendChild(linkViewRecipe);
