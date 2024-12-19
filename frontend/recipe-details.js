@@ -34,6 +34,19 @@ const recipeId = params.get('id');
 fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
     .then(response => response.json())
     .then(recipe => {
+        const categories = document.createElement('div');
+        categories.classList.add('categories');
+
+        if (Array.isArray(recipe.categories)) {
+            for (let i = 0; i < recipe.categories.length; i++) {
+                let category = document.createElement('p');
+                category.innerText = "#" + recipe.categories[i];
+                categories.appendChild(category);
+            }
+        }
+
+        recipeContainer.appendChild(categories);
+
         let recipeName = document.createElement('h1');
         recipeName.classList.add('recipe-name');
         recipeName.innerText = recipe.name;
@@ -81,7 +94,9 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         const editRecipeBtn = document.createElement('button');
         editRecipeBtn.classList.add('edit-recipe-btn');
         editRecipeBtn.innerText = "Editar receta";
-        editRecipeBtn.onclick = "editRecipe.html";
+        editRecipeBtn.onclick = () => {
+            window.location.href = "editRecipe.html";
+        };
         recipesBtn.appendChild(editRecipeBtn);
 
         const deleteRecipeBtn = document.createElement('button');
@@ -93,7 +108,10 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         const commentsRecipeBtn = document.createElement('button');
         commentsRecipeBtn.classList.add('comments-recipe-btn');
         commentsRecipeBtn.innerText = "Comentarios";
-        commentsRecipeBtn.onclick = "commentsRecipe.html";
+        commentsRecipeBtn.onclick = () => {
+            window.location.href = "comments-recipoe.html"
+        };
+
         recipesBtn.appendChild(commentsRecipeBtn);
 
         recipeContainer.appendChild(recipesBtn);
