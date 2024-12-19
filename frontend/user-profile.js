@@ -80,7 +80,7 @@ logoutButton.addEventListener('click', async () => {
     if (response.ok) {
       console.log(data.message);
       localStorage.clear(); // Borra el almacenamiento local
-      window.location.href = 'inicio.html'; // Redirige al usuario a inicio
+      window.location.href = 'index.html'; // Redirige al usuario a inicio
     } else {
       console.error('Error:', data.message);
     }
@@ -107,7 +107,7 @@ deleteButton.addEventListener('click', async () => {
     if (response.ok) {
       alert('Usuario eliminado exitosamente');
       localStorage.clear();
-      window.location.href = 'inicio.html';
+      window.location.href = 'index.html';
     } else {
       const error = await response.json();
       alert('Error al eliminar el usuario: ' + error.error);
