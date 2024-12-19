@@ -35,7 +35,6 @@ if (recipeId) {
 
 const moreIngredientesBtn = document.querySelector(".more-ingredients-btn");
 const moreInstructionsBtn = document.querySelector(".more-instructions-btn");
-const addCategoryBtn = document.querySelector(".add-category-btn");
 
 moreIngredientesBtn.addEventListener('click', (event) => {
     event.preventDefault();
@@ -61,19 +60,6 @@ moreInstructionsBtn.addEventListener('click', (event) => {
     inputInstructions.classList.add('recipe-instructions');
 
     instructionsContainer.appendChild(inputInstructions);
-});
-
-addCategoryBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    const categoriesContainer = document.querySelector(".categories")
-
-    const inputCategories = document.createElement('input');
-    inputCategories.type = "text";
-    inputCategories.name = "recipecategories";
-    inputCategories.classList.add('recipe-categories');
-
-    categoriesContainer.appendChild(inputCategories);
 });
 
 
@@ -110,13 +96,6 @@ function loadRecipeForEditing(id){
         submitRecipeBtn.onclick = () => updateRecipe(recipe.id);
 
         window.editingRecipeId = recipe.id;
-        // recipe.categories.forEach((category, index) => {
-        //     if(index === 0){
-        //         document.querySelector('.recipe-categories').value = category.name;
-        //     } else {
-        //         addInputField('.categories', 'recipe-categories', category.name);
-        //     }
-        // });
     })
     .catch(error => console.error("Error al cargar la receta:", error));
 }
@@ -147,7 +126,6 @@ if(user){
     
         let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value);
         let instructions = Array.from(document.querySelectorAll('.recipe-instructions')).map(input => input.value);
-        let categories = Array.from(document.querySelectorAll('.recipe-categories')).map(input => input.value);
     
         let body = {
             name: name,
@@ -156,7 +134,6 @@ if(user){
             temperatureCook: temperatureCook,
             ingredients: ingredients,
             instructions: instructions,
-            categories: categories,
             userId: userId
         };
     
@@ -191,10 +168,9 @@ if(user){
         // Corregir obtención de valores para inputs múltiples
         let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value.trim()).filter(value => value !== '');
         let instructions = Array.from(document.querySelectorAll('.recipe-instructions')).map(input => input.value.trim()).filter(value => value !== '');
-        let categories = Array.from(document.querySelectorAll('.recipe-categories')).map(input => input.value.trim()).filter(value => value !== '');
         
         // Verifica que se completen todos los campos obligatorios
-        if(!name || !description || isNaN(time) || isNaN(temperatureCook) || ingredients.length === 0 || instructions.length === 0 || categories.length === 0){
+        if(!name || !description || isNaN(time) || isNaN(temperatureCook) || ingredients.length === 0 || instructions.length === 0){
             alert("Por favor, completa todos los campos obligatorios");
             return;
         }
@@ -208,7 +184,6 @@ if(user){
             instructions: instructions,
             // Faltaría implementar el manejo de la imagen si es necesario
             // image: image,
-            categories: categories,
             userId: userId
         };
     
@@ -248,8 +223,13 @@ function clearForm() {
             input.value = '';
         });
 
-    const categoriesInputs = document.querySelectorAll('.recipe-categories');
-        categoriesInputs.forEach(input => {
-            input.value = '';
-        });
+    const titleContainer = document.querySelector('.title');
+    titleContainer.innerHTML = '';
+    const titleElement = document.createElement('h1');
+    titleElement.innerText = "Crear receta";
+    titleContainer.appendChild(titleElement);
+    const submitRecipeBtn = document.getElementById('submit-recipe-btn');
+    submitRecipeBtn.innerText = "Crear receta";
+    submitRecipeBtn.onclick = createRecipe;
+    window.editingRecipeId = null;
 }

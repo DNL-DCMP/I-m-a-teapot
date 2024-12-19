@@ -35,8 +35,6 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
     .then(response => response.json())
     .then(recipe => {
 
-        recipeContainer.appendChild(categories);
-
         let recipeName = document.createElement('h1');
         recipeName.classList.add('recipe-name');
         recipeName.innerText = recipe.name;
