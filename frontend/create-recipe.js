@@ -26,6 +26,12 @@ navCloseBtn.addEventListener('click', () => {
     nav.classList.remove('openNav');
 });
 
+const urlParams = new URLSearchParams(window.location.search);
+const recipeId = urlParams.get('id');
+if (recipeId) {
+    loadRecipeForEditing(recipeId);
+}
+
 
 const moreIngredientesBtn = document.querySelector(".more-ingredients-btn");
 const moreInstructionsBtn = document.querySelector(".more-instructions-btn");
@@ -70,24 +76,129 @@ addCategoryBtn.addEventListener('click', (event) => {
     categoriesContainer.appendChild(inputCategories);
 });
 
+
+function loadRecipeForEditing(id){
+    fetch(`http://localhost:3000/api/v1/recipes/${id}`)
+    .then(response => response.json())
+    .then(recipe => {
+        const titleContainer = document.querySelector('.title');
+            titleContainer.innerHTML = '';
+            const titleElement = document.createElement('h1');
+            titleElement.innerText = "Editar receta";
+            titleContainer.appendChild(titleElement);
+        document.querySelector('.recipe-name').value = recipe.name;
+        document.querySelector('.recipe-description').value = recipe.description;
+        document.querySelector('.recipe-time').value = recipe.time;
+        document.querySelector('.recipe-temperatureCook').value = recipe.temperatureCook;
+        recipe.ingredients.forEach((ingredient, index) => {
+            if(index === 0){
+                document.querySelector('.recipe-ingredients').value = ingredient;
+            } else {
+                addInputField('.ingredients', 'recipe-ingredients', ingredient);
+            }
+        });
+
+        recipe.instructions.forEach((instruction, index) => {
+            if(index === 0){
+                document.querySelector('.recipe-instructions').value = instruction;
+            } else {
+                addInputField('.instructions', 'recipe-instructions', instruction);
+            }
+        });
+        const submitRecipeBtn = document.getElementById('submit-recipe-btn');
+        submitRecipeBtn.innerText = "Guardar";
+        submitRecipeBtn.onclick = () => updateRecipe(recipe.id);
+
+        window.editingRecipeId = recipe.id;
+        // recipe.categories.forEach((category, index) => {
+        //     if(index === 0){
+        //         document.querySelector('.recipe-categories').value = category.name;
+        //     } else {
+        //         addInputField('.categories', 'recipe-categories', category.name);
+        //     }
+        // });
+    })
+    .catch(error => console.error("Error al cargar la receta:", error));
+}
+
+function addInputField(containerSelector, inputClass, value){
+    const container = document.querySelector(containerSelector);
+    
+    const input = document.createElement('input');
+    input.type = "text";
+    input.name = inputClass;
+    input.classList.add(inputClass);
+    input.value = value;
+    container.appendChild(input);
+}
+
+
 //Funcion para crear la receta
 const user = JSON.parse(localStorage.getItem('user'));
 
 if(user){
-    function createRecipe() {
-
+    function updateRecipe(id) {
         const userId = user.id;
-
+    
         let name = document.querySelector('.recipe-name').value;
         let description = document.querySelector('.recipe-description').value;
+        let time = parseInt(document.querySelector('.recipe-time').value, 10);
+        let temperatureCook = parseInt(document.querySelector('.recipe-temperatureCook').value, 10);
+    
+        let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value);
+        let instructions = Array.from(document.querySelectorAll('.recipe-instructions')).map(input => input.value);
+        let categories = Array.from(document.querySelectorAll('.recipe-categories')).map(input => input.value);
+    
+        let body = {
+            name: name,
+            description: description,
+            time: time,
+            temperatureCook: temperatureCook,
+            ingredients: ingredients,
+            instructions: instructions,
+            categories: categories,
+            userId: userId
+        };
+    
+        fetch(`http://localhost:3000/api/v1/recipes/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        .then(response => {
+            if (response.status !== 200) {
+                alert("Error al actualizar la receta");
+            } else {
+                console.log("Receta actualizada");
+                clearForm();
+            }
+        })
+        .catch(error => console.error("Error al actualizar la receta:", error));
+        window.location.href = `user-recipes.html`;
+    }
+
+    function createRecipe() {
+        
+        const userId = user.id;
+        
+        let name = document.querySelector('.recipe-name').value.trim();
+        let description = document.querySelector('.recipe-description').value.trim();
         let time = parseInt(document.querySelector('.recipe-time').value);
         let temperatureCook = parseInt(document.querySelector('.recipe-temperatureCook').value);
     
         // Corregir obtención de valores para inputs múltiples
-        let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value);
-        let instructions = Array.from(document.querySelectorAll('.recipe-instructions')).map(input => input.value);
-        let categories = Array.from(document.querySelectorAll('.recipe-categories')).map(input => input.value);
+        let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value.trim()).filter(value => value !== '');
+        let instructions = Array.from(document.querySelectorAll('.recipe-instructions')).map(input => input.value.trim()).filter(value => value !== '');
+        let categories = Array.from(document.querySelectorAll('.recipe-categories')).map(input => input.value.trim()).filter(value => value !== '');
         
+        // Verifica que se completen todos los campos obligatorios
+        if(!name || !description || isNaN(time) || isNaN(temperatureCook) || ingredients.length === 0 || instructions.length === 0 || categories.length === 0){
+            alert("Por favor, completa todos los campos obligatorios");
+            return;
+        }
+
         let body = {
             name: name,
             description: description,
@@ -109,19 +220,17 @@ if(user){
             body: JSON.stringify(body)
         })
         .then(response => {
-            if (response.status !== 201) {
-                alert("Error al cargar la receta");
-            } else {
-                console.log("Receta creada");
+            if (response.status === 201) {
+                alert("Receta creada con éxito");
                 clearForm();
+            } else {
+                alert("Error al cargar la receta");
             }
         })
-        .catch(error => {
-            console.error("Error al enviar la receta:", error);
-        });
+        .catch(error => console.error("Error al enviar la receta:", error));
+        window.location.href = `user-recipes.html`;       
     }
 }
-
 
 function clearForm() {
     document.querySelector('.recipe-name').value = ' ';

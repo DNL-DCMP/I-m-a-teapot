@@ -81,7 +81,11 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         const editRecipeBtn = document.createElement('button');
         editRecipeBtn.classList.add('edit-recipe-btn');
         editRecipeBtn.innerText = "Editar receta";
-        editRecipeBtn.onclick = "editRecipe.html";
+        editRecipeBtn.dataset.recipeId = recipe.id;
+        editRecipeBtn.addEventListener('click', (event) => {
+            const recipeId = event.target.dataset.recipeId;
+            window.location.href = `create-recipe.html?id=${recipeId}`;
+        });
         recipesBtn.appendChild(editRecipeBtn);
 
         const deleteRecipeBtn = document.createElement('button');

@@ -83,8 +83,6 @@
                         <div class="container-input ingredients">
                             <label for="recipe-ingredients">Ingredientes</label>
                             <input class="recipe-ingredients" type="text" name="recipeingredientes" placeholder="Ingresar los ingredientes">
-                            <input class="recipe-ingredients" type="text" name="recipeingredientes">
-                            <input class="recipe-ingredients" type="text" name="recipeingredientes">
                         </div>
                         <button class="more-ingredients-btn">Agregar ingrediente</button>
                     </div>
@@ -92,8 +90,6 @@
                     <div class="input-box">
                         <div class="container-input instructions">
                             <label for="recipe-instructions">Pasos para hacer la receta</label>
-                            <input class="recipe-instructions" type="text" name="recipeinstructions">
-                            <input class="recipe-instructions" type="text" name="recipeinstructions">
                             <input class="recipe-instructions" type="text" name="recipeinstructions">
                         </div>
                         <button class="more-instructions-btn">Agregar instrucción</button>
@@ -110,7 +106,7 @@
             </form>
 
             <div class="submit-button">
-                <button onclick="createRecipe()">Crear</button>
+                <button id="submit-recipe-btn"  onclick="createRecipe()">Crear</button>
                 <button onclick="clearForm()">Limpiar</button> 
             </div>
 
