@@ -34,16 +34,6 @@ const recipeId = params.get('id');
 fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
     .then(response => response.json())
     .then(recipe => {
-        const categories = document.createElement('div');
-        categories.classList.add('categories');
-
-        if (Array.isArray(recipe.categories)) {
-            for (let i = 0; i < recipe.categories.length; i++) {
-                let category = document.createElement('p');
-                category.innerText = "#" + recipe.categories[i];
-                categories.appendChild(category);
-            }
-        }
 
         recipeContainer.appendChild(categories);
 
