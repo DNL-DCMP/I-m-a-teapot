@@ -36,8 +36,8 @@
 
     <script>
         // Obtener el userId del localStorage
-        const userId = localStorage.getItem('userId');  // Asume que el userId está en el localStorage
-
+        const user = JSON.parse(localStorage.getItem('user'));
+        const userId = user ? user.id : null;
         if (!userId) {
             alert('Por favor, inicie sesión para comentar.');
             window.location.href = '/login';  // Redirigir a la página de login

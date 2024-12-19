@@ -111,7 +111,7 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         commentsRecipeBtn.classList.add('comments-recipe-btn');
         commentsRecipeBtn.innerText = "Comentarios";
         commentsRecipeBtn.onclick = () => {
-            window.location.href = "comments-recipoe.html"
+            window.location.href = "buttoncomment.html"
         };
 
         recipesBtn.appendChild(commentsRecipeBtn);
