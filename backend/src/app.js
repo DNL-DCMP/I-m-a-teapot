@@ -24,6 +24,10 @@ app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/recipes', recipeRoutes)
 app.use('/api/v1/recipes', commentsRoutes)
 
+app.get('/', (req, res) => {
+  res.send('¡Bienvenido a Yumm!');
+});
+
 // Login de usuario
 app.post("/api/v1/login", async (req, res) => {
     const { email, password } = req.body;
