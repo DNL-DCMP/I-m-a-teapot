@@ -1,0 +1,29 @@
+
+services:
+  db:
+    image: postgres:17
+    container_name: db
+    environment:
+      - POSTGRES_USER=yumm
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=yumm_app
+    ports:
+      - 5432:5432
+    volumes:
+      - ./psql_data:/var/lib/postgresql/data
+    
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - backend
