@@ -11,7 +11,7 @@
 
     <div class="wrapper">
         <h3>Deja tu comentario</h3>
-        <input type="hidden" id="recipeId" value="3">  <!-- ID de la receta -->
+        <input type="hidden" id="recipeId" >  <!-- ID de la receta -->
         
         <!-- Formulario de comentarios -->
         <form id="commentForm">
@@ -42,8 +42,13 @@
             alert('Por favor, inicie sesión para comentar.');
             window.location.href = '/login';  // Redirigir a la página de login
         }
+        // Obtener el recipeId dinámicamente de la URL
+        const pathSegments = window.location.pathname.split('/');
+        const recipeId = pathSegments[pathSegments.length - 1];  // Suponiendo que la URL es algo como /receta/3
 
-        const recipeId = document.getElementById('recipeId').value;  // Obtener el ID de la receta
+        // Asignar el recipeId al campo oculto en el formulario
+        document.getElementById('recipeId').value = recipeId;
+
         const ratingInput = document.getElementById('ratingInput');  // Input oculto para la calificación
         const opinionTextArea = document.getElementById('opinion');
         const commentForm = document.getElementById('commentForm');
