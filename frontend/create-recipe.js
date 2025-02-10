@@ -201,12 +201,13 @@ if(user){
             if (response.status === 201) {
                 alert("Receta creada con éxito");
                 clearForm();
+                window.location.href = `user-recipes.html`;
             } else {
                 alert("Error al cargar la receta");
             }
         })
         .catch(error => console.error("Error al enviar la receta:", error));
-        window.location.href = `user-recipes.html`;       
+               
     }
 }
 

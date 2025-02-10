@@ -28,8 +28,13 @@ navCloseBtn.addEventListener('click', () => {
 
 const recipeContainer = document.querySelector('.container');
 
-const params = new URLSearchParams(window.location.search);
-const recipeId = params.get('id');
+const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+    const [key, value] = cookie.split("=");
+    acc[key] = value;
+    return acc;
+}, {});
+
+const recipeId = cookies.recipeid;
 
 fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
     .then(response => response.json())
