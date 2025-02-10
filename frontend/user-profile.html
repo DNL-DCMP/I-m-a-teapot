@@ -9,19 +9,23 @@
     <link rel="stylesheet" href="style-user-profile.css">
 </head>
 <body>
+    <div class="container">
         <nav class="nav">
-            <i class='bx bx-menu navOpenBtn' style='color:#ffffff'></i>
             <!--Aca va el logo-->
             <a href="#" class="logo">Yumm!</a>
+            <div class="menu-title">
+                <p class="title">
+                    Menu
+                </p>
+            </div>
             <ul class="nav-links">
-                <i class='bx bx-x navCloseBtn'></i>
                 <li>
                     <a href="index.html" class="nav-link">
                         <i class='bx bx-home-alt-2'></i>
                         <span class="text">Inicio</span>
                         </a>
                 </li>
-                 <li>
+                 <li class="active">
                     <a href="user-profile.html" class="nav-link">
                         <i class='bx bx-user'></i>
                         <span class="text">Perfil</span>
@@ -40,50 +44,44 @@
                     </a>
                 </li>
             </ul>
-            <i class='bx bx-search search-icon' id="searchIcon"></i>
-            <div class="search-box">
-                <i class='bx bx-search search-icon'></i>
-                <input type="text" placeholder="Busca por receta o categoría...">
+            <div class="account-title">
+                <p class="title">
+                    Cuenta
+                </p>
+                <ul>
+                    <li>
+                        <button class="edit-profile-btn" id="logout"><i class='bx bx-log-out' style='color:#fbfbfb' ></i>Cerrar sesion</button>
+                    </li>
+                </ul>
             </div>
         </nav>
 
-        <div class="container">
-            <div class="header-profile">
-                <h2 class="title-container">Mi perfil</h2>
-                <button class="edit-profile-btn" id="deleteUser"><a>Eliminar Cuenta</a></button>
-                <button class="edit-profile-btn" id="logout"><a>Logout</a></button>
-                <button class="edit-profile-btn"><a href="edit-profile.html">Editar perfil</a></button>
-            </div>
-
-            <div class="name-container">
-                <img id="profilePicture" src="img/cookiecheseecake.webp" class="user-image" alt="profilePicture">
-                <h2 class="name-user"></h2>
-            </div>
-            <div class="personal-info-container">
-                <h2 class="title-information">Información personal</h2>
-
-                <div class="info-container">
-                    <div class="information">
-                        <p class="email-title">E-mail</p>
-                        <p class="email"></p>
-                    </div>
-                    
-                </div>
-            </div>
-            <div id="biography">
-                <div class="personal-info-container">
-                    <h2 class="title-information">Biografia</h2>
-
-                    <div class="info-container">
-                        <div class="information">
-                            <p class="biografia"></p>
-                        </div>
-                        
+        <section class="section-user-profile">
+            <div class="header-user-profile">
+                <div class="back-user-profile">
+                    <div class="picture-user-profile">
+                        <img src="img/cookieredvelvet.webp" alt="user-header-picture">
                     </div>
                 </div>
             </div>
-        </div>
-
+            <div class="body-user-profile">
+                <div class="bio-user-profile">
+                    <h3 class="user-name">Nombre de usuario</h3>
+                    <p class="biography">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus perferendis eum ex dolorem maxime mollitia, Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, natus repellendus.</p>
+                    <p class="user-email">esteesunemail@gmail.com</p>
+                </div>
+                <div class="options-user-profile">
+                    <ul class="options-list">
+                        <li>
+                            <button class="edit-profile-btn" id="deleteUser"><a>Eliminar Cuenta</a></button>
+                        </li>
+                        <li>
+                            <button class="edit-profile-btn"><a href="edit-profile.html">Editar perfil</a></button>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
+        </section>
     </div>
     <script src="user-profile.js"></script>
 </body>
