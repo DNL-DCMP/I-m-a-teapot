@@ -38,9 +38,9 @@ if(user){
     fetch(`http://localhost:3000/api/v1/users/${userId}`)
     .then(response => response.json())
     .then(data => {
-        const nameMain = document.querySelector('.name-user');
-        const email = document.querySelector('.email');
-        const biography = document.querySelector('.biografia');
+        const nameMain = document.querySelector('.user-name');
+        const email = document.querySelector('.user-email');
+        const biography = document.querySelector('.biography');
         const profilePicture = document.querySelector('#profilePicture');
 
         nameMain.innerText = data.name;
@@ -89,8 +89,8 @@ logoutButton.addEventListener('click', async () => {
   }
 });
 
-// Eliminar usuario
 
+// Eliminar usuario
 const deleteButton = document.getElementById('deleteUser');
 
 deleteButton.addEventListener('click', async () => {
