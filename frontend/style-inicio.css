@@ -28,9 +28,11 @@ body {
     gap: 30px;
 }
 
-.nav .nav-links a:hover {
-    font-size: 17px;
-    font-weight: 700 ;
+.nav ul li:hover a, 
+.nav ul li.active a{
+    color: #fff;
+    background-color: #5f4430;
+    border-radius: 20px;
 }
 
 .nav {
@@ -53,6 +55,7 @@ a {
 }
 .nav .nav-links a {
     transition: all 0.2s linear;
+    padding: 10px;
 }
 
 .nav.openSearch .nav-links a {
