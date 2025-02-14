@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style-recipe-details.css">
 </head>
 <body>
-    <nav class="nav">
+        <nav class="nav">
         <i class='bx bx-menu navOpenBtn' style='color:#ffffff'></i>
         <!--Aca va el logo-->
         <a href="#" class="logo">Yumm!</a>
@@ -46,9 +46,114 @@
             <input type="text" placeholder="Busca por receta o categoría...">
         </div>
     </nav>
-    <div class="container">
-        
-    </div>
+    <section class="main-container">
+        <div class="category-container">
+
+            <button class="back-to-my-recipes-btn">
+                <a href="user-recipes.html">🠠 TUS RECETAS</a>
+            </button>
+
+            <div class="filter-container">
+                <h3 class="category-title">
+                    Categorías
+                </h3>
+                <hr>
+                <ul class="categories-list">
+                    <li class="category">categoria 1</li>
+                    <li class="category">categoria 2</li>
+                    <li class="category">categoria 3</li>
+                    <li class="category">categoria 4</li>
+                    <li class="category">categoria 5</li>
+                    <li class="category">categoria 6</li>
+                    <li class="category">categoria 7</li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="container-recipe">
+            <div class="categories-recipes-container">
+                <ul class="categories-recipes-list">
+                    <li>#CATEGORIA</li>
+                    <li>#CATEGORIA</li>
+                    <li>#CATEGORIA</li>
+                </ul>
+            </div>
+                <img src="img/cookiepeanutbutter.webp" alt="" class="recipe-image">
+                <h1 class="recipe-name">
+                    Nombre de la receta
+                </h1>
+                <p class="recipe-description">
+                    Esta es la descripción de la receta creada
+                </p>
+                <div class="ingredients-container">
+                    <h1 class="ingredients-title">
+                        Ingredientes:
+                    </h1>
+                    <ul class="ingredients-list">
+                        <li>
+                            — Esto es un ingrediente ...................
+                        </li>
+                        <li>
+                            — Esto es un ingrediente
+                        </li>
+                        <li>
+                            — Esto es un ingrediente
+                        </li>
+                        <li>
+                            — Esto es un ingrediente
+                        </li>
+                        <li>
+                            — Esto es un ingrediente
+                        </li>
+                        <li>
+                            — Esto es un ingrediente
+                        </li>
+                        <li>
+                            — Esto es un ingrediente
+                        </li>
+                        <li>
+                            — Esto es un ingrediente
+                        </li>
+                    </ul>
+                </div>
+                <div class="instructions-container">
+                    <h1 class="instructions-title">
+                        Instrucciones:
+                    </h1>
+                    <ul class="instructions-list">
+                        <li>
+                            Esta es una instruccion
+                        </li>
+                        <li>
+                            Esta es una instruccion
+                        </li>
+                        <li>
+                            Esta es una instruccion
+                        </li>
+                        <li>
+                            Esta es una instruccion
+                        </li>
+                        <li>
+                            Esta es una instruccion
+                        </li>
+                        <li>
+                            Esta es una instruccion
+                        </li>
+                    </ul>
+                </div>
+                <div class="button-recipes">
+                    <button class="edit-recipe-btn">
+                        Editar receta
+                    </button>
+                    <button class="delete-recipe-btn">
+                        Borrar receta
+                    </button>
+                    <button class="comments-recipe-btn">
+                        Comentarios
+                    </button>
+                </div>
+        </div>
+    </section>
     <script src="recipe-details.js"></script>
 </body>
 </html>
