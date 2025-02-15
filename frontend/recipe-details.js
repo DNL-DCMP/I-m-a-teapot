@@ -26,7 +26,7 @@ navCloseBtn.addEventListener('click', () => {
     nav.classList.remove('openNav');
 });
 
-const recipeContainer = document.querySelector('.main-container');
+const mainContainer = document.querySelector('.main-container');
 
 const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
     const [key, value] = cookie.split("=");
@@ -39,7 +39,7 @@ const recipeId = cookies.recipeid;
 fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
     .then(response => response.json())
     .then(recipe => {
-        let categoryContainer = document.createElement('div');
+        /*let categoryContainer = document.createElement('div');
         categoryContainer.classList.add('category-container');
 
         let backToMyRecipesBtn = document.createElement('button');
@@ -56,10 +56,11 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         categoryTitle.innerText = "Categorías";
         filterContainer.appendChild(categoryTitle);
         let hr = document.createElement('hr');
-        filterContainer.appendChild('hr');
+        filterContainer.appendChild(hr);
         let categoryList = document.createElement('ul');
         categoryList.classList.add('categories-list');
-        //Falta filtrar por categoría
+
+
         for(let i = 0; i < recipe.categories.length; i++){
             let category = document.createElement('li');
             category.classList.add('category');
@@ -69,10 +70,12 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
 
         filterContainer.appendChild(categoryList);
         categoryContainer.appendChild(filterContainer);
-
+        */
 
         let recipeContainer = document.createElement('div');
         recipeContainer.classList.add('container-recipe');
+
+        /*
         let categoriesContainer = document.createElement('div');
         categoriesContainer.classList.add('categories-recipes-container');
         let categoriesList = document.createElement('ul');
@@ -84,8 +87,8 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         }
         categoriesContainer.appendChild(categoriesList);
         recipeContainer.appendChild(categoriesContainer);
-
-
+        */
+       
         let imageRecipe = document.createElement('img');
         imageRecipe.classList.add('recipe-image');
         imageRecipe.src = recipe.recipePicture;
@@ -101,6 +104,34 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         recipeDescription.innerText = recipe.description;
         recipeContainer.appendChild(recipeDescription);
 
+        let infoRecipe = document.createElement('div');
+        infoRecipe.classList.add('info-recipe');
+        let infoList = document.createElement('ul');
+        infoList.classList.add('info-list');
+        let liTime = document.createElement('li');
+        liTime.classList.add('info-item');
+        let iconoTime = document.createElement('i');
+        iconoTime.classList.add('bx', 'bxs-time');
+        liTime.appendChild(iconoTime);
+        let time = document.createElement('p');
+        time.innerText = recipe.time + " " + "minutos";
+        liTime.appendChild(time);
+        infoList.appendChild(liTime);
+
+        let liTemp = document.createElement('li');
+        liTemp.classList.add('info-item');
+        let iconoTemp = document.createElement('i');
+        iconoTemp.classList.add('bx','bxs-thermometer');
+        liTemp.appendChild(iconoTemp);
+        let temp = document.createElement('p');
+        temp.innerText = recipe.temperatureCook + "°" + " " + "grados";
+        liTemp.appendChild(temp);
+        infoList.appendChild(liTemp);
+
+        infoRecipe.appendChild(infoList);
+        recipeContainer.appendChild(infoRecipe);
+
+
         let ingredientsContainer = document.createElement('div');
         ingredientsContainer.classList.add('ingredients-container');
         let ingredientsTitle = document.createElement('h1');
@@ -111,7 +142,7 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         ingredientsList.classList.add('ingredients-list');
         for (let i = 0; i < recipe.ingredients.length; i++) {
             let ingredientsItem = document.createElement('li');
-            ingredientsItem.innerText = "—" + recipe.ingredients[i];
+            ingredientsItem.innerText = "—" + " " + recipe.ingredients[i];
             ingredientsList.appendChild(ingredientsItem);
         }
         ingredientsContainer.appendChild(ingredientsList);
@@ -121,10 +152,10 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         instructionsContainer.classList.add('instructions-container');
         let instructionsTitle = document.createElement('h1');
         instructionsTitle.classList.add('instructions-title');
-        ingredientsTitle.innerText = "Instrucciones:";
+        instructionsTitle.innerText = "Instrucciones:";
         instructionsContainer.appendChild(instructionsTitle);
         let instructionsList = document.createElement('ul');
-        ingredientsList.classList.add('instructions-list');
+        instructionsList.classList.add('instructions-list');
         for (let i = 0; i < recipe.instructions.length; i++) {
             let instructionsItem = document.createElement('li');
             instructionsItem.innerText = recipe.instructions[i];
@@ -160,8 +191,8 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
         };
 
         recipesBtn.appendChild(commentsRecipeBtn);
-
         recipeContainer.appendChild(recipesBtn);
+        mainContainer.appendChild(recipeContainer);
     })
 
 function deleteRecipe(){
