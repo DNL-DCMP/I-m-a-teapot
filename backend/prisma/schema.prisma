@@ -53,8 +53,8 @@ model Comment {
 }
 
 model Category{
-  id Int @id @default(autoincrement())
-  name String @unique
+  id               Int           @id @default(autoincrement())
+  name             String        @unique
   recipeCategories RecipeCategory[]
 }
 
