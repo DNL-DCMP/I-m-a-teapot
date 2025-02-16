@@ -34,11 +34,11 @@ model Recipe {
   instructions    String[]
   time            Int
   temperatureCook Int
-  servings        Int?
   recipePicture   String?
   userId          Int
   user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   comments        Comment[]  
+  recipeCategories RecipeCategory[]
 }
 
 model Comment {
@@ -50,4 +50,20 @@ model Comment {
   recipeId     Int
   user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   recipe       Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+}
+
+model Category{
+  id Int @id @default(autoincrement())
+  name String @unique
+  recipeCategories RecipeCategory[]
+}
+
+model RecipeCategory {
+  recipeId  Int
+  categoryId Int
+
+  recipe   Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([recipeId, categoryId])
 }
