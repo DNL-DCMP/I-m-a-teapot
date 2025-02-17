@@ -46,21 +46,19 @@ router.get('/:id/comments', async (req, res) => {
 /*Agrega receta*/
 router.post('/', async (req, res) => {
     try {
-        const { name, description, ingredients, instructions, time, temperatureCook, userId, categoryNames } = req.body;
-
+        const { name, description, ingredients, instructions, time, temperatureCook, recipePicture, userId, categoryNames = [] } = req.body;
         // Crear la receta
         const newRecipe = await prisma.recipe.create({
             data: {
-                name:req.body.name,
-                description:req.body.description,
-                ingredients:req.body.ingredients,
-                instructions:req.body.instructions,
-                time:req.body.time,
-                temperatureCook:req.body.temperatureCook,
+                name,
+                description,
+                ingredients,
+                instructions,
+                time,
+                temperatureCook,
+                recipePicture,
                 user: {
-                    connect: {
-                        id: req.body.userId
-                    }
+                    connect: { id: userId }
                 }
                 
             }
