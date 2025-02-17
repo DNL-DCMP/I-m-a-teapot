@@ -44,7 +44,7 @@ router.get('/:id/comments', async (req, res) => {
 })
 
 /*Agrega receta*/
-app.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { name, description, ingredients, instructions, time, temperatureCook, userId, categoryNames } = req.body;
 
