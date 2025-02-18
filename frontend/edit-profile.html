@@ -9,19 +9,23 @@
     <link rel="stylesheet" href="style-edit-profile.css">
 </head>
 <body>
+    <div class="container">
         <nav class="nav">
-            <i class='bx bx-menu navOpenBtn' style='color:#ffffff'></i>
             <!--Aca va el logo-->
             <a href="#" class="logo">Yumm!</a>
+            <div class="menu-title">
+                <p class="title">
+                    Menu
+                </p>
+            </div>
             <ul class="nav-links">
-                <i class='bx bx-x navCloseBtn'></i>
                 <li>
                     <a href="index.html" class="nav-link">
                         <i class='bx bx-home-alt-2'></i>
                         <span class="text">Inicio</span>
                         </a>
                 </li>
-                 <li>
+                 <li class="active">
                     <a href="user-profile.html" class="nav-link">
                         <i class='bx bx-user'></i>
                         <span class="text">Perfil</span>
@@ -40,69 +44,61 @@
                     </a>
                 </li>
             </ul>
-            <i class='bx bx-search search-icon' id="searchIcon"></i>
-            <div class="search-box">
-                <i class='bx bx-search search-icon'></i>
-                <input type="text" placeholder="Busca por receta o categoría...">
+            <div class="account-title">
+                <p class="title">
+                    Cuenta
+                </p>
+                <ul>
+                    <li>
+                        <button class="edit-profile-btn" id="logout"><i class='bx bx-log-out' style='color:#fbfbfb' ></i>Cerrar sesion</button>
+                    </li>
+                </ul>
             </div>
         </nav>
 
-        <div class="container">
-            <div class="header-profile">
-                <h2 class="title-container">Mi perfil</h2>
-                <div class="button-control">
-                    <button class="edit-profile-btn" id="saveButton"><a href="user-profile.html">Guardar cambios</a></button>
-                    <button class="close-btn"><a href="user-profile.html">Cancelar</a></button>
-                </div>
-            </div>
-
-            <div class="name-container">
-                <img id="profilePicture" src="img/cookiecheseecake.webp" class="user-image" alt="profilePicture">
-                <h2 class="name-user"></h2>
-            </div>
-            <div class="personal-info-container">
-                <h2 class="title-information">Información personal</h2>
-
-                <div class="info-container">
-                    <div class="information">
-                        <label>Nombre/s</label>
-                        <input type="text" id="first-name" placeholder="Ingresar nombre/s...">
-                    </div>
-                    <div class="information">
-                        <label>Email</label>
-                        <input type="text" id="email"  required  placeholder="Ingresar email...">
-                    </div>
-                    <div class="information">
-                        <label>Biografia</label>
-                        <textarea type="text" id="biography" rows="4" cols="50" placeholder="Escribre una biografia..."></textarea>
-                    </div>
-                    <div class="information">
-                        <label>Imagen de Perfil</label>
-                        <input type="url" id="imgProfile" placeholder="https://example.com/imagen.jpg">
+        <section class="section-user-profile">
+            <div class="header-user-profile">
+                <div class="back-user-profile">
+                    <div class="picture-user-profile">
+                        <img src="" alt="user-header-picture" id="profilePicture">
+                        <input type="text" id="pictureInput" placeholder="URL">
                     </div>
                 </div>
             </div>
-           
-            <div class="changepsswd-container">
-                <h2 class="title-information">Cambiar contraseña</h2>
+            <div class="body-user-profile">
+                <div class="input-box">
+                    <input class="user-name" type="text" name="user-name">
+                    <textarea maxlength="200" class="biography" id="biography"></textarea>
+                    <input class="user-email" type= "text">
+                </div>
+                <div class="changepsswd-container">
+                    <h2 class="title-information">Cambiar contraseña</h2>
 
-                <div class="info-container">
-                    <div class="information">
-                        <label>Contraseña Nueva</label>
-                        <input type="password" id="newPassword">
-                    </div>
+                    <div class="info-container">
+                        <div class="information">
+                            <label>Contraseña Nueva</label>
+                            <input type="password" id="newPassword" placeholder="Ingrese la contraseña nueva...">
+                        </div>
 
-                    <div class="information">
-                        <label>Confirmar Contraseña</label>
-                        <input type="password" id="confirmPassword">
+                        <div class="information">
+                            <label>Confirmar Contraseña</label>
+                            <input type="password" id="confirmPassword" placeholder="Ingrese nuevamente la constraseña nueva...">
+                        </div>
+                        
                     </div>
                 </div>
-                   
-            </div>
-            
-        </div>
-
+                <div class="options-user-profile">
+                    <ul class="options-list">
+                        <li>
+                            <button class="edit-profile-btn" id="saveButton"><a href="user-profile.html">Guardar cambios</a></button>
+                        </li>
+                        <li>
+                            <button class="close-btn"><a href="user-profile.html">Cancelar</a></button>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
+        </section>
     </div>
     <script src="edit-profile.js"></script>
 </body>
-</html>
