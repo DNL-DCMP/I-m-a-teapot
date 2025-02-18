@@ -4,8 +4,26 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 router.get('/', async (req,res) => {
-    const recipes = await prisma.recipe.findMany()
-    res.json(recipes)
+    const recipes = await prisma.recipe.findMany({
+        include: {
+          recipeCategories: {
+            select: {
+              category: {
+                select: {
+                  name: true
+                }
+              }
+            }
+          }
+        }
+      });
+      
+    const recipesWithCategories = recipes.map(({ recipeCategories, ...recipe }) => ({
+    ...recipe,
+    categories: recipeCategories.map(rc => rc.category.name) // Extrae solo los nombres
+    }));
+    
+    res.json(recipesWithCategories);
 })
 
 /*Obtiene las recetas por id*/
@@ -46,7 +64,8 @@ router.get('/:id/comments', async (req, res) => {
 /*Agrega receta*/
 router.post('/', async (req, res) => {
     try {
-        const { name, description, ingredients, instructions, time, temperatureCook, recipePicture, userId, categoryNames = [] } = req.body;
+        console.log("Datos recibidos en el backend:", req.body); //Depuracion 
+        const { name, description, ingredients, instructions, time, temperatureCook, recipePicture, userId, categoryNames} = req.body;
         // Crear la receta
         const newRecipe = await prisma.recipe.create({
             data: {
@@ -71,6 +90,8 @@ router.post('/', async (req, res) => {
             }
         });
 
+        console.log("Categorías encontradas en la DB:", existingCategories); // Depuracion
+
         // Obtener los nombres de las categorías existentes
         const existingCategoryNames = existingCategories.map(cat => cat.name);
 
@@ -90,13 +111,30 @@ router.post('/', async (req, res) => {
             }
         });
 
+        console.log("Todas las categorías después de crearlas:", allCategories); // Depuracion
+
         // Asociar las categorías a la receta en la tabla intermedia
         const relations = allCategories.map(category => ({
             recipeId: newRecipe.id,
             categoryId: category.id
         }));
 
+        console.log("Relaciones a crear:", relations); // Depuracion
+
         await prisma.recipeCategory.createMany({ data: relations });
+
+        //Depuracion
+        const recipeWithCategories = await prisma.recipe.findUnique({
+            where: { id: newRecipe.id },
+            include: { 
+                recipeCategories: {
+                    include: { category: true }
+                }
+            }
+        });
+        
+        console.log("🚀 Receta con categorías:", JSON.stringify(recipeWithCategories, null, 2));
+        //Hasta aca
 
         res.status(201).json({ message: "Receta creada con éxito", recipe: newRecipe });
 
