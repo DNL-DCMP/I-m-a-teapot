@@ -17,12 +17,52 @@ body {
 }
 
 .nav {
+    position: fixed;
     width: 256px;
     display: flex;
     flex-direction: column;
     background-color: #593d27;
     padding: 24px;
     min-height: 100vh;
+    z-index: 1;
+}
+
+.nav.active {
+    width: 95px;
+}
+
+.nav.active .logo {
+    font-size: 14px;
+}
+
+.nav.active .menu-btn i {
+    transform: rotate(180deg);
+}
+
+.nav.active .menu-title {
+    text-align: center;
+}
+
+.nav.active ul li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav.active .account-title ul li button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav.active ul li a .text {
+    display: none;
+}
+
+.nav.active .account-title ul li button .text {
+    display: none;
 }
 
 .nav .logo {
@@ -66,7 +106,7 @@ body {
 .nav ul li.active a{
     color: #fff;
     background-color: #5f4430;
-    margin-top: 8px;
+    margin-top: 5px;
 }
 
 .nav ul li i {
@@ -85,6 +125,16 @@ body {
     color: #bebebeb7;
     margin-top: auto;
     margin-bottom: 10px;
+}
+
+.nav.active .account-title p.title {
+    text-align: center;
+}
+
+.nav.active a.logo {
+    font-size: 12px;
+    padding: 15px 2px;
+    text-align: center;
 }
 
 .nav .account-title ul li button {
@@ -107,25 +157,46 @@ body {
 .nav .account-title ul li:hover button {
     color: #fff;
     background-color: #5f4430;
-    margin-top: 8px;
+    margin-top: 9px;
 }
 
 .nav .menu-btn {
     position: absolute;
-    right: -14px;
-    top: 3.5%;
-    background-color: #ffffff;
-    displaY: none;
+    right: -18px;
+    top: 3.8%;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    background-color: #593d27;
+    border: 2px solid #5f4430;
 }
+
+.nav .menu-btn {
+    cursor: pointer;
+}
+
+.nav .menu-btn:hover i {
+    color: #8b6a51;
+}
+
 .nav .menu-btn i {
-    background-color: #ffffff;
+    transition: all 0.3s;
 }
+
 .section-user-profile {
     flex: 1;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 0;
+    margin: 0 3rem 0 9rem;
 }
 
 .section-user-profile .header-user-profile {
@@ -139,36 +210,11 @@ body {
     display: block;
     position: relative;
     width: 100%;
-    height: 10rem;
+    height: 11rem;
     border-radius: 0 0 20px 20px;
     cursor: pointer;
 }
 
-.section-user-profile .back-user-profile .edit-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); 
-    border-radius: 0 0 20px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-}
-
-.section-user-profile .back-user-profile .edit-overlay i {
-    color: white;
-    font-size: 24px;
-}
-
-
-.section-user-profile .back-user-profile:hover .edit-overlay {
-    opacity: 1;
-}
 
 .section-user-profile .picture-user-profile{
     display: flex;
@@ -301,6 +347,7 @@ body {
     font-size: 20px;
     color: #333;
     text-shadow: 0 0 2px rgba(0,0,0, .2);
+    margin-bottom: 3rem;
 }
 
 .section-user-profile .body-user-profile .changepsswd-container .info-container  {
@@ -310,9 +357,9 @@ body {
 .section-user-profile .body-user-profile .changepsswd-container .info-container .information {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 600px;
+    justify-content: center;
+    align-items: center;
+    width: 480px;
     margin-bottom: 1.5rem;
 }
 
@@ -329,6 +376,7 @@ body {
     width: 100%;
     border-radius: 20px;
     outline: none;
+    text-align: center;
     box-shadow: 0 0 3px rgba(0,0,0,.1);
 }
 
@@ -383,3 +431,224 @@ body {
 .section-user-profile .options-list li button:hover a {
     color: #ffffffc2;
 }
+
+@media (max-width: 755px) {
+    .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    .section-user-profile {
+        margin: 0 0.4rem 0 6.5rem;
+    }
+
+    .section-user-profile .picture-user-profile{
+        width: 150px;
+        height: 150px;
+        bottom: -60px;
+        left: calc(50% - 75px);
+    }
+
+    .section-user-profile .body-user-profile .input-box {
+        padding: 20px 20px;
+        max-width: 500px;
+    }
+
+    .section-user-profile .body-user-profile .input-box .user-name {
+        width: 330px;
+        font-size: 18px;
+    }
+
+    .section-user-profile .body-user-profile .input-box .biography {
+        font-size: 16px;
+    }
+
+    .section-user-profile .body-user-profile .input-box .user-email {
+        font-size: 14px;
+    }
+
+    .section-user-profile .body-user-profile .changepsswd-container {
+        padding: 20px 20px;
+        max-width: 500px;
+
+    }
+
+    .section-user-profile .body-user-profile .changepsswd-container .title-information {
+        font-size: 18px;
+    }
+
+    .section-user-profile .body-user-profile .changepsswd-container .info-container .information {
+        width: 330px ;
+    }
+
+    .section-user-profile .options-list li button {
+        padding: 3.5px 12px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .section-user-profile .body-user-profile .changepsswd-container .info-container .information,
+    .section-user-profile .body-user-profile .input-box .user-name {
+        width: 300px ;
+    }
+}
+
+@media screen and (max-width: 495px) {
+
+    .section-user-profile {
+        margin: 0 4px 0 6rem;
+    }
+
+    .nav {
+        width: 175px;
+    }
+
+    .nav .logo {
+        font-size: 12px;
+    }
+
+    .nav  .account-title p.title {
+        font-size: 8px;
+    }
+
+    .nav .menu-title {
+        font-size: 8px;
+    }
+
+    .nav ul li a i {
+        font-size: 15px;
+    }
+
+    .nav .account-title ul li button i {
+        font-size: 15px;
+    }
+
+    .nav ul li a .text,
+    .nav .account-title ul li button .text {
+        font-size: 12px;
+    }
+
+    .nav ul li a:hover i {
+        border-radius: 80px;
+    }
+
+    .nav .menu-btn {
+        position: absolute;
+        right: -14px;
+        top: 3.3%;
+        width: 22px;
+        height: 20px;
+    }
+
+    .nav .menu-btn i {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .nav.active {
+        width: 70px;
+        padding: 10px 2px;
+        height: 100%;
+    }
+
+    .nav.active .account-title p.title {
+        font-size: 8px;
+    }
+
+    .nav.active .menu-title {
+        font-size: 8px;
+    }
+
+    .nav.active ul li a i {
+        font-size: 15px;
+    }
+
+    .nav.active .account-title ul li button i {
+        font-size: 15px;
+    }
+
+    .nav.active ul li a:hover i {
+        border-radius: 80px;
+    }
+
+    .nav.active .menu-btn {
+        position: absolute;
+        right: -14px;
+        top: 3.3%;
+        width: 22px;
+        height: 20px;
+    }
+
+    .nav.active .menu-btn i {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .section-user-profile .back-user-profile {
+        height: 9rem;
+    }
+
+    .section-user-profile {
+        margin: 0 1rem 0 5.9rem;
+    }
+
+    .section-user-profile .picture-user-profile{
+        border: 4.5px solid #faf8eb;
+        width: 120px;
+        height: 120px;
+        left: calc(50% - 58px);
+    }
+
+    .section-user-profile .body-user-profile .input-box .user-name {
+        width: 200px;
+        font-size: 14px;
+    }
+
+    .section-user-profile .body-user-profile .input-box .biography {
+        font-size: 12px;
+    }
+
+    .section-user-profile .body-user-profile .input-box .user-email {
+        width: 200px;
+        font-size: 12px;
+    }
+
+    .section-user-profile .body-user-profile .input-box {
+        max-width: 310px;
+    }
+
+    .section-user-profile .body-user-profile .changepsswd-container .info-container .information {
+        width: 200px;
+    }
+
+    .section-user-profile .body-user-profile .changepsswd-container {
+        max-width: 310px;
+
+    }
+
+    .section-user-profile .body-user-profile .changepsswd-container .title-information {
+        font-size: 14px;
+    }
+
+    .section-user-profile .body-user-profile .changepsswd-container .info-container .information label,
+    .section-user-profile .body-user-profile .changepsswd-container .info-container .information input {
+        font-size: 12px;
+    }
+
+    .section-user-profile .options-list li button {
+        padding: 3.5px 12px;
+        font-size: 12px;
+    }
+
+}
+
+
+@media screen and (max-width: 410px){
+    .section-user-profile .options-list li button {
+        padding: 2px 9px;
+        font-size: 10px;
+    }
+}
+

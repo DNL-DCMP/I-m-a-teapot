@@ -1,3 +1,8 @@
+document.querySelector('.menu-btn').addEventListener('click', () => {
+    const nav = document.querySelector('.nav');
+    nav.classList.toggle('active');
+});
+
 const biography = document.querySelector('.biography');
 biography.addEventListener("keyup", event => {
     biography.style.height = "auto";
