@@ -10,8 +10,11 @@
 </head>
 <body>
     <div class="container">
-        <nav class="nav">
+        <nav class="nav active">
             <!--Aca va el logo-->
+            <div class="menu-btn">
+                <i class='bx bxs-chevron-right'></i>
+            </div>
             <a href="#" class="logo">Yumm!</a>
             <div class="menu-title">
                 <p class="title">
@@ -25,7 +28,7 @@
                         <span class="text">Inicio</span>
                         </a>
                 </li>
-                 <li class="active">
+                <li class="active">
                     <a href="user-profile.html" class="nav-link">
                         <i class='bx bx-user'></i>
                         <span class="text">Perfil</span>
@@ -50,7 +53,10 @@
                 </p>
                 <ul>
                     <li>
-                        <button class="edit-profile-btn" id="logout"><i class='bx bx-log-out' style='color:#fbfbfb' ></i>Cerrar sesion</button>
+                        <button class="close-profile-btn" id="logout">
+                            <i class='bx bx-log-out' style='color:#fbfbfb' ></i>
+                            <span class="text">Cerrar sesion</span>
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -66,9 +72,9 @@
             </div>
             <div class="body-user-profile">
                 <div class="bio-user-profile">
-                    <h3 class="user-name">Nombre de usuario</h3>
-                    <p class="biography" id="biography">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus perferendis eum ex dolorem maxime mollitia, Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, natus repellendus.</p>
-                    <p class="user-email">esteesunemail@gmail.com</p>
+                    <h3 class="user-name"></h3>
+                    <p class="biography" id="biography"></p>
+                    <p class="user-email"></p>
                 </div>
                 <div class="options-user-profile">
                     <ul class="options-list">

@@ -1,3 +1,8 @@
+document.querySelector('.menu-btn').addEventListener('click', () => {
+  const nav = document.querySelector('.nav');
+  nav.classList.toggle('active');
+})
+
 const user = JSON.parse(localStorage.getItem('user'));
 
 if(user){
@@ -17,7 +22,7 @@ if(user){
 
         if (data.profilePicture) {
           profilePicture.src = data.profilePicture;
-        } else {
+        } else if (data.profilePicture === null){
           profilePicture.src = 'img/cookiecheseecake.webp'; // Imagen por defecto si no tiene una URL
         }
 
@@ -25,7 +30,19 @@ if(user){
           const hiddenBio = document.querySelector("#biography");
           hiddenBio.classList.add("hidden"); // Agrega la clase 'hidden' para ocultar el elemento
         }
+
+        const editProfileBtn = document.querySelector('.edit-profile-btn');
+        editProfileBtn.dataset.recipeId = user.id;
+        editProfileBtn.addEventListener('click', (event) => {
+          const userId = event.target.dataset.userId;
+          window.location.href = `edit-profile.html?id=${userId}`;
+      });
     });
+}
+
+if (!user) {
+  localStorage.removeItem('user'); 
+  window.location.reload(); // Para reiniciar la sesión
 }
 
 // Logout de usuario

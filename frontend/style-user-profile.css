@@ -14,16 +14,57 @@ body {
 .container {
     display: flex;
     flex-direction: row;
-    height: 100vh;
 }
 
 .nav {
+    position: relative;
     width: 256px;
     display: flex;
     flex-direction: column;
     background-color: #593d27;
     padding: 24px;
+    min-height: 100vh;
+    z-index: 1;
 }
+
+.nav.active {
+    width: 95px;
+}
+
+.nav.active .logo {
+    font-size: 14px;
+}
+
+.nav.active .menu-btn i {
+    transform: rotate(180deg);
+}
+
+.nav.active .menu-title {
+    text-align: center;
+}
+
+.nav.active ul li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav.active .account-title ul li button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav.active ul li a .text {
+    display: none;
+}
+
+.nav.active .account-title ul li button .text {
+    display: none;
+}
+
 .nav .logo {
     font-size: 22px;
     font-weight: 600;
@@ -65,6 +106,7 @@ body {
 .nav ul li.active a{
     color: #fff;
     background-color: #5f4430;
+    margin-top: 5px;
 }
 
 .nav ul li i {
@@ -83,6 +125,16 @@ body {
     color: #bebebeb7;
     margin-top: auto;
     margin-bottom: 10px;
+}
+
+.nav.active .account-title p.title {
+    text-align: center;
+}
+
+.nav.active a.logo {
+    font-size: 12px;
+    padding: 15px 2px;
+    text-align: center;
 }
 
 .nav .account-title ul li button {
@@ -105,14 +157,45 @@ body {
 .nav .account-title ul li:hover button {
     color: #fff;
     background-color: #5f4430;
+    margin-top: 9px;
+}
+
+.nav .menu-btn {
+    position: absolute;
+    right: -18px;
+    top: 3.8%;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    background-color: #593d27;
+    border: 2px solid #5f4430;
+}
+
+.nav .menu-btn {
+    cursor: pointer;
+}
+
+.nav .menu-btn:hover i {
+    color: #8b6a51;
+}
+
+.nav .menu-btn i {
+    transition: all 0.3s;
 }
 
 .section-user-profile {
+    position: relative;
     flex: 1;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     align-items: center;
+    z-index: 0;
 }
 
 .section-user-profile .header-user-profile {
@@ -126,9 +209,7 @@ body {
     display: block;
     position: relative;
     width: 100%;
-    height: 14rem;
-    background-image: url(img/profileback.png);
-    background-size: cover;
+    height: 12rem;
     border-radius: 0 0 20px 20px;
 }
 
@@ -138,12 +219,12 @@ body {
     height: 180px;
     align-items: center;
     justify-content: center;
-    border: 7px solid #FFFFFF;
+    border: 7px solid #faf8eb;
     background-color: #DFE5F2 ;
     border-radius: 50%;
     box-shadow: 0 0 12px rgba(0,0,0, .2);
     position: absolute;
-    bottom: -50px;
+    bottom: -38px;
     left: calc(50% - 90px);
     z-index: 1;
     overflow: hidden;
@@ -151,7 +232,9 @@ body {
 
 .section-user-profile .picture-user-profile img {
     width: 100%;
-    position: relative;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .section-user-profile .body-user-profile {
@@ -159,13 +242,15 @@ body {
 }
 
 .section-user-profile .bio-user-profile {
+    background-color: #faf8eb;
     display: block;
     padding: 1.5rem 2rem;
     box-shadow: 0 0 8px rgba(0,0,0,.2);
-    background-color: #fff;
     border-radius: 15px;
     text-align: center;
-    max-width: 70%;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    max-width: 800px;
     justify-content: center;
     margin: 0 auto;
 }
@@ -213,18 +298,22 @@ body {
 .section-user-profile .options-list li button {
     border: none;
     padding: 10px 12px;
-    font-weight: 500;
-    border-radius: 18px;
+    font-weight: 600;
+    border-radius: 20px;
     box-shadow: 0 0 4px rgba(0,0,0,.2);
-    background-color: #593d27;
-    color: #ffffffc2;
+    background-color: #ffffff;
+    border: 2px solid #593d27;
+    color: #593d27;
     cursor: pointer;
     transition: all 0.5s ;
+    text-transform: uppercase;
 }
 
 .section-user-profile .options-list li button a {
     text-decoration: none;
-    color: #fff;
+    color: #593d27;
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .section-user-profile .options-list li button:hover {
@@ -236,4 +325,173 @@ body {
     color: #ffffffc2;
 }
 
+@media (max-width: 755px) {
+    .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
 
+    .section-user-profile {
+        margin: 0 0.4rem 0 6.5rem;
+    }
+
+    .section-user-profile .bio-user-profile h3.user-name {
+        font-size: 18px;
+    }
+
+    .section-user-profile .bio-user-profile p.biography {
+        font-size: 16px;
+    }
+
+    .section-user-profile .bio-user-profile p.user-email {
+        font-size: 14px;
+    }
+
+    .section-user-profile .bio-user-profile {
+        padding: 1rem 1.3rem;
+    }
+
+    
+    .section-user-profile .picture-user-profile{
+        width: 150px;
+        height: 150px;
+        left: calc(50% - 75px);
+    }
+
+    .section-user-profile .options-list li button {
+        padding: 3.5px 12px;
+        font-size: 12px;
+    }
+    
+}
+
+
+@media screen and (max-width: 480px){
+
+    .nav {
+        width: 175px;
+    }
+
+    .nav .logo {
+        font-size: 12px;
+    }
+
+    .nav  .account-title p.title {
+        font-size: 8px;
+    }
+
+    .nav .menu-title {
+        font-size: 8px;
+    }
+
+    .nav ul li a i {
+        font-size: 15px;
+    }
+
+    .nav .account-title ul li button i {
+        font-size: 15px;
+    }
+
+    .nav ul li a .text,
+    .nav .account-title ul li button .text {
+        font-size: 12px;
+    }
+
+    .nav ul li a:hover i {
+        border-radius: 80px;
+    }
+
+    .nav .menu-btn {
+        position: absolute;
+        right: -14px;
+        top: 3.3%;
+        width: 22px;
+        height: 20px;
+    }
+
+    .nav .menu-btn i {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .nav.active {
+        width: 70px;
+        padding: 10px 2px;
+        height: 100%;
+    }
+
+    .nav.active .account-title p.title {
+        font-size: 8px;
+    }
+
+    .nav.active .menu-title {
+        font-size: 8px;
+    }
+
+    .nav.active ul li a i {
+        font-size: 15px;
+    }
+
+    .nav.active .account-title ul li button i {
+        font-size: 15px;
+    }
+
+    .nav.active ul li a:hover i {
+        border-radius: 80px;
+    }
+
+    .nav.active .menu-btn {
+        position: absolute;
+        right: -14px;
+        top: 3.3%;
+        width: 22px;
+        height: 20px;
+    }
+
+    .nav.active .menu-btn i {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+
+    .section-user-profile .back-user-profile {
+        height: 10rem;
+    }
+
+    .section-user-profile {
+        margin: 0 1rem 0 5.9rem;
+    }
+
+    .section-user-profile .picture-user-profile{
+        border: 4.5px solid #faf8eb;
+    }
+
+    .section-user-profile .bio-user-profile h3.user-name {
+        font-size: 14px;
+    }
+
+    .section-user-profile .bio-user-profile p.biography {
+        font-size: 12px;
+    }
+
+    .section-user-profile .bio-user-profile p.user-email {
+        font-size: 12px;
+    }
+
+    .section-user-profile .bio-user-profile {
+        padding: 0.7rem 1rem;
+    }
+
+    
+    .section-user-profile .picture-user-profile{
+        width: 120px;
+        height: 120px;
+        left: calc(50% - 58px);
+    }
+
+    .section-user-profile .options-list li button {
+        padding: 3px 9px;
+        font-size: 10px;
+    }
+}
