@@ -86,8 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let linkViewRecipe = document.createElement('a');
             linkViewRecipe.classList.add('view-recipe-btn');
             linkViewRecipe.innerText = "Ver receta";
-            linkViewRecipe.href = `recipes-details.html?id=${recipe.id}`;
-
+            linkViewRecipe.addEventListener(`click`, () => {
+                document.cookie = `recipeid=${recipe.id}; path=/; max-age=3600`; // Expira en 1 hora
+                window.location.href = 'recipes-details.html';
+            });
             div.appendChild(img);
             div.appendChild(titulo);
             div.appendChild(desc);
