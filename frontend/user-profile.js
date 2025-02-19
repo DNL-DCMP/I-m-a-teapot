@@ -8,7 +8,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 if(user){
     const userId = user.id;
 
-    fetch(`${window.API_URL}/users/${userId}`)
+    fetch(`${window.API_URL}/api/v1/users/${userId}`)
     .then(response => response.json())
     .then(data => {
         const nameMain = document.querySelector('.user-name');
