@@ -1,5 +1,3 @@
-//const apiUrl = process.env.API_URL || "http://localhost:3000";
-
 const nav = document.querySelector(".nav");
 const searchIcon = document.querySelector("#searchIcon");
 const navOpenBtn = document.querySelector(".navOpenBtn");
@@ -79,7 +77,7 @@ moreCategoriesBtn.addEventListener('click', (event) => {
 });
 
 function loadRecipeForEditing(id){
-    fetch(`http://localhost:3000/api/v1/recipes/${id}`)
+    fetch(`${window.API_URL}/api/v1/recipes/${id}`)
     .then(response => response.json())
     .then(recipe => {
         const titleContainer = document.querySelector('.title');
@@ -155,7 +153,7 @@ if(user){
             userId: userId
         };
     
-        fetch(`http://localhost:3000/api/v1/recipes/${id}`, {
+        fetch(`${window.API_URL}/api/v1/recipes/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -207,7 +205,7 @@ if(user){
             userId: userId
         };
         console.log(body)
-        fetch(`http://localhost:3000/api/v1/recipes`, {
+        fetch(`${window.API_URL}/api/v1/recipes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

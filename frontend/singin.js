@@ -1,4 +1,3 @@
-//const apiUrl = process.env.API_URL || "http://localhost:3000";
 const sign_in_btn = document.querySelector("#sign-in-btn");
 const sign_up_btn = document.querySelector("#sign-up-btn");
 const container = document.querySelector(".container");
@@ -22,8 +21,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     console.log("Datos enviados al back-end:", { name, email, password }); // Depuración
 
     try {
-        //const response = await fetch(`http://${apiUrl}/api/v1/users`, {
-        const response = await fetch(`http://localhost:3000/api/v1/users`, {
+        const response = await fetch(`${window.API_URL}/api/v1/users`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password }),
@@ -58,7 +56,7 @@ if (location.hash === '#registerForm') {
     myButton.click();
 }
 
-//Tomar los datos de inicio de secion
+//Tomar los datos de inicio de sesion
 const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", async (event) => {
     event.preventDefault(); // Evita que la página se recargue
@@ -69,7 +67,7 @@ loginForm.addEventListener("submit", async (event) => {
 
     try {
         // Enviar los datos al backend
-        const response = await fetch(`http://localhost:3000/api/v1/login`, {
+        const response = await fetch(`${window.API_URL}/api/v1/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
