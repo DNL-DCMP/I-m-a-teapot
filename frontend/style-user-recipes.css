@@ -207,14 +207,13 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
 }
 
 .container-btn-create-recipes .create-recipe-btn {
     background-color: #A3B18A;
     border-radius: 20px;
-    font-size: 15px;
-    padding: 5px 30px;
+    font-size: 30px;
+    padding: 10px 60px;
     margin: 20px;
 }
 
