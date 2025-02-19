@@ -1,5 +1,3 @@
-const apiUrl = process.env.API_URL || 'localhost:3000';
-
 const nav = document.querySelector(".nav");
 const searchIcon = document.querySelector("#searchIcon");
 const navOpenBtn = document.querySelector(".navOpenBtn");
@@ -63,7 +61,7 @@ if(user){
 
     const userId = user.id;
 
-    fetch(`${apiUrl}/api/v1/users/${userId}/recipes`)
+    fetch(`${window.API_URL}/api/v1/users/${userId}/recipes`)
         .then(response => response.json())
         .then(recipes => {
             recipes.forEach((recipe) => {
