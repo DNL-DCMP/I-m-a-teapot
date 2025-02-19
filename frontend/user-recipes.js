@@ -71,10 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     const containerBotonOrdenar = document.querySelector('.container-button');
                     containerBotonOrdenar.style.display = 'none';
 
-                    const container = document.querySelector('.container');
+                    const encabezado = document.querySelector('.encabezado');
+                    encabezado.innerHTML = '<h2>No tienes recetas aún, prueba creando una</h2>'
                     let div = document.createElement('div');
                     div.classList.add('container-no-recipes');
-                    div.innerHTML = '<h2>No tienes recetas aún, prueba creando una</h2>';
                     let containerBtn = document.createElement('div');
                     containerBtn.classList.add('container-btn-create-recipes');
                     let linkCreateRecipe = document.createElement('a');

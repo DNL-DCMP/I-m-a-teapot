@@ -137,6 +137,12 @@ a {
     color: #593d27;
 }
 
+.encabezado h2 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #593d27;
+}
+
 .container {
     display: flex;
     flex-direction: column;
