@@ -94,45 +94,6 @@ app.post("/api/v1/logout", async (req, res) => {
     }
 });
 
-/*
-app.put('/api/v1/users/:id', async (req, res) => {
-    const userId = parseInt(req.params.id, 10); // Convertir ID a número entero
-    const { firstName, email, bio } = req.body; // Desestructurar datos enviados
-  
-    // Validar los campos obligatorios
-    if (!firstName || !email || !bio) {
-      return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
-    }
-  
-    try {
-      // Actualizar el usuario en la base de datos con Prisma
-      const updatedUser = await prisma.user.update({
-        where: { id: userId },
-        data: {
-          firstName,
-          email,
-          bio,
-        },
-      });
-  
-      // Responder con éxito
-      res.status(200).json({
-        message: 'Perfil actualizado correctamente.',
-        user: updatedUser,
-      });
-    } catch (error) {
-      console.error(error);
-  
-      // Manejar el error si no se encuentra el usuario
-      if (error.code === 'P2025') {
-        return res.status(404).json({ message: 'Usuario no encontrado.' });
-      }
-  
-      // Manejar errores internos
-      res.status(500).json({ message: 'Error interno del servidor.' });
-    }
-  });*/
-
 app.listen(port, () => {
     console.log(`Yumm! app listening on port ${port}`)
 })

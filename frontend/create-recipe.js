@@ -35,6 +35,7 @@ if (recipeId) {
 
 const moreIngredientesBtn = document.querySelector(".more-ingredients-btn");
 const moreInstructionsBtn = document.querySelector(".more-instructions-btn");
+const moreCategoriesBtn = document.querySelector(".more-categories-btn");
 
 moreIngredientesBtn.addEventListener('click', (event) => {
     event.preventDefault();
@@ -62,6 +63,18 @@ moreInstructionsBtn.addEventListener('click', (event) => {
     instructionsContainer.appendChild(inputInstructions);
 });
 
+moreCategoriesBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const categoriesContainer = document.querySelector(".categories")
+
+    const inputCategories = document.createElement('input');
+    inputCategories.type = "text";
+    inputCategories.name = "recipecategories";
+    inputCategories.classList.add('recipe-categories');
+
+    categoriesContainer.appendChild(inputCategories);
+});
 
 function loadRecipeForEditing(id){
     fetch(`http://localhost:3000/api/v1/recipes/${id}`)
@@ -172,9 +185,10 @@ if(user){
         // Corregir obtención de valores para inputs múltiples
         let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value.trim()).filter(value => value !== '');
         let instructions = Array.from(document.querySelectorAll('.recipe-instructions')).map(input => input.value.trim()).filter(value => value !== '');
+        let categories = Array.from(document.querySelectorAll('.recipe-categories')).map(input => input.value.trim()).filter(value => value !== '');
         
         // Verifica que se completen todos los campos obligatorios
-        if(!name || !description || isNaN(time) || isNaN(temperatureCook) || ingredients.length === 0 || instructions.length === 0){
+        if(!name || !description || isNaN(time) || isNaN(temperatureCook) || ingredients.length === 0 || instructions.length === 0 || categories.length === 0){
             alert("Por favor, completa todos los campos obligatorios");
             return;
         }
@@ -187,9 +201,10 @@ if(user){
             recipePicture: recipePicture,
             ingredients: ingredients,
             instructions: instructions,
+            categoryNames: categories,
             userId: userId
         };
-    
+        console.log(body)
         fetch(`http://localhost:3000/api/v1/recipes`, {
             method: 'POST',
             headers: {

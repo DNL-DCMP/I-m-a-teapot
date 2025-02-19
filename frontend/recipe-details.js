@@ -15,7 +15,7 @@ searchIcon.addEventListener('click', () => {
     searchIcon.classList.replace("bx-x", "bx-search");
 });
 
-/*Agrega funcionalidad al boto de menu y cierre*/
+/*Agrega funcionalidad al boton de menu y cierre*/
 navOpenBtn.addEventListener('click', () => {
     nav.classList.add('openNav');
     nav.classList.remove('openSearch');

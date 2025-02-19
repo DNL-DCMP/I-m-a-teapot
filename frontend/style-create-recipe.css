@@ -196,7 +196,7 @@ a {
 
 .input-box .more-ingredients-btn,
 .input-box .more-instructions-btn,
-.input-box .add-category-btn {
+.input-box .more-categories-btn {
     margin-top: 0.3rem;
     border: none;
     background-color: #b4c29c;
@@ -213,7 +213,7 @@ a {
 
 .input-box .more-ingredients-btn:hover,
 .input-box .more-instructions-btn:hover,
-.input-box .add-category-btn:hover {
+.input-box .more-categories-btn:hover {
     background-color:#b4c29c ;
     font-weight: 600;
     width: 103px;
