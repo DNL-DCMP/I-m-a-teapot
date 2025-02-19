@@ -233,6 +233,11 @@ function clearForm() {
     document.querySelector('.recipe-temperatureCook').value = '';
     document.querySelector('.recipe-picture').value = '';
     
+    const categoriesInputs = document.querySelectorAll('.recipe-categories');
+        categoriesInputs.forEach(input => {
+            input.value = '';
+        });
+    
     const ingredientsInputs = document.querySelectorAll('.recipe-ingredients');
         ingredientsInputs.forEach(input => {
             input.value = '';
