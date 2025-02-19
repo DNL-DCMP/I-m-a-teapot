@@ -1,56 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yumm!</title>
-    <!--ICONS-->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style-recipe-details.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Yumm!</title>
+        <!--ICONS-->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="style-recipe-details.css">
+    </head>
+    <body>
         <nav class="nav">
-        <i class='bx bx-menu navOpenBtn' style='color:#ffffff'></i>
-        <!--Aca va el logo-->
-        <a href="#" class="logo">Yumm!</a>
-        <ul class="nav-links">
-            <i class='bx bx-x navCloseBtn'></i>
-            <li>
-                <a href="index.html" class="nav-link">
-                    <i class='bx bx-home-alt-2'></i>
-                    <span class="text">Inicio</span>
+            <i class='bx bx-menu navOpenBtn' style='color:#ffffff'></i>
+            <!--Aca va el logo-->
+            <a href="#" class="logo">Yumm!</a>
+            <ul class="nav-links">
+                <div class="menu-btn">
+                    <i class='bx bxs-chevron-left navCloseBtn'></i>
+                </div>
+                <div class="menu-title">
+                    <p class="title">
+                        Menu
+                    </p>
+                </div>
+                <li class="active">
+                    <a href="index.html" class="nav-link">
+                        <i class='bx bx-home-alt-2'></i>
+                        <span class="text">Inicio</span>
+                        </a>
+                </li>
+                 <li class="notAuth">
+                    <a href="user-profile.html" class="nav-link">
+                        <i class='bx bx-user'></i>
+                        <span class="text">Perfil</span>
                     </a>
-            </li>
-             <li>
-                <a href="user-profile.html" class="nav-link">
-                    <i class='bx bx-user'></i>
-                    <span class="text">Perfil</span>
-                </a>
-            </li>
-            <li>
-                <a href="user-recipes.html" class="nav-link">
-                    <i class='bx bx-collection'></i>
-                    <span class="text">Mis recetas</span>
-                </a>
-            </li>
-            <li>
-                <a href="create-recipe.html" class="nav-link">
-                    <i class='bx bx-pencil'></i>
-                    <span class="text">Crear Receta</span>
-                </a>
-            </li>
-        </ul>
-        <i class='bx bx-search search-icon' id="searchIcon"></i>
-        <div class="search-box">
-            <i class='bx bx-search search-icon' id="search-box-icon"></i>
-            <input class="search-box-input" type="text" placeholder="Busca por receta, ingrediente o categoría...">
-        </div>
-    </nav>
-    <section class="main-container">
+                </li>
+                <li class="notAuth">
+                    <a href="user-recipes.html" class="nav-link">
+                        <i class='bx bx-collection'></i>
+                        <span class="text">Mis recetas</span>
+                    </a>
+                </li>
+                <li class="notAuth">
+                    <a href="create-recipe.html" class="nav-link">
+                        <i class='bx bx-pencil'></i>
+                        <span class="text">Crear Receta</span>
+                    </a>
+                </li>
+            </ul>
+            <i class='bx bx-search search-icon' id="searchIcon"></i>
+            <div class="search-box">
+                <i class='bx bx-search search-icon' id="search-box-icon"></i>
+                <input class="search-box-input" type="text" placeholder="Busca por receta, ingrediente o categoría...">
+            </div>
+        </nav>
+        <section class="main-container">
 
-    </section>
-    <script src="config.js"></script>
-    <script src="recipe-details.js"></script>
-    <script src="search-recipes.js"></script>
-</body>
+        </section>
+        <script src="config.js"></script>
+        <script src="recipe-details.js"></script>
+        <script src="search-recipes.js"></script>
+    </body>
 </html>
