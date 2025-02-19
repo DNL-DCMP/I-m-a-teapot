@@ -38,7 +38,7 @@ const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
 
 const recipeId = cookies.recipeid;
 
-fetch(`http://${apiUrl}/api/v1/recipes/${recipeId}`)
+fetch(`${apiUrl}/api/v1/recipes/${recipeId}`)
     .then(response => response.json())
     .then(recipe => {
         /*let categoryContainer = document.createElement('div');
@@ -198,7 +198,7 @@ fetch(`http://${apiUrl}/api/v1/recipes/${recipeId}`)
     })
 
 function deleteRecipe(){
-    fetch(`http://${apiUrl}/api/v1/recipes/${recipeId}`, {
+    fetch(`${apiUrl}/api/v1/recipes/${recipeId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'

@@ -63,7 +63,7 @@ if(user){
 
     const userId = user.id;
 
-    fetch(`http://${apiUrl}/api/v1/users/${userId}/recipes`)
+    fetch(`${apiUrl}/api/v1/users/${userId}/recipes`)
         .then(response => response.json())
         .then(recipes => {
             recipes.forEach((recipe) => {

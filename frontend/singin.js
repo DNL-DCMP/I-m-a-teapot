@@ -22,7 +22,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     console.log("Datos enviados al back-end:", { name, email, password }); // Depuración
 
     try {
-        const response = await fetch(`http://${apiUrl}/api/v1/users`, {
+        const response = await fetch(`${apiUrl}/api/v1/users`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password }),
@@ -68,7 +68,7 @@ loginForm.addEventListener("submit", async (event) => {
 
     try {
         // Enviar los datos al backend
-        const response = await fetch(`http://${apiUrl}/api/v1/login`, {
+        const response = await fetch(`${apiUrl}/api/v1/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),

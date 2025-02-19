@@ -1,4 +1,4 @@
-const apiUrl = process.env.API_UTL || "http://localhost:3000";
+const apiUrl = /*process.env.API_URL ||*/ "http://localhost:3000";
 
 const nav = document.querySelector(".nav");
 const searchIcon = document.querySelector("#searchIcon");
