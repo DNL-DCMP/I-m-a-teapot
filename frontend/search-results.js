@@ -49,11 +49,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    const titleContainer = document.querySelector('.encabezado');
     const resultsContainer = document.getElementById('results');
     const searchResults = JSON.parse(localStorage.getItem('searchResults')) || [];
 
     if (searchResults.length === 0) {
-        resultsContainer.innerHTML = '<p>No se encontraron recetas</p>';
+        titleContainer.innerHTML = '<h1>No se encontraron recetas para tu búsqueda</h1>';
         return;
     }
 
