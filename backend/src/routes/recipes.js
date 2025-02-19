@@ -42,25 +42,6 @@ router.get('/:id', async (req, res) => {
     res.status(201).json(recipe)
 })
 
-/*Filtra los comentarios de una receta mediante el id*/
-router.get('/:id/comments', async (req, res) => {
-    const recipe = await prisma.recipe.findUnique({
-        where: {
-            id: parseInt(req.params.id)
-        },
-        include: {
-            comments: true
-        }
-    })
-
-    if(recipe === null){
-        res.sendStatus(404)
-        return
-    }
-
-    res.json(recipe.comments)
-})
-
 /*Agrega receta*/
 router.post('/', async (req, res) => {
     try {

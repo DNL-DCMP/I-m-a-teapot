@@ -11,23 +11,24 @@
 
     <div class="wrapper">
         <h3>Deja tu comentario</h3>
-        
-        <input type="hidden" id="recipeId" value="{recipeId}">  <!-- ID de la receta -->
+
+        <input type="hidden" id="recipeId" value="{recipeId}"> <!-- ID de la receta -->
         
         <!-- Formulario de comentarios -->
         <form id="commentForm">
             <div class="rating" required>
-                <input type="number" name="rating" id="ratingInput" hidden>
+                
                 <i class='bx bx-star star' style="--i: 0;" data-value="1"></i>
                 <i class='bx bx-star star' style="--i: 1;" data-value="2"></i>
                 <i class='bx bx-star star' style="--i: 2;" data-value="3"></i>
                 <i class='bx bx-star star' style="--i: 3;" data-value="4"></i>
                 <i class='bx bx-star star' style="--i: 4;" data-value="5"></i>
+                <input type="number" name="rating" id="ratingInput" hidden>
             </div>
             <textarea id="opinion" name="opinion" cols="30" rows="5" placeholder="Escribe tu opinión..." required></textarea>
             <div class="btn-group">
                 <button type="submit" class="btn submit">Enviar</button>
-                <button type="button" class="btn cancel">Cancelar</button>
+                <button type="button" class="btn cancel" onclick="goBack()">Cancelar</button>
             </div>
         </form>
 
@@ -36,106 +37,118 @@
     </div>
 
     <script>
-    // ID de la receta (esto debe ser dinámico dependiendo de la receta)
-    const recipeId = document.getElementById('recipeId').value;
-    console.log("recipeId:", recipeId); 
+        // Obtener el recipeId desde las cookies
+        const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+            const [key, value] = cookie.split("=");
+            acc[key] = value;
+            return acc;
+        }, {});
 
-    // Función para mostrar los comentarios en la página
-async function loadComments() {
-    try {
-        const response = await fetch(`/recipes/${recipeId}/comments`);
-    if (response.ok) {
-        throw new Error(`Error HTTP! estado: ${response.status}`);
-    } 
-        const comments = await response.json();
-        const commentsSection = document.getElementById('commentsSection');
-        commentsSection.innerHTML = ''; // Limpiar los comentarios existentes
-        comments.forEach(comment => {
-            const commentDiv = document.createElement('div');
-            commentDiv.classList.add('comment');
-            commentDiv.innerHTML = `
-                <p><strong>${comment.user.name}</strong> (Calificación: ${comment.rating} estrellas)</p>
-                <p>${comment.content}</p>
-            `;
-            commentsSection.appendChild(commentDiv);
-        });
-    } catch (error) {
-        console.error("error al cargar comentarios:", error);
-        document.getElementById('commentsSection').innerHTML = "<p> error al cargar comentarios. </p>";
+        const user = JSON.parse(localStorage.getItem('user'));
 
-    }
-}
-    
-// Agregar evento para interactuar con las estrellas
-document.querySelectorAll('.star').forEach(star => {
-    star.addEventListener('click', function() {
-        const rating = this.getAttribute('data-value');
-        document.getElementById('ratingInput').value = rating;
-        updateStarRating(rating);
-    });
-});
-
-function updateStarRating(rating) {
-    document.querySelectorAll('.star').forEach(star => {
-        if (parseInt(star.getAttribute('data-value')) <= rating) {
-            star.classList.add('rated');
-        } else {
-            star.classList.remove('rated');
-        }
-    });
-}
-
-
-// Cargar los comentarios cuando la página cargue
-window.onload = loadComments;
-
-// Enviar un comentario
-const commentForm = document.getElementById('commentForm');
-commentForm.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Evitar que el formulario se recargue
-
-    // Obtener recipeId dinámicamente al enviar
-    const recipeId = document.getElementById('recipeId').value;
-    console.log("recipeId al enviar:", recipeId);
-
-    const content = document.getElementById('opinion').value;
-    const rating = document.getElementById('ratingInput').value; // Aquí debes manejar el valor de la calificación
-    const userId = window.userId;
-    if (!userId) {
-        alert("Debes iniciar sesión para enviar un comentario.");
-        return;
-    }
-    try {
-        const response = await fetch(`/recipes/${recipeId}/comments`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ content, rating, userId })
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json(); // Intenta obtener detalles del error del servidor
-            throw new Error(`Error HTTP! estado: ${response.status}, mensaje: ${errorData.message || 'Error desconocido'}`);
+        // Función para mostrar los comentarios en la página
+        async function loadComments() {
+            try {
+                const recipeId = cookies.recipeid;
+                const response = await fetch(`http://localhost:3000/api/v1/recipes/${recipeId}/comments`);
+                if (!response.ok) {
+                    throw new Error(`Error HTTP! estado: ${response.status}`);
+                }
+                const comments = await response.json();
+                const commentsSection = document.getElementById('commentsSection');
+                commentsSection.innerHTML = ''; // Limpiar los comentarios existentes
+                comments.forEach(comment => {
+                    const commentDiv = document.createElement('div');
+                    commentDiv.classList.add('comment');
+                    commentDiv.innerHTML = `
+                        <p><strong>${comment.user.name}</strong> (Calificación: ${comment.rating} estrellas)</p>
+                        <p>${comment.content}</p>
+                    `;
+                    commentsSection.appendChild(commentDiv);
+                });
+            } catch (error) {
+                console.error("Error al cargar comentarios:", error);
+                document.getElementById('commentsSection').innerHTML = "<p>Error al cargar comentarios.</p>";
+            }
         }
 
-        const newComment = await response.json();
-        loadComments(recipeId); // Recargar comentarios con el recipeId correcto
-        commentForm.reset(); // Limpiar el formulario después del envío exitoso
-    } catch (error) {
-        console.error("Error al enviar comentario:", error);
-        alert("Error al enviar comentario. Inténtalo de nuevo."); // Mensaje de error amigable para el usuario
-    }
-});
-// Cargar comentarios al cargar la página (ahora necesita recipeId)
-window.addEventListener('DOMContentLoaded', () => {
-    const recipeId = document.getElementById('recipeId').value;
-    if (recipeId) { // Solo cargar si recipeId está disponible
-        loadComments(recipeId);
-    } else {
-        console.warn("Falta el ID de la receta. No se pueden cargar los comentarios.");
-    }
-});
+        // Agregar evento para interactuar con las estrellas
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-value'); // Obtiene el valor de la estrella clickeada
+                document.getElementById('ratingInput').value = rating; // Guarda el rating en un input oculto
+                updateStarRating(rating); // Llama a la función para actualizar la UI
+            });
+        });
+
+        function updateStarRating(rating) {
+            document.querySelectorAll('.star').forEach(star => {
+                if (parseInt(star.getAttribute('data-value')) <= parseInt(rating)) {
+                    star.classList.add('bxs-star'); // Cambia el ícono a estrella llena
+                    star.classList.remove('bx-star'); // Remueve el ícono de estrella vacía
+                } else {
+                    star.classList.add('bx-star'); // Asegura que las estrellas no seleccionadas sean vacías
+                    star.classList.remove('bxs-star'); // Remueve la estrella llena
+                }
+            });
+        }
+
+        // Cargar los comentarios cuando la página cargue
+        window.onload = loadComments(recipeId);
+
+        // Enviar un comentario
+        const commentForm = document.getElementById('commentForm');
+        commentForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Evitar que el formulario se recargue
+            
+            const content = document.getElementById('opinion').value;
+            const rating = document.getElementById('ratingInput').value; // Aquí debes manejar el valor de la calificación
+            const userId = user.id;
+            
+            try {
+                const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+                    const [key, value] = cookie.split("=");
+                    acc[key] = value;
+                    return acc;
+                }, {});
+
+                const recipeId = cookies.recipeid;
+                console.log("recipeId:",recipeId);
+
+                const response = await fetch(`http://localhost:3000/api/v1/recipes/${recipeId}/comments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ content, rating, userId })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json(); // Aquí intentas parsear la respuesta como JSON
+                    throw new Error(`Error HTTP! estado: ${response.status}, mensaje: ${errorData.message || 'Error desconocido'}`);
+                }
+
+                const newComment = await response.json(); // Asegúrate de que la respuesta es JSON
+                loadComments(recipeId); // Recargar comentarios
+                commentForm.reset(); // Limpiar formulario
+            } catch (error) {
+                console.error("Error al enviar comentario:", error);
+                alert("Error al enviar comentario. Inténtalo de nuevo.");
+            }
+            });
+
+        // Cargar comentarios al cargar la página (ahora necesita recipeId)
+        window.addEventListener('DOMContentLoaded', () => {
+            if (recipeId) { // Solo cargar si recipeId está disponible
+                loadComments(recipeId);
+            } else {
+                console.warn("Falta el ID de la receta. No se pueden cargar los comentarios.");
+            }
+        });
+        function goBack() {
+            window.history.back(); // Vuelve a la página anterior
+        }
     </script>
+
 </body>
 </html>

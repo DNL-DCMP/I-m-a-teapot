@@ -4,7 +4,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 /* Muestra todos los comentarios de una receta */
-router.get('/recipes/:id/comments', async (req, res) => {
+router.get('/:id/comments', async (req, res) => {
     const recipeId = parseInt(req.params.id, 10);
 
     // Verificar si el ID de la receta es un número válido
@@ -35,31 +35,39 @@ router.get('/recipes/:id/comments', async (req, res) => {
     }
 });
 
-router.post('/recipes/:id/comments', async (req, res) => {
+router.post('/:id/comments', async (req, res) => {
+    console.log("Solicitud recibida para agregar comentario en la receta con ID:", req.params.id);
     const recipeId = parseInt(req.params.id, 10);
+    console.log("recipeId:",recipeId);
 
     if (isNaN(recipeId)) {
-        return res.status(400).send('ID de receta inválido');
+        return res.status(400).json({ message: 'ID de receta inválido' });
     }
 
-    const { content, rating, userId } = req.body;
+    let { content, rating, userId } = req.body;
+
+    rating = parseInt(rating, 10);
+    userId = parseInt(userId, 10);
+
 
     // Validación de la calificación
     if (rating < 1 || rating > 5) {
-        return res.status(400).send('La calificación debe estar entre 1 y 5');
+        return res.status(400).json({ message: 'La calificación debe estar entre 1 y 5' });
     }
 
     if (!content || content.trim().length === 0) {
-   console.log("recipeId:", recipeId);      return res.status(400).send('El contenido del comentario es obligatorio');
+        console.log("recipeId:", recipeId);
+        return res.status(400).json({ message: 'El contenido del comentario es obligatorio' });
     }
 
-    try {console.log("recipeId:", recipeId); 
+    try {
+        console.log("recipeId:", recipeId); 
         const recipe = await prisma.recipe.findUnique({
             where: { id: recipeId }
         });
 
         if (!recipe) {
-            return res.status(404).send('Receta no encontrada');
+            return res.status(404).json({ message: 'Receta no encontrada' });
         }
 
         const comment = await prisma.comment.create({
@@ -84,7 +92,7 @@ router.post('/recipes/:id/comments', async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error interno del servidor');
+        res.status(500).json({ message: 'Error interno del servidor', error: error.message });
     }
 });
 
