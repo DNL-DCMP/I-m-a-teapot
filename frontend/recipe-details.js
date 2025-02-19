@@ -1,3 +1,5 @@
+const apiUrl = process.env.API_URL || "http://localhost:3000";
+
 const nav = document.querySelector(".nav");
 const searchIcon = document.querySelector("#searchIcon");
 const navOpenBtn = document.querySelector(".navOpenBtn");
@@ -36,7 +38,7 @@ const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
 
 const recipeId = cookies.recipeid;
 
-fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
+fetch(`http://${apiUrl}/api/v1/recipes/${recipeId}`)
     .then(response => response.json())
     .then(recipe => {
         /*let categoryContainer = document.createElement('div');
@@ -196,7 +198,7 @@ fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`)
     })
 
 function deleteRecipe(){
-    fetch(`http://localhost:3000/api/v1/recipes/${recipeId}`, {
+    fetch(`http://${apiUrl}/api/v1/recipes/${recipeId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'

@@ -1,3 +1,5 @@
+const apiUrl = process.env.API_URL || "http://localhost:3000";
+
 document.addEventListener('DOMContentLoaded', () => {
     const searchIcon = document.getElementById('search-box-icon');
     const searchInput = document.querySelector('.search-box-input');
@@ -5,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchIcon.addEventListener('click', async () => {
         const query = searchInput.value.toLowerCase();
         if (query) {
-            fetch ('http://localhost:3000/api/v1/recipes')
+            fetch (`http://${apiUrl}/api/v1/recipes`)
             .then(response => response.json())
             .then(data => {
                 // Filtrar las recetas según el término de búsqueda

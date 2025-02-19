@@ -1,3 +1,4 @@
+const apiUrl = process.env.API_UTL || "http://localhost:3000";
 
 const nav = document.querySelector(".nav");
 const searchIcon = document.querySelector("#searchIcon");
@@ -30,7 +31,7 @@ navCloseBtn.addEventListener('click', () => {
 
 const Container = document.querySelector('.container');
 
-fetch("https://localhost:3000/api/v1/recipes")
+fetch(`https://${apiUrl}/api/v1/recipes`)
   .then((response) => response.json())
   .then((recipe) => {
     const recetasAleatorias = data.sort(() => 0.5 - Math.random()).slice(0, 8);

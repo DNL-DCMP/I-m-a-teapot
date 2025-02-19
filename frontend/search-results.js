@@ -52,19 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsContainer = document.getElementById('results');
     const searchResults = JSON.parse(localStorage.getItem('searchResults')) || [];
 
-    // function getCookie(name) {
-    //     const value = `; ${document.cookie}`;
-    //     const parts = value.split(`; ${name}=`);
-    //     if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
-    // }
-
-    // function deleteCookie(name) {
-    //     document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-    // }
-
-    // const searchResults = JSON.parse(getCookie('searchResults'));
-
-    // deleteCookie('searchResults');
     if (searchResults.length === 0) {
         resultsContainer.innerHTML = '<p>No se encontraron recetas</p>';
         return;

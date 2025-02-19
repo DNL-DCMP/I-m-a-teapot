@@ -1,3 +1,5 @@
+const apiURL = process.env.API_URL || 'http://localhost:3000';
+
 document.querySelector('.menu-btn').addEventListener('click', () => {
   const nav = document.querySelector('.nav');
   nav.classList.toggle('active');
@@ -8,7 +10,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 if(user){
     const userId = user.id;
 
-    fetch(`http://localhost:3000/api/v1/users/${userId}`)
+    fetch(`http://${apiUrl}/users/${userId}`)
     .then(response => response.json())
     .then(data => {
         const nameMain = document.querySelector('.user-name');
@@ -53,7 +55,7 @@ logoutButton.addEventListener('click', async () => {
   try {
     const userId = user.id;
 
-    const response = await fetch('http://localhost:3000/api/v1/logout', {
+    const response = await fetch(`http://${apiUrl}/api/v1/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +87,7 @@ deleteButton.addEventListener('click', async () => {
   if (!confirmation) return;
 
   try {
-    const response = await fetch(`http://localhost:3000/api/v1/users/${userId}`, {
+    const response = await fetch(`http://${apiUrl}/api/v1/users/${userId}`, {
       method: 'DELETE',
     });
 
