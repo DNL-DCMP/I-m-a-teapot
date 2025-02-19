@@ -9,7 +9,7 @@ router.get('/:id/comments', async (req, res) => {
 
     // Verificar si el ID de la receta es un número válido
     if (isNaN(recipeId)) {
-        return res.status(400).send('ID de receta inválido');
+        return res.status(400).json({ message: 'ID de la receta invalido' });
     }
 
     try {
@@ -25,13 +25,48 @@ router.get('/:id/comments', async (req, res) => {
         });
 
         if (!recipe) {
-            return res.status(404).send('Receta no encontrada');
+            return res.status(404).json({ message: 'Receta no encontrada' });
         }
 
         res.send(recipe.comments);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error interno del servidor');
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+});
+
+router.get('/:recipeId/comments/:commentId', async (req, res) => {
+    const { recipeId, commentId } = req.params;
+
+    try {
+        const comment = await prisma.comment.findUnique({
+            where: {
+                id: Number(commentId),
+                recipeId: Number(recipeId),
+            },
+        });
+
+        if (!comment) {
+            return res.status(404).json({ error: "Comentario no encontrado" });
+        }
+
+        // Generamos las estrellas pintadas y no pintadas
+        const totalStars = 5; // Suponiendo una escala de 5 estrellas
+        const stars = Array.from({ length: totalStars }, (_, i) => ({
+            value: i + 1,
+            filled: i < comment.rating, // Las primeras "rating" estrellas estarán pintadas
+        }));
+
+        res.json({
+            id: comment.id,
+            recipeId: comment.recipeId,
+            content: comment.content,
+            rating: comment.rating,
+            stars,
+        });
+    } catch (error) {
+        console.error("Error al obtener el comentario:", error);
+        res.status(500).json({ error: "Error interno del servidor" });
     }
 });
 
@@ -97,7 +132,7 @@ router.post('/:id/comments', async (req, res) => {
 });
 
 /* Modificar un comentario de una receta */
-router.put('/recipes/:id/comments/:commentId', async (req, res) => {
+router.put('/:id/comments/:commentId', async (req, res) => {
     const commentId = parseInt(req.params.commentId, 10);
 
     // Verificar si el ID del comentario es un número válido
@@ -106,8 +141,14 @@ router.put('/recipes/:id/comments/:commentId', async (req, res) => {
     }
 
     // Validar datos recibidos en el cuerpo
-    if (!req.body.content || req.body.content.trim().length === 0) {
+    const { content, rating } = req.body;
+
+    if (!content || content.trim().length === 0) {
         return res.status(400).send('El contenido del comentario es obligatorio');
+    }
+
+    if (rating !== undefined && (isNaN(rating) || rating < 1 || rating > 5)) {
+        return res.status(400).send('La calificación debe estar entre 1 y 5');
     }
 
     try {
@@ -121,42 +162,40 @@ router.put('/recipes/:id/comments/:commentId', async (req, res) => {
 
         const updatedComment = await prisma.comment.update({
             where: { id: commentId },
-            data: { content: req.body.content }
+            data: { content, rating } // Ahora actualiza contenido y calificación
         });
 
-        res.send(updatedComment);
+        res.json(updatedComment);
     } catch (error) {
-        console.error(error);
+        console.error('Error al actualizar el comentario:', error);
         res.status(500).send('Error interno del servidor');
     }
 });
 
 /* Eliminar un comentario de una receta */
-router.delete('/recipes/:id/comments/:commentId', async (req, res) => {
-    const commentId = parseInt(req.params.commentId, 10);
-
-    // Verificar si el ID del comentario es un número válido
-    if (isNaN(commentId)) {
-        return res.status(400).send('ID de comentario inválido');
-    }
+router.delete('/:recipeId/comments/:commentId', async (req, res) => {
+    const { recipeId, commentId } = req.params;
 
     try {
+        // Buscar el comentario en la base de datos
         const comment = await prisma.comment.findUnique({
-            where: { id: commentId }
+            where: { id: Number(commentId) }, // Se usa Number porque los parámetros en URL son cadenas
+            include: { user: true, recipe: true }, // Incluir las relaciones si las necesitas
         });
 
         if (!comment) {
-            return res.status(404).send('Comentario no encontrado');
+            return res.status(404).json({ message: 'Comentario no encontrado.' });
         }
 
+        // Eliminar el comentario
         await prisma.comment.delete({
-            where: { id: commentId }
+            where: { id: Number(commentId) },
         });
 
-        res.send(comment);
+        res.status(200).json({ message: 'Comentario eliminado con éxito.' });
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Error interno del servidor');
+        console.error("Error al eliminar comentario:", error);
+        res.status(500).json({ message: 'Hubo un problema al eliminar el comentario.', error: error.message });
     }
 });
 

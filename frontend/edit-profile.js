@@ -1,4 +1,4 @@
-const apiUrl = process.env.API_URL || 'http://localhost:3000';
+//const apiUrl = process.env.API_URL || 'http://localhost:3000';
 
 document.querySelector('.menu-btn').addEventListener('click', () => {
     const nav = document.querySelector('.nav');
@@ -18,7 +18,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 if(user){
     const userId = user.id;
 
-    fetch(`http://${apiUrl}/api/v1/users/${userId}`)
+    fetch(`http://localhost:3000/api/v1/users/${userId}`)
         .then(response => response.json())
         .then(user => {
             const name = document.querySelector('.user-name');
@@ -97,7 +97,7 @@ function updateUser(id){
         profilePicture: profilePicture
     }
 
-    fetch(`http://${apiUrl}/api/v1/users/${id}`, {
+    fetch(`http://localhost:3000/api/v1/users/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

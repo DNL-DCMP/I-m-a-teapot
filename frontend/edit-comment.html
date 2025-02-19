@@ -10,10 +10,8 @@
 <body>
 
     <div class="wrapper">
-        <h3>Deja tu comentario</h3>
+        <h3>Editar tu comentario</h3>
 
-        <input type="hidden" id="recipeId" value="{recipeId}"> <!-- ID de la receta -->
-        
         <!-- Formulario de comentarios -->
         <form id="commentForm">
             <div class="rating" required>
@@ -27,15 +25,12 @@
             </div>
             <textarea id="opinion" name="opinion" cols="30" rows="5" placeholder="Escribe tu opinión..." required></textarea>
             <div class="btn-group">
-                <button type="submit" class="btn submit">Enviar</button>
+                <button type="submit" class="btn submit">Guardar cambios</button>
                 <button type="button" class="btn cancel" onclick="goBack()">Cancelar</button>
             </div>
         </form>
 
-        <!-- Sección de comentarios enviados -->
-        <div id="commentsSection"></div>
     </div>
-
-    <script src="buttoncomment.js"></script>
+    <script src="edit-comment.js"></script>
 </body>
 </html>
