@@ -120,23 +120,22 @@ fetch(`${window.API_URL}/api/v1/recipes/${recipeId}`)
 
     const user = JSON.parse(localStorage.getItem('user'));
     const userId = user.id;
-    if( userId === recipe.user.id){
+    if(userId === recipe.user.id){
+      let editRecipeBtn = document.createElement('button');
+      editRecipeBtn.classList.add('edit-recipe-btn');
+      editRecipeBtn.innerText = "Editar receta";
+      editRecipeBtn.dataset.recipeId = recipe.id;
+      editRecipeBtn.addEventListener('click', (event) => {
+      const recipeId = event.target.dataset.recipeId;
+      window.location.href = `edit-recipe.html?id=${recipeId}`;
+      });
+      recipesBtn.appendChild(editRecipeBtn);
 
-        let editRecipeBtn = document.createElement('button');
-        editRecipeBtn.classList.add('edit-recipe-btn');
-        editRecipeBtn.innerText = "Editar receta";
-        editRecipeBtn.dataset.recipeId = recipe.id;
-        editRecipeBtn.addEventListener('click', (event) => {
-        const recipeId = event.target.dataset.recipeId;
-        window.location.href = `create-recipe.html?id=${recipeId}`;
-        });
-        recipesBtn.appendChild(editRecipeBtn);
-
-        let deleteRecipeBtn = document.createElement('button');
-        deleteRecipeBtn.classList.add('delete-recipe-btn');
-        deleteRecipeBtn.innerText = "Borrar receta";
-        deleteRecipeBtn.onclick = deleteRecipe;
-        recipesBtn.appendChild(deleteRecipeBtn);
+      let deleteRecipeBtn = document.createElement('button');
+      deleteRecipeBtn.classList.add('delete-recipe-btn');
+      deleteRecipeBtn.innerText = "Borrar receta";
+      deleteRecipeBtn.onclick = deleteRecipe;
+      recipesBtn.appendChild(deleteRecipeBtn);
     }
 
     let commentsRecipeBtn = document.createElement('button');

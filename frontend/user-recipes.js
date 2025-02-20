@@ -64,7 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     div.classList.add('card-recipe');
 
                     let img = document.createElement('img');
-                    img.src = recipe.recipePicture;
+
+                    if(recipe.recipePicture){
+                        img.src = recipe.recipePicture;
+                    } else {
+                        img.src = 'img/form-image.png';
+                    }
 
                     
                     let titulo = document.createElement('h3');
