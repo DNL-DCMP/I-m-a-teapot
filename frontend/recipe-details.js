@@ -126,8 +126,9 @@ fetch(`${window.API_URL}/api/v1/recipes/${recipeId}`)
       editRecipeBtn.innerText = "Editar receta";
       editRecipeBtn.dataset.recipeId = recipe.id;
       editRecipeBtn.addEventListener('click', (event) => {
-      const recipeId = event.target.dataset.recipeId;
-      window.location.href = `edit-recipe.html?id=${recipeId}`;
+        const recipeId = event.target.dataset.recipeId;
+        document.cookie = `recipeid=${recipeId}; path=/; max-age=3600`; // Expira en 1 hora
+        window.location.href = `edit-recipe.html?id=${recipeId}`;
       });
       recipesBtn.appendChild(editRecipeBtn);
 

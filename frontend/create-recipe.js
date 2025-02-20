@@ -1,5 +1,3 @@
-
-
 const moreIngredientesBtn = document.querySelector(".more-ingredients-btn");
 const moreInstructionsBtn = document.querySelector(".more-instructions-btn");
 const moreCategoriesBtn = document.querySelector(".more-categories-btn");
