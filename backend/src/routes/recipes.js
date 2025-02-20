@@ -35,6 +35,7 @@ router.get('/:id', async (req, res) => {
           id: parseInt(id), 
         },
         include: {
+          user: true,
           recipeCategories: {
             include: {
               category: true, 

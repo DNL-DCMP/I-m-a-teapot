@@ -163,5 +163,5 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function goBack() {
-    window.history.back(); // Vuelve a la página anterior
+    window.location.href = "recipes-details.html";
 }
