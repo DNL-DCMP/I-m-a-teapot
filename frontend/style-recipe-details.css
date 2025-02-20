@@ -488,6 +488,7 @@
 @media screen and (max-width: 720px) {
     .main-container .container-recipe {
         margin: 3rem;
+        margin-top: 6rem;
     }
 
     .main-container .container-recipe .categories-recipes-container .categories-recipes-list {
@@ -565,6 +566,85 @@
     }
 }
 
+@media screen and (max-width: 590px){
+    .main-container .container-recipe {
+        margin-top: 1.5rem;
+    }
+
+    .main-container .container-recipe .categories-recipes-container .categories-recipes-list {
+        font-size: 14px;
+        margin: 1rem 15px 1rem 15px;
+    }
+
+    .main-container .container-recipe .recipe-image {
+        height: 250px;
+    }
+
+    .main-container .container-recipe .recipe-name {
+        font-size: 48px;
+    }
+
+    .main-container .container-recipe .recipe-description {
+        font-size: 12.8px;
+    }
+
+    .main-container .container-recipe .info-recipe .info-list {
+        gap: 30px;
+    }
+
+    .main-container .container-recipe .info-recipe .info-list .info-item p {
+        font-size: 14px;
+    }
+
+    .main-container .container-recipe .info-recipe .info-list .info-item i {
+        font-size: 16px;
+    }
+
+    .main-container .container-recipe .info-recipe .info-list .info-item {
+        gap: 5px;
+    }
+
+    .main-container .container-recipe .ingredients-container {
+        margin-top: 2rem;
+    }
+
+    .main-container .container-recipe .ingredients-container .ingredients-title {
+        width: 190px;
+        font-size: 16px;
+    }
+
+    .main-container .container-recipe .ingredients-container .ingredients-list li {
+        font-size: 12px;
+    }
+
+    .main-container .container-recipe .ingredients-container .ingredients-list {
+        margin: 0 1.5rem 1rem 1.5rem;
+    }
+
+    .main-container .container-recipe .instructions-container .instructions-title {
+        width: 200px;
+        font-size: 16px;
+    }
+
+    .main-container .container-recipe .instructions-container .instructions-title {
+        margin: 2rem 2rem 1rem 2rem;
+    }
+
+    .main-container .container-recipe .instructions-container .instructions-list li {
+        font-size: 12px;
+    }
+
+    .main-container .container-recipe .button-recipes button {
+        font-size: 10px;
+        margin-top: 2rem;
+    }
+
+    .main-container .container-recipe .instructions-container .instructions-list {
+        padding: 2rem 2.5rem;
+    }
+}
+
+
 @media screen  and (max-width: 585px){
     .nav .nav-links {
         max-width: 40%;
@@ -594,6 +674,73 @@
         max-width: 50%;
     }
 }
+
+@media screen and (max-width: 450px){
+    .main-container .container-recipe {
+        margin: 1rem;
+    }
+
+    .main-container .container-recipe .categories-recipes-container .categories-recipes-list {
+        font-size: 10px;
+    }
+
+    .main-container .container-recipe .recipe-image {
+        height: 200px;
+    }
+
+    .main-container .container-recipe .recipe-name {
+        font-size: 38px;
+    }
+
+    .main-container .container-recipe .recipe-description {
+        font-size: 10px;
+    }
+
+    .main-container .container-recipe .info-recipe .info-list .info-item p {
+        font-size: 12px;
+    }
+
+    .main-container .container-recipe .ingredients-container {
+        margin-top: 1rem;
+    }
+
+    .main-container .container-recipe .ingredients-container .ingredients-title {
+        width: 150px;
+        font-size: 14px;
+    }
+
+    .main-container .container-recipe .ingredients-container .ingredients-list {
+        padding: 1.5rem;
+    }
+    
+    .main-container .container-recipe .ingredients-container .ingredients-list li {
+        font-size: 10px;
+    }
+
+    .main-container .container-recipe .ingredients-container .ingredients-list li {
+        margin-bottom: 5px;
+    }
+
+    .main-container .container-recipe .instructions-container .instructions-title {
+        width: 175px;
+        font-size: 14px;
+    }
+
+    .main-container .container-recipe .instructions-container .instructions-list li {
+        font-size: 10px;
+    }
+
+    .main-container .container-recipe .instructions-container .instructions-list li {
+        margin-bottom: 12px;
+    }
+
+    .main-container .container-recipe .button-recipes button {
+        font-size: 8px;
+        margin-bottom: 2rem;
+        padding: 0.2rem 0.6rem;
+    }
+}
+
 
 @media screen  and (max-width: 380px){
 
