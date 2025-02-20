@@ -17,6 +17,19 @@ fetch(`${window.API_URL}/api/v1/recipes/${recipeId}`)
     let recipeContainer = document.createElement('div');
     recipeContainer.classList.add('container-recipe');
 
+    // Mostrar las categorías de la receta
+    let categoriesContainer = document.createElement('div');
+    categoriesContainer.classList.add('categories-recipes-container');
+    let categoriesList = document.createElement('ul');
+    categoriesList.classList.add('categories-recipes-list');
+    for (let i = 0; i < recipe.categories.length; i++) {
+      let categoryItem = document.createElement('li');
+      categoryItem.innerText = "#" + " " + capitalizeFirstLetter(recipe.categories[i]);
+      categoriesList.appendChild(categoryItem);
+    }
+    categoriesContainer.appendChild(categoriesList);
+    recipeContainer.appendChild(categoriesContainer);
+
     // Mostrar la imagen de la receta
     if(recipe.recipePicture){
       let imageRecipe = document.createElement('img');
@@ -37,18 +50,6 @@ fetch(`${window.API_URL}/api/v1/recipes/${recipeId}`)
     recipeDescription.innerText = recipe.description;
     recipeContainer.appendChild(recipeDescription);
 
-    // Mostrar las categorías de la receta
-    let categoriesContainer = document.createElement('div');
-    categoriesContainer.classList.add('categories-recipes-container');
-    let categoriesList = document.createElement('ul');
-    categoriesList.classList.add('categories-recipes-list');
-    for (let i = 0; i < recipe.categories.length; i++) {
-      let categoryItem = document.createElement('li');
-      categoryItem.innerText = capitalizeFirstLetter(recipe.categories[i]);
-      categoriesList.appendChild(categoryItem);
-    }
-    categoriesContainer.appendChild(categoriesList);
-    recipeContainer.appendChild(categoriesContainer);
 
     // Mostrar el tiempo de preparación
     let infoRecipe = document.createElement('div');
