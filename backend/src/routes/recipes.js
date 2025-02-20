@@ -28,20 +28,39 @@ router.get('/', async (req,res) => {
 
 /*Obtiene las recetas por id*/
 router.get('/:id', async (req, res) => {
-    const recipe = await prisma.recipe.findUnique({
+    const { id } = req.params;  
+    try {
+      const recipe = await prisma.recipe.findUnique({
         where: {
-            id: parseInt(req.params.id)
-        }
-    })
-    //Si el usuario no existe, devuelve un 404 not found
-    if (recipe === null){
-        res.sendStatus(404)
-        return
+          id: parseInt(id), 
+        },
+        include: {
+          recipeCategories: {
+            include: {
+              category: true, 
+            },
+          },
+        },
+    });
+  
+    if (!recipe) {
+    return res.status(404).json({ error: 'Receta no encontrada' });
     }
 
-    res.status(201).json(recipe)
-})
+    // Transforma la respuesta para incluir solo los nombres de las categorías
+    const recipeWithCategories = {
+    ...recipe,
+    categories: recipe.recipeCategories.map((rc) => rc.category.name),
+    };
 
+    res.json(recipeWithCategories);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al obtener la receta' });
+    }
+});
+
+  
 /*Agrega receta*/
 router.post('/', async (req, res) => {
     try {
