@@ -57,11 +57,19 @@ function loadRecipeForEditing(id){
             const titleElement = document.createElement('h1');
             titleElement.innerText = "Editar receta";
             titleContainer.appendChild(titleElement);
-        document.querySelector('.recipe-name').value = recipe.name;
-        document.querySelector('.recipe-description').value = recipe.description;
-        document.querySelector('.recipe-time').value = recipe.time;
-        document.querySelector('.recipe-temperatureCook').value = recipe.temperatureCook;
-        document.querySelector('.recipe-picture').value = recipe.recipePicture;
+        const name = document.querySelector('.recipe-name');
+        const description = document.querySelector('.recipe-description');
+        const time = document.querySelector('.recipe-time');
+        const temperature = document.querySelector('.recipe-temperatureCook');
+        const picture = document.querySelector('.recipe-picture');
+
+        name.value = recipe.name;
+        description.value = recipe.description;
+        time.value = recipe.time;
+        temperature.value = recipe.temperatureCook;
+        picture.value = user.picture;
+
+
         recipe.ingredients.forEach((ingredient, index) => {
             if(index === 0){
                 document.querySelector('.recipe-ingredients').value = ingredient;
@@ -77,6 +85,15 @@ function loadRecipeForEditing(id){
                 addInputField('.instructions', 'recipe-instructions', instruction);
             }
         });
+
+        recipe.categories.forEach((category, index) => {
+            if (index === 0){
+                document.querySelector('.recipe-categories').value = category;
+            } else {
+                addInputField('.category', 'recipe-categories',category);
+            }
+        })
+
         const submitRecipeBtn = document.getElementById('submit-recipe-btn');
         submitRecipeBtn.innerText = "Guardar";
         submitRecipeBtn.onclick = () => updateRecipe(recipe.id);
@@ -113,6 +130,8 @@ if(user){
         
         let ingredients = Array.from(document.querySelectorAll('.recipe-ingredients')).map(input => input.value);
         let instructions = Array.from(document.querySelectorAll('.recipe-instructions')).map(input => input.value);
+        let categories = Array.from(document.querySelectorAll('.recipe-categories')).map(input => input.value);
+
     
         let body = {
             name: name,
@@ -122,6 +141,7 @@ if(user){
             recipePicture: recipePicture,
             ingredients: ingredients,
             instructions: instructions,
+            categoryNames: categories,
             userId: userId
         };
     
