@@ -17,7 +17,7 @@ body {
 }
 
 .nav {
-    position: relative;
+    position: fixed;
     width: 256px;
     display: flex;
     flex-direction: column;
