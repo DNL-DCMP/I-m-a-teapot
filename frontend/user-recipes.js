@@ -95,17 +95,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     let img = document.createElement('img');
                     img.src = recipe.recipePicture;
 
-                    /* Titulo de la receta */
+                    
                     let titulo = document.createElement('h3');
                     titulo.classList.add('recipe-name');
                     titulo.innerText = recipe.name;
 
-                    /*Descripcion de la receta */
+                    
                     let desc = document.createElement('p');
                     desc.classList.add('recipe-description');
                     desc.innerText = recipe.description;
 
-                    /* Boton de ver receta */
+                    
                     let linkViewRecipe = document.createElement('a');
                     linkViewRecipe.classList.add('view-recipe-btn');
                     linkViewRecipe.innerText = "Ver receta";
