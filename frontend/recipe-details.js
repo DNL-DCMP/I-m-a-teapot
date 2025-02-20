@@ -128,7 +128,7 @@ fetch(`${window.API_URL}/api/v1/recipes/${recipeId}`)
         editRecipeBtn.dataset.recipeId = recipe.id;
         editRecipeBtn.addEventListener('click', (event) => {
         const recipeId = event.target.dataset.recipeId;
-        window.location.href = `create-recipe.html?id=${recipeId}`;
+        window.location.href = `edit-recipe.html?id=${recipeId}`;
         });
         recipesBtn.appendChild(editRecipeBtn);
 
