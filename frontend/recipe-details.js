@@ -14,10 +14,12 @@ fetch(`${window.API_URL}/api/v1/recipes/${recipeId}`)
     recipeContainer.classList.add('container-recipe');
 
     // Mostrar la imagen de la receta
-    let imageRecipe = document.createElement('img');
-    imageRecipe.classList.add('recipe-image');
-    imageRecipe.src = recipe.recipePicture;
-    recipeContainer.appendChild(imageRecipe);
+    if(recipe.recipePicture){
+      let imageRecipe = document.createElement('img');
+      imageRecipe.classList.add('recipe-image');
+      imageRecipe.src = recipe.recipePicture;
+      recipeContainer.appendChild(imageRecipe);
+    }
 
     // Mostrar el nombre de la receta
     let recipeName = document.createElement('h1');
