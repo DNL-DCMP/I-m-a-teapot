@@ -159,6 +159,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    margin: 5rem;
 }
 
 .card-recipe {
@@ -260,11 +261,10 @@ body {
         font-size: 13.5px;
     }
     
-    .container-recipes h3 {
+    .card-recipe h3.recipe-name {
         font-size: 15px;
         margin: 10px 0 0 0;
     }
-    
     
     .container-results .card-recipe img {
         height: 25%;

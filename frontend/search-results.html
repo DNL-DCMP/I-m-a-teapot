@@ -9,54 +9,48 @@
     <link rel="stylesheet" href="style-search-results.css">
 </head>
 <body>
-        <nav class="nav">
-            <i class='bx bx-menu navOpenBtn' style='color:#ffffff'></i>
-            <!--Aca va el logo-->
-            <a href="#" class="logo">Yumm!</a>
-            <ul class="nav-links">
-                <i class='bx bx-x navCloseBtn'></i>
-                <li>
-                    <a href="index.html" class="nav-link">
-                        <i class='bx bx-home-alt-2'></i>
-                        <span class="text">Inicio</span>
-                        </a>
-                </li>
-                 <li class="notAuth">
-                    <a href="user-profile.html" class="nav-link">
-                        <i class='bx bx-user'></i>
-                        <span class="text">Perfil</span>
-                    </a>
-                </li>
-                <li class="auth">
-                    <a href="signin.html#registerForm" class="nav-link">
-                        <i class='bx bx-user'></i>
-                        <span class="text">Registrate</span>
-                    </a>
-                </li>
-                <li class="auth">
-                    <a href="signin.html" class="nav-link">
-                        <i class='bx bx-user'></i>
-                        <span class="text">Logeate</span>
-                    </a>
-                </li>
-                <li class="notAuth">
-                    <a href="user-recipes.html" class="nav-link">
-                        <i class='bx bx-collection'></i>
-                        <span class="text">Mis recetas</span>
-                    </a>
-                </li>
-                <li class="notAuth">
-                    <a href="create-recipe.html" class="nav-link">
-                        <i class='bx bx-pencil'></i>
-                        <span class="text">Crear Receta</span>
-                    </a>
-                </li>
-            </ul>
-            <i class='bx bx-search search-icon' id="searchIcon"></i>
-            <div class="search-box">
-                <i class='bx bx-search search-icon' id="search-box-icon"></i>
-                <input class="search-box-input" type="text" placeholder="Busca por receta, ingrediente o categoría...">
+    <nav class="nav">
+        <i class='bx bx-menu navOpenBtn' style='color:#ffffff'></i>
+        <!--Aca va el logo-->
+        <a href="#" class="logo">Yumm!</a>
+        <ul class="nav-links">
+            <div class="menu-btn">
+                <i class='bx bxs-chevron-left navCloseBtn'></i>
             </div>
+            <div class="menu-title">
+                <p class="title">
+                    Menu
+                </p>
+            </div>
+            <li>
+                <a href="index.html" class="nav-link">
+                    <i class='bx bx-home-alt-2'></i>
+                    <span class="text">Inicio</span>
+                    </a>
+            </li>
+            <li>
+                <a href="user-profile.html" class="nav-link">
+                    <i class='bx bx-user'></i>
+                    <span class="text">Perfil</span>
+                </a>
+            </li>
+            <li>
+                <a href="user-recipes.html" class="nav-link">
+                    <i class='bx bx-collection'></i>
+                    <span class="text">Mis recetas</span>
+                </a>
+            </li>
+            <li>
+                <a href="create-recipe.html" class="nav-link">
+                    <i class='bx bx-pencil'></i>
+                    <span class="text">Crear Receta</span>
+                </a>
+            </li>
+        </ul>
+        <i class='bx bx-search search-icon' id="searchIcon"></i>
+        <div class="search-box">
+            <i class='bx bx-search search-icon' id="search-box-icon"></i>
+            <input class="search-box-input" type="text" placeholder="Busca por receta, ingrediente o categoría...">
         </div>
     </nav>
     <div class="encabezado">
