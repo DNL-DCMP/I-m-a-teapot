@@ -62,7 +62,7 @@ if(user){
         let categories = Array.from(document.querySelectorAll('.recipe-categories')).map(input => input.value.trim()).filter(value => value !== '');
         
         // Verifica que se completen todos los campos obligatorios
-        if(!name || !description || isNaN(time) || isNaN(temperatureCook) || ingredients.length === 0 || instructions.length === 0 || categories.length === 0){
+        if(!name || !description || isNaN(time) || isNaN(temperatureCook) || ingredients.length === 0 || instructions.length === 0){
             alert("Por favor, completa todos los campos obligatorios");
             return;
         }
