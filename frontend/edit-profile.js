@@ -4,11 +4,13 @@ document.querySelector('.menu-btn').addEventListener('click', () => {
 });
 
 const biography = document.querySelector('.biography');
-biography.addEventListener("keyup", event => {
-    biography.style.height = "auto";
-    let sclHeight = event.target.scrollHeight;
-    biography.style.height = `${sclHeight}px`;
-});
+if (biography) {
+    biography.addEventListener("keyup", event => {
+        biography.style.height = "auto";
+        let sclHeight = event.target.scrollHeight;
+        biography.style.height = `${sclHeight}px`;
+    });
+}
 
 const user = JSON.parse(localStorage.getItem('user'));
 
@@ -30,16 +32,16 @@ if(user){
             profilePicture.src = user.profilePicture;
 
             document.getElementById('pictureInput').addEventListener('input', function() {
-                let url = this.value; // Obtiene la URL ingresada
+                let url = this.value.trim(); 
                 let profilePicture = document.getElementById('profilePicture');
             
                 if (url) { 
-                    profilePicture.src = url; // Asigna la URL al src de la imagen
-                    profilePicture.style.display = 'block'; // Muestra la imagen con la nueva URL
-                } else if (url === "") {
-                    profilePicture.style.display = 'block'; // Muestra la imagen por defecto si no hay URL
+                    profilePicture.src = url;
+                } else {
+                    profilePicture.src = "img/cookiecheseecake.png";
                 }
             });
+            
 
             const submitUserBtn = document.querySelector('#saveButton');
             submitUserBtn.onclick = () => updateUser(user.id);
@@ -81,18 +83,19 @@ function updateUser(id){
     let confirmPassword = document.querySelector('#confirmPassword').value;
     let profilePicture = document.querySelector('#profilePicture').src;
 
-
-    if (password !== confirmPassword) {
-        alert('Las contraseñas no coinciden. Por favor, inténtalo de nuevo.');
-        return;
-    }
-
     let body = {
         name: name,
         biography: biography,
         email: email,
-        password: password,
         profilePicture: profilePicture
+    }
+
+    if (password && confirmPassword) {
+        if (password !== confirmPassword) {
+            alert('Las contraseñas no coinciden. Por favor, inténtalo de nuevo.');
+            return;
+        }
+        body.password = password;
     }
 
     fetch(`${window.API_URL}/api/v1/users/${id}`, {
@@ -105,6 +108,7 @@ function updateUser(id){
     .then(response => {
         if (response.ok) {
             alert('El usuario se actualizó con éxito');
+            window.location.href="user-profile.html"
         }
         console.log('Usuario actualizado', response);
     })
