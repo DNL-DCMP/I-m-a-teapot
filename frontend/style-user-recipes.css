@@ -222,15 +222,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    
 }
 
 .container-btn-create-recipes .create-recipe-btn {
     background-color: #A3B18A;
     border-radius: 20px;
-    font-size: 15px;
-    padding: 5px 30px;
+    font-size: 30px;
+    padding: 10px 60px;
     margin: 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+    text-transform: uppercase;
 }
 
 .card-recipe {
@@ -253,6 +256,7 @@ body {
     font-size: 15px;
     padding: 5px 30px;
     margin: 20px;
+<<<<<<< HEAD
     color: #fff;
     font-weight: 500;
     text-decoration: none;
@@ -263,6 +267,12 @@ body {
     background-color: #fff;
     border: 2px solid #b24c2d;
     color: #b24c2d;
+=======
+    cursor: pointer;
+    transition: all 0.5s;
+    text-transform: uppercase;
+    
+>>>>>>> d05f7b344f8306cf6fb1a90cbafe5bfb122df78e
 }
 
 .card-recipe p {

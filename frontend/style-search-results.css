@@ -153,9 +153,14 @@ a {
 }
 
 .card-recipe .view-recipe-btn {
-    background-color: #A3B18A;
-    border-radius: 20px;
+    color:#A3B18A;
+    background-color: #faf8eb;
+    border: 2px solid #A3B18A;
     font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 30px;
+    cursor: pointer;
     padding: 10px;
     margin-bottom: 0;
 }
@@ -181,6 +186,14 @@ a {
 .container-results .card-recipe img {
     max-width: 100%;
     border-radius: 20px;
+}
+
+
+
+.card-recipe .view-recipe-btn:hover {
+    background-color: #A3B18A;
+    color: #fff;
+
 }
 
 /*---responsive---*/
