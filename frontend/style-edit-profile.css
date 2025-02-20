@@ -550,7 +550,6 @@ body {
     .nav.active {
         width: 70px;
         padding: 10px 2px;
-        height: 100%;
     }
 
     .nav.active .account-title p.title {
