@@ -9,15 +9,12 @@ fetch(`${window.API_URL}/api/v1/recipes`)
   .catch(error => console.error("Error al obtener las recetas:", error));
 
 function createRecipeSection(recipes) {
-
     const topRecipes = document.createElement('section');
     topRecipes.classList.add('container', 'top-recipes');
 
     const titleContainer = document.createElement('h1');
     titleContainer.classList.add('heading-1');
-    titleContainer.innerText = "Explora las mejores recetas!";
-    topRecipes.appendChild(titleContainer);
-
+    
     const recipesContainer = document.createElement('div');
     recipesContainer.classList.add('container-recipes');
     recipesContainer.style.display = "grid";
@@ -25,6 +22,10 @@ function createRecipeSection(recipes) {
     recipesContainer.style.gap = "20px";
 
     recipes.forEach(recipe => {
+
+        const recipeContainer = document.createElement('div');
+        recipeContainer.classList.add('container-recipes');
+
         const cardRecipe = document.createElement('div');
         cardRecipe.classList.add('card-recipe');
 
@@ -53,11 +54,11 @@ function createRecipeSection(recipes) {
         buttonContainer.appendChild(linkViewRecipe);
         cardRecipe.appendChild(buttonContainer);
 
-        recipesContainer.appendChild(cardRecipe);
+        recipeContainer.appendChild(cardRecipe);
     });
 
-    topRecipes.appendChild(recipesContainer);
-    Container.appendChild(topRecipes);
+    Container.appendChild(recipeContainer);
+    
 }
 
 /* Autentication */
