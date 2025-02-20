@@ -225,20 +225,23 @@ body {
 }
 
 .container-btn-create-recipes .create-recipe-btn {
-    background-color: #A3B18A;
+    background-color: #b24c2d;
     border-radius: 50px;
     font-size: 18px;
     padding: 5px 40px;
     color: #fff;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.5s;
-    text-transform: uppercase;
     text-decoration: none;
 }
 
 .container-btn-create-recipes .create-recipe-btn:hover {
-    background-color: #abb895;
+    background-color: #fff;
+    border: 2px solid #b24c2d;
+    color: #b24c2d;
+    cursor: pointer;
+    transition: all 0.5s;
+    text-transform: uppercase;
 }
 
 
