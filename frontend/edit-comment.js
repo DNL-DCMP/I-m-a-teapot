@@ -38,7 +38,7 @@ function getCookie(name) {
 const commentId = getCookie('commentId');
 const recipeId = getCookie("recipeid");
 
-fetch(`http://localhost:3000/api/v1/recipes/${recipeId}/comments/${commentId}`)
+fetch(`${window.API_URL}/api/v1/recipes/${recipeId}/comments/${commentId}`)
     .then(response => response.json())
     .then(comment => {
         console.log(comment)
@@ -90,7 +90,7 @@ document.getElementById("commentForm").addEventListener("submit", function(event
     };
 
     // Enviar la petición PUT al backend
-    fetch(`http://localhost:3000/api/v1/recipes/${recipeId}/comments/${commentId}`, {
+    fetch(`${window.API_URL}/api/v1/recipes/${recipeId}/comments/${commentId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"

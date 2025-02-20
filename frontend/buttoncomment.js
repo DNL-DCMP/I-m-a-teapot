@@ -12,7 +12,7 @@ function loadComments() {
     try {
         const recipeId = cookies.recipeid;
         const userId = user.id;
-        fetch(`http://localhost:3000/api/v1/recipes/${recipeId}/comments`)
+        fetch(`${window.API_URL}/api/v1/recipes/${recipeId}/comments`)
             .then(response => response.json())
             .then(comments => {
                 const commentsSection = document.getElementById('commentsSection');
@@ -67,7 +67,7 @@ async function deleteComment(commentId, commentElement) {
 
     try {
         const recipeId = cookies.recipeid;
-        const response = await fetch(`http://localhost:3000/api/v1/recipes/${recipeId}/comments/${commentId}`, {
+        const response = await fetch(`${window.API_URL}/api/v1/recipes/${recipeId}/comments/${commentId}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
         });
@@ -130,7 +130,7 @@ commentForm.addEventListener('submit', async (e) => {
         const recipeId = cookies.recipeid;
         console.log("recipeId:",recipeId);
 
-        const response = await fetch(`http://localhost:3000/api/v1/recipes/${recipeId}/comments`, {
+        const response = await fetch(`${window.API_URL}/api/v1/recipes/${recipeId}/comments`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
