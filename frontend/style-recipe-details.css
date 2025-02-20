@@ -567,9 +567,6 @@
 }
 
 @media screen and (max-width: 590px){
-    .main-container .container-recipe {
-        margin-top: 1.5rem;
-    }
 
     .main-container .container-recipe .categories-recipes-container .categories-recipes-list {
         font-size: 14px;
@@ -678,6 +675,7 @@
 @media screen and (max-width: 450px){
     .main-container .container-recipe {
         margin: 1rem;
+        margin-top: 6rem;
     }
 
     .main-container .container-recipe .categories-recipes-container .categories-recipes-list {
