@@ -1,3 +1,7 @@
+function capitalizeFirstLetter(string) {
+  return string[0].toUpperCase() + string.slice(1).toLowerCase();
+}
+
 const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
     const [key, value] = cookie.split("=");
     acc[key] = value;
@@ -40,7 +44,7 @@ fetch(`${window.API_URL}/api/v1/recipes/${recipeId}`)
     categoriesList.classList.add('categories-recipes-list');
     for (let i = 0; i < recipe.categories.length; i++) {
       let categoryItem = document.createElement('li');
-      categoryItem.innerText = recipe.categories[i];
+      categoryItem.innerText = capitalizeFirstLetter(recipe.categories[i]);
       categoriesList.appendChild(categoryItem);
     }
     categoriesContainer.appendChild(categoriesList);
