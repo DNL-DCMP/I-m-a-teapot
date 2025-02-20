@@ -256,7 +256,7 @@ body {
 }
 
 
-.card-recipe .button-container .view-recipe-btn {
+.card-recipe .view-recipe-btn {
     background-color: #b24c2d;
     border-radius: 20px;
     font-size: 15px;
@@ -268,7 +268,7 @@ body {
     cursor: pointer;
 }
 
-.card-recipe .button-container .view-recipe-btn:hover {
+.card-recipe .view-recipe-btn:hover {
     background-color: #fff;
     border: 2px solid #b24c2d;
     color: #b24c2d;
@@ -345,7 +345,7 @@ body {
         height: 25%;
     }
 
-    .card-recipe .button-container .view-recipe-btn {
+    .card-recipe .view-recipe-btn {
         font-size: 12px;
         padding: 5px 10px;
     }
@@ -477,7 +477,7 @@ body {
         height: 25%;
     }
 
-    .card-recipe .button-container .view-recipe-btn {
+    .card-recipe .view-recipe-btn {
         font-size: 12px;
         padding: 5px 10px;
     }
