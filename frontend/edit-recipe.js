@@ -19,7 +19,7 @@ function loadRecipeForEditing(id){
         description.value = recipe.description;
         time.value = recipe.time;
         temperature.value = recipe.temperatureCook;
-        picture.value = user.picture;
+        picture.value = recipe.picture;
 
 
         recipe.ingredients.forEach((ingredient, index) => {
@@ -47,7 +47,7 @@ function loadRecipeForEditing(id){
         })
 
         const submitUserBtn = document.querySelector('#saveButton');
-        submitUserBtn.onclick = () => updateRecipe(recipe.id);
+        submitUserBtn.onclick = () => updateRecipe(id);
 
         window.editingRecipeId = recipe.id;
     })
@@ -105,5 +105,5 @@ function updateRecipe(id) {
         }
     })
     .catch(error => console.error("Error al actualizar la receta:", error));
-    window.location.href = `user-recipes.html`;
+    window.location.href = `recipes-details.html`;
 }
