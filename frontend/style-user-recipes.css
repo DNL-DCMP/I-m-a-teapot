@@ -155,7 +155,7 @@ body {
 
 .encabezado h2 {
     font-size: 30px;
-    font-weight: 500;
+    font-weight: 600;
     color: #593d27;
 }
 
@@ -212,8 +212,7 @@ body {
 }
 
 .container-no-recipes h2 {
-    font-size: 30px;
-    font-weight: 500;
+    font-weight: 800;
     color: #593d27;
 }
 
@@ -227,14 +226,21 @@ body {
 
 .container-btn-create-recipes .create-recipe-btn {
     background-color: #A3B18A;
-    border-radius: 20px;
-    font-size: 30px;
-    padding: 10px 60px;
-    margin: 20px;
+    border-radius: 50px;
+    font-size: 18px;
+    padding: 5px 40px;
+    color: #fff;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.5s;
     text-transform: uppercase;
+    text-decoration: none;
 }
+
+.container-btn-create-recipes .create-recipe-btn:hover {
+    background-color: #abb895;
+}
+
 
 .card-recipe {
     display: flex;
@@ -256,7 +262,6 @@ body {
     font-size: 15px;
     padding: 5px 30px;
     margin: 20px;
-<<<<<<< HEAD
     color: #fff;
     font-weight: 500;
     text-decoration: none;
@@ -267,12 +272,9 @@ body {
     background-color: #fff;
     border: 2px solid #b24c2d;
     color: #b24c2d;
-=======
     cursor: pointer;
     transition: all 0.5s;
     text-transform: uppercase;
-    
->>>>>>> d05f7b344f8306cf6fb1a90cbafe5bfb122df78e
 }
 
 .card-recipe p {
@@ -526,6 +528,14 @@ body {
 }
 
 @media screen  and (max-width: 560px){
+    .container-btn-create-recipes .create-recipe-btn {
+        font-size: 16px;
+    }
+
+    .encabezado h2 {
+        font-size: 22px;
+        line-height: 28px;
+    }
     .container {
         margin: 80px 10px;
     }
@@ -561,6 +571,15 @@ body {
 @media screen and (max-width: 390px){
     .nav .nav-links {
         max-width: 75%;
+    }
+
+    .container-btn-create-recipes .create-recipe-btn {
+        font-size: 14px;
+    }
+
+    .encabezado h2 {
+        font-size: 19px;
+        line-height: 20px;
     }
 }
 
