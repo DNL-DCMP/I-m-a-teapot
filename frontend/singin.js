@@ -10,13 +10,20 @@ sign_in_btn.addEventListener("click", () => {
     container.classList.remove("sign-up-mode");
 });
 
-document.getElementById("registerForm").addEventListener("submit", async (e) => {
+document.getElementById("registerForm").addEventListener("submit", async(e) => {
     e.preventDefault();
 
     // Obtén los valores de los inputs
     const name = document.getElementById("registerName").value;
     const email = document.getElementById("registerEmail").value;
     const password = document.getElementById("registerPassword").value;
+
+    const emailError = validarEmail(email);
+    if(emailError){
+        alert(emailError);
+        return;
+    }
+
 
     console.log("Datos enviados al back-end:", { name, email, password }); // Depuración
 
@@ -49,6 +56,17 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     }
 });
 
+function validarEmail(email){
+    if (!email) return "El campo de correo electrónico es obligatorio.";
+    
+    const regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,6}$/i
+    if(!email.includes('@')) return 'El correo electrónico debe contener un "@"';
+    if(!email.includes('.')) return 'El correo electrónico debe contener un "."';
+    if(!regex.test(email)) return 'El correo electrónico no es válido';
+
+    return ""; //Si no hay errores devuelve una cadena vacía
+}
+
 
 // Si el usuario se esta registrando, lo lleva la parte de registro de la pagina
 if (location.hash === '#registerForm') {
@@ -64,6 +82,12 @@ loginForm.addEventListener("submit", async (event) => {
     // Obtener los valores de los campos
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+
+    const emailError = validarEmail(email);
+    if(emailError){
+        alert(emailError);
+        return;
+    }
 
     try {
         // Enviar los datos al backend
