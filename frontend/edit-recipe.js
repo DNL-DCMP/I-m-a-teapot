@@ -147,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
             categoryNames: categories,
         };
 
+        console.log("Enviando actualización:", body)
+
         fetch(`${window.API_URL}/api/v1/recipes/${id}`, {
             method: 'PUT',
             headers: {

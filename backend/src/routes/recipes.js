@@ -119,10 +119,11 @@ router.post('/', async (req, res) => {
             recipeId: newRecipe.id,
             categoryId: category.id
         }));
+        
+        await prisma.recipeCategory.createMany({ data: relations });
 
         console.log("Relaciones a crear:", relations); // Depuracion
 
-        await prisma.recipeCategory.createMany({ data: relations });
 
         //Depuracion
         const recipeWithCategories = await prisma.recipe.findUnique({
@@ -168,35 +169,96 @@ router.delete('/:id', async (req, res) => {
     res.send(recipe)
 })
 
+/* Actualizar receta */
 router.put('/:id', async (req, res) => {
-    let recipe = await prisma.recipe.findUnique({
-        where: {
-            id: parseInt(req.params.id)
-        }
-    })
+    try {
+        console.log("Datos recibidos en el backend para actualizar:", req.body); // Depuración
+        
+        const { id } = req.params;
+        const { name, description, ingredients, instructions, time, temperatureCook, recipePicture, categoryNames } = req.body;
 
-    if(recipe === null){
-        res.sendStatus(404)
-        return
+        // Actualizar la receta
+        const updatedRecipe = await prisma.recipe.update({
+            where: { id: Number(id) },
+            data: {
+                name,
+                description,
+                ingredients,
+                instructions,
+                time,
+                temperatureCook,
+                recipePicture
+            }
+        });
+
+        console.log("Receta actualizada:", updatedRecipe); // Depuración
+
+        // Buscar las categorías existentes en la DB
+        const existingCategories = await prisma.category.findMany({
+            where: {
+                name: { in: categoryNames }
+            }
+        });
+
+        console.log("Categorías encontradas en la DB:", existingCategories); // Depuración
+
+        // Obtener los nombres de las categorías existentes
+        const existingCategoryNames = existingCategories.map(cat => cat.name);
+
+        // Identificar categorías nuevas que no están en la DB
+        const newCategoryNames = categoryNames.filter(name => !existingCategoryNames.includes(name));
+
+        // Crear solo las categorías nuevas
+        if (newCategoryNames.length > 0) {
+            await prisma.category.createMany({
+                data: newCategoryNames.map(name => ({ name })),
+                skipDuplicates: true // Evita errores si la categoría ya existe
+            });
+        }
+
+        // Obtener todas las categorías con sus IDs después de agregar las nuevas
+        const allCategories = await prisma.category.findMany({
+            where: {
+                name: { in: categoryNames }
+            }
+        });
+
+        console.log("Todas las categorías actualizadas:", allCategories); // Depuración
+
+        // Eliminar relaciones antiguas de la receta en recipeCategory
+        await prisma.recipeCategory.deleteMany({
+            where: { recipeId: Number(id) }
+        });
+
+        // Asociar las nuevas categorías con la receta en recipeCategory
+        const relations = allCategories.map(category => ({
+            recipeId: Number(id),
+            categoryId: category.id
+        }));
+
+        await prisma.recipeCategory.createMany({ data: relations });
+
+        console.log("Nuevas relaciones creadas:", relations); // Depuración
+
+        // Obtener la receta con sus categorías actualizadas
+        const recipeWithCategories = await prisma.recipe.findUnique({
+            where: { id: Number(id) },
+            include: {
+                recipeCategories: {
+                    include: { category: true }
+                }
+            }
+        });
+
+        console.log("🚀 Receta actualizada con categorías:", JSON.stringify(recipeWithCategories, null, 2));
+
+        res.status(200).json({ message: "Receta actualizada con éxito", recipe: recipeWithCategories });
+
+    } catch (error) {
+        console.error("Error al actualizar la receta:", error);
+        res.status(500).json({ error: "Error al actualizar la receta" });
     }
-
-    recipe = await prisma.recipe.update({
-        where:{
-            id: recipe.id
-        },
-        data:{
-            name: req.body.name,
-            description: req.body.description,
-            ingredients: req.body.ingredients, 
-            instructions: req.body.instructions,
-            time: req.body.time,
-            temperatureCook: req.body.temperatureCook,
-            recipePicture: req.body.recipePicture
-        }
-    })
-
-    res.send(recipe)
-})
+});
 
 // Mostrar todas las categorias
 router.get('/categories', async (req, res) => {
